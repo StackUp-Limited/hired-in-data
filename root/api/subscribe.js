@@ -133,7 +133,7 @@ function validateEmail(value) {
 // Throws on failure so the handler can tell the reader to try again. The email
 // IS the whole transaction here - a silent failure would lose the lead and send
 // them to the resource as if nothing was wrong.
-async function sendToFunnelr(magnet, email, firstName) {
+async function sendToFunnelr(magnet, email, firstName, tracking) {
   const webhookUrl = process.env[magnet.envVar];
   if (!webhookUrl) {
     throw new Error(`${magnet.envVar} is not set`);
@@ -147,6 +147,7 @@ async function sendToFunnelr(magnet, email, firstName) {
       first_name: firstName,
       source: magnet.source,
       tag: magnet.tag,
+      ...tracking,
       captured_at: new Date().toISOString(),
     }),
   });
@@ -156,13 +157,28 @@ async function sendToFunnelr(magnet, email, firstName) {
   }
 }
 
+// --- Attribution -------------------------------------------------------------
+// trakyo_id (set by the Trakyo tag) and UTMs ride along to the Zap so the lead
+// can be tied back to the video/ad that brought it. Strings only, trimmed and
+// capped; anything else is dropped rather than rejected.
+function trackingFields(trakyoId, utm) {
+  const s = (v) => (typeof v === 'string' ? v.trim().slice(0, 200) : '');
+  const out = {};
+  if (s(trakyoId)) out.trakyo_id = s(trakyoId);
+  const u = utm && typeof utm === 'object' ? utm : {};
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach((k) => {
+    if (s(u[k])) out[k] = s(u[k]);
+  });
+  return out;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { magnet: magnetKey, email, first_name: firstName, company } = req.body || {};
+  const { magnet: magnetKey, email, first_name: firstName, company, trakyo_id: trakyoId, utm } = req.body || {};
 
   const magnet = MAGNETS[magnetKey];
   if (!magnet) {
@@ -203,7 +219,7 @@ export default async function handler(req, res) {
   const sanitizedName = firstName.trim();
 
   try {
-    await sendToFunnelr(magnet, sanitizedEmail, sanitizedName);
+    await sendToFunnelr(magnet, sanitizedEmail, sanitizedName, trackingFields(trakyoId, utm));
   } catch (err) {
     console.error('[SUBSCRIBE] Funnelr sync failed:', err);
     return res.status(502).json({

@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Trakyo -->
+  <script src="https://go.hiredindata.com/api/js/latest.js"></script>
+  <script src="/hid-params.js"></script>
   <meta charset="utf-8">
   <meta name="robots" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -689,6 +692,8 @@
     });
     data.company = honeypot ? honeypot.value : '';
     data.utm = utm;
+    var tp = window.hidParams && window.hidParams();
+    if (tp && tp.get('trakyo_id')) data.trakyo_id = tp.get('trakyo_id');
     return data;
   }
 

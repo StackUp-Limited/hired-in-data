@@ -219,6 +219,8 @@ export default async function handler(req, res) {
     utm_medium: clean(utm.utm_medium, SHORT_MAX),
     utm_campaign: clean(utm.utm_campaign, SHORT_MAX),
     utm_content: clean(utm.utm_content, SHORT_MAX),
+    utm_term: clean(utm.utm_term, SHORT_MAX),
+    trakyo_id: clean(body.trakyo_id, SHORT_MAX),
     coach: clean(utm.coach, SHORT_MAX),
     referrer: clean(utm.referrer, URL_MAX),
     captured_at: new Date().toISOString(),

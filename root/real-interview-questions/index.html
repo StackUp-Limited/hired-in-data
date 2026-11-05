@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Trakyo -->
+  <script src="https://go.hiredindata.com/api/js/latest.js"></script>
+  <script src="/hid-params.js"></script>
   <meta name="robots" content="noindex">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1JE38D9B5"></script>
@@ -321,7 +324,9 @@ footer{text-align:center; color:var(--text-muted); font-size:13px; margin-top:40
           magnet: 'real-interview-questions',
           first_name: name,
           email: email,
-          company: honeypot.value
+          company: honeypot.value,
+          trakyo_id: (window.hidParams && window.hidParams() && window.hidParams().get('trakyo_id')) || '',
+          utm: (function () { var o = {}, p = window.hidParams && window.hidParams(); if (p) ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function (k) { if (p.get(k)) o[k] = p.get(k); }); return o; })()
         })
       })
         .then(function (res) {
@@ -337,7 +342,7 @@ footer{text-align:center; color:var(--text-muted); font-size:13px; margin-top:40
           }
           // Capture succeeded - hand over the bank immediately rather than
           // making them wait on the email.
-          window.location.href = BANK_URL;
+          window.location.href = window.hidForward ? window.hidForward(BANK_URL) : BANK_URL;
         })
         .catch(function () {
           setLoading(false);
