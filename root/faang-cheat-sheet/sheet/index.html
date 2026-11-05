@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1JE38D9B5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E1JE38D9B5');
+  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The FAANG Data Interview Cheat Sheet | Hired in Data</title>
+<meta name="description" content="Fifteen questions asked in data interviews at Meta, Amazon, Apple, Netflix and Google, from our community and recent interview reports. Free from Mandy Liu, ex-Meta Data Scientist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --yellow:#ffe578; --yellow-hover:#ffd633; --dark:#252525; --dark-mid:#333333;
+  --cream:#fbf7f1; --text:#333333; --text-light:#666666; --text-muted:#999999;
+  --border:#e0dcd6; --radius:6px;
+}
+body{
+  font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16px; line-height:1.6; color:var(--text); background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'Merriweather',Georgia,serif; line-height:1.3}
+.sheet{max-width:820px; margin:0 auto; padding:0 24px 80px}
+
+/* ---------- Cover ---------- */
+.cover{padding:64px 0 40px; border-bottom:3px solid var(--dark)}
+.kicker{
+  display:inline-block; background:var(--yellow); color:var(--dark);
+  font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  padding:6px 12px; border-radius:var(--radius); margin-bottom:20px;
+}
+h1{font-size:clamp(30px,5.2vw,46px); font-weight:900; color:var(--dark); margin-bottom:16px}
+.sub{font-size:18px; color:var(--text-light); max-width:62ch}
+.byline{margin-top:24px; font-size:14px; color:var(--text-muted)}
+.byline strong{color:var(--dark-mid)}
+
+/* ---------- Company strip ---------- */
+.cos{display:flex; flex-wrap:wrap; justify-content:center; gap:16px 30px; align-items:center; margin:30px 0 4px}
+.cos span{display:inline-flex; align-items:center}
+
+/* ---------- Logos ---------- */
+.lg{display:inline-block; height:16px; background-position:center; background-repeat:no-repeat; background-size:contain; vertical-align:middle}
+.cos .lg{height:26px}
+.co-head .lg{height:22px}
+.lg.meta{aspect-ratio:1.5;background-image:url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTU2cHgiIGhlaWdodD0iMTA0cHgiIHZpZXdCb3g9IjAgMCAxNTYgMTA0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPgogICAgPHRpdGxlPk1ldGE8L3RpdGxlPgogICAgPGRlZnM+CiAgICAgICAgPGxpbmVhckdyYWRpZW50IHgxPSIxMy44Nzg0MzU0JSIgeTE9IjU1LjkzMzc0OTElIiB4Mj0iODkuMTQzNTc0JSIgeTI9IjU4LjY5MzYzMjQlIiBpZD0ibGluZWFyR3JhZGllbnQtMSI+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiMwMDY0RTEiIG9mZnNldD0iMCUiPjwvc3RvcD4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iIzAwNjRFMSIgb2Zmc2V0PSI0MCUiPjwvc3RvcD4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iIzAwNzNFRSIgb2Zmc2V0PSI4MyUiPjwvc3RvcD4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iIzAwODJGQiIgb2Zmc2V0PSIxMDAlIj48L3N0b3A+CiAgICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgICA8bGluZWFyR3JhZGllbnQgeDE9IjU0LjMxNTAyNzIlIiB5MT0iODIuNzgyNDQzJSIgeDI9IjU0LjMxNTAyNzIlIiB5Mj0iMzkuMzA2NzcxNSUiIGlkPSJsaW5lYXJHcmFkaWVudC0yIj4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iIzAwODJGQiIgb2Zmc2V0PSIwJSI+PC9zdG9wPgogICAgICAgICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjMDA2NEUwIiBvZmZzZXQ9IjEwMCUiPjwvc3RvcD4KICAgICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPGc+CiAgICAgICAgPHBhdGggZD0iTTE2Ljc3NTAyMTEsNjguMDI5MDI5NSBDMTYuNzc1MDIxMSw3My45NTkxNTYxIDE4LjA3NjYyNDUsNzguNTEyMDY3NSAxOS43Nzc4OTAzLDgxLjI2NjQ5NzkgQzIyLjAwODQzODgsODQuODc0MjYxNiAyNS4zMzUzNTg2LDg2LjQwMjcwMDQgMjguNzI3MDg4Niw4Ni40MDI3MDA0IEMzMy4xMDE3NzIyLDg2LjQwMjcwMDQgMzcuMTAzNzk3NSw4NS4zMTcxMzA4IDQ0LjgxNjIwMjUsNzQuNjUwNDY0MSBDNTAuOTk0NzY3OSw2Ni4xMDA5MjgzIDU4LjI3NTEwNTUsNTQuMTAwMjUzMiA2My4xNzM2NzA5LDQ2LjU3Njg3NzYgTDcxLjQ2OTM2NzEsMzMuODMwODg2MSBDNzcuMjMyMDY3NSwyNC45Nzg5MDMgODMuOTAyMTA5NywxNS4xMzg1NjU0IDkxLjU0OTcwNDYsOC40Njg1MjMyMSBDOTcuNzkzMDgwMiwzLjAyNDQ3MjU3IDEwNC41Mjc5MzIsMCAxMTEuMzA1OTkyLDAgQzEyMi42ODU1NywwIDEzMy41MjUwNjMsNi41OTQ0MzAzOCAxNDEuODIwNzU5LDE4Ljk2MjM2MjkgQzE1MC44OTk1NzgsMzIuNTA3Njc5MyAxNTUuMzA2NjY3LDQ5LjU2ODk0NTEgMTU1LjMwNjY2Nyw2Ny4xNzU2OTYyIEMxNTUuMzA2NjY3LDc3LjY0MjUzMTYgMTUzLjI0MzU0NCw4NS4zMzMzMzMzIDE0OS43MzI5OTYsOTEuNDA5MjgyNyBDMTQ2LjM0MTI2Niw5Ny4yODU0MDA4IDEzOS43MzA2MzMsMTAzLjE1NjExOCAxMjguNjEwMjk1LDEwMy4xNTYxMTggTDEyOC42MTAyOTUsODYuNDAyNzAwNCBDMTM4LjEzMTk4Myw4Ni40MDI3MDA0IDE0MC41MDgzNTQsNzcuNjUzMzMzMyAxNDAuNTA4MzU0LDY3LjY0MDE2ODggQzE0MC41MDgzNTQsNTMuMzcxMTM5MiAxMzcuMTgxNDM1LDM3LjUzNTg2NSAxMjkuODUyNDg5LDI2LjIyMTA5NyBDMTI0LjY1MTQ3NywxOC4xOTU0NDMgMTE3LjkxMTIyNCwxMy4yOTE0NzY4IDExMC40OTU4NjUsMTMuMjkxNDc2OCBDMTAyLjQ3NTYxMiwxMy4yOTE0NzY4IDk2LjAyMTYwMzQsMTkuMzQwNDIxOSA4OC43NjgyNywzMC4xMjU5MDcyIEM4NC45MTIwNjc1LDM1Ljg1NjIwMjUgODAuOTUzMjQ4OSw0Mi44Mzk0OTM3IDc2LjUwODM1NDQsNTAuNzE5MzI0OSBMNzEuNjE1MTg5OSw1OS4zODc2NzkzIEM2MS43ODU2NTQsNzYuODE2MjAyNSA1OS4yOTU4NjUsODAuNzg1ODIyOCA1NC4zODEwOTcsODcuMzM3MDQ2NCBDNDUuNzY2NzUxMSw5OC44MDg0Mzg4IDM4LjQxMDgwMTcsMTAzLjE1NjExOCAyOC43MjcwODg2LDEwMy4xNTYxMTggQzE3LjIzOTQ5MzcsMTAzLjE1NjExOCA5Ljk3NTM1ODY1LDk4LjE4MTk0MDkgNS40NzY0NTU3LDkwLjY4NTU2OTYgQzEuODAzODgxODYsODQuNTc3MjE1MiAwLDc2LjU2MjM2MjkgMCw2Ny40Mjk1MzU5IEwxNi43NzUwMjExLDY4LjAyOTAyOTUgWiIgZmlsbD0iIzAwODFGQiI+PC9wYXRoPgogICAgICAgIDxwYXRoIGQ9Ik0xMy4yMjY2NjY3LDIwLjE0NTE0NzcgQzIwLjkxNzQ2ODQsOC4yOTAyOTUzNiAzMi4wMTYyMDI1LDAgNDQuNzQ1OTkxNiwwIEM1Mi4xMTgxNDM1LDAgNTkuNDQ3MDg4NiwyLjE4MTk0MDkzIDY3LjEwMDA4NDQsOC40MzA3MTczIEM3NS40NzEzOTI0LDE1LjI2Mjc4NDggODQuMzkzNTg2NSwyNi41MTI3NDI2IDk1LjUyNDcyNTcsNDUuMDUzODM5NyBMOTkuNTE1OTQ5NCw1MS43MDc2NzkzIEMxMDkuMTUxMDU1LDY3Ljc1ODk4NzMgMTE0LjYzMjkxMSw3Ni4wMTY4Nzc2IDExNy44NDEwMTMsNzkuOTEwODg2MSBDMTIxLjk2NzI1Nyw4NC45MTIwNjc1IDEyNC44NTY3MDksODYuNDAyNzAwNCAxMjguNjEwMjk1LDg2LjQwMjcwMDQgQzEzOC4xMzE5ODMsODYuNDAyNzAwNCAxNDAuNTA4MzU0LDc3LjY1MzMzMzMgMTQwLjUwODM1NCw2Ny42NDAxNjg4IEwxNTUuMzA2NjY3LDY3LjE3NTY5NjIgQzE1NS4zMDY2NjcsNzcuNjQyNTMxNiAxNTMuMjQzNTQ0LDg1LjMzMzMzMzMgMTQ5LjczMjk5Niw5MS40MDkyODI3IEMxNDYuMzQxMjY2LDk3LjI4NTQwMDggMTM5LjczMDYzMywxMDMuMTU2MTE4IDEyOC42MTAyOTUsMTAzLjE1NjExOCBDMTIxLjY5NzIxNSwxMDMuMTU2MTE4IDExNS41NzI2NTgsMTAxLjY1NDY4NCAxMDguOCw5NS4yNjU0ODUyIEMxMDMuNTkzNTg2LDkwLjM2MTUxOSA5Ny41MDY4MzU0LDgxLjY0OTk1NzggOTIuODI0MzAzOCw3My44MTg3MzQyIEw3OC44OTU1Mjc0LDUwLjU1MTg5ODcgQzcxLjkwNjgzNTQsMzguODc1Mjc0MyA2NS40OTYwMzM4LDMwLjE2OTExMzkgNjEuNzg1NjU0LDI2LjIyNjQ5NzkgQzU3Ljc5NDQzMDQsMjEuOTg2ODM1NCA1Mi42NjM2Mjg3LDE2Ljg2NjgzNTQgNDQuNDc1OTQ5NCwxNi44NjY4MzU0IEMzNy44NDkxMTM5LDE2Ljg2NjgzNTQgMzIuMjIxNDM0NiwyMS41MTY5NjIgMjcuNTExODk4NywyOC42Mjk4NzM0IEwxMy4yMjY2NjY3LDIwLjE0NTE0NzcgWiIgZmlsbD0idXJsKCNsaW5lYXJHcmFkaWVudC0xKSI+PC9wYXRoPgogICAgICAgIDxwYXRoIGQ9Ik00NC40NzU5NDk0LDE2Ljg2NjgzNTQgQzM3Ljg0OTExMzksMTYuODY2ODM1NCAzMi4yMjE0MzQ2LDIxLjUxNjk2MiAyNy41MTE4OTg3LDI4LjYyOTg3MzQgQzIwLjg1MjY1ODIsMzguNjgwODQzOSAxNi43NzUwMjExLDUzLjY1MTk4MzEgMTYuNzc1MDIxMSw2OC4wMjkwMjk1IEMxNi43NzUwMjExLDczLjk1OTE1NjEgMTguMDc2NjI0NSw3OC41MTIwNjc1IDE5Ljc3Nzg5MDMsODEuMjY2NDk3OSBMNS40NzY0NTU3LDkwLjY4NTU2OTYgQzEuODAzODgxODYsODQuNTc3MjE1MiAwLDc2LjU2MjM2MjkgMCw2Ny40Mjk1MzU5IEMwLDUwLjgyMTk0MDkgNC41NTgzMTIyNCwzMy41MTIyMzYzIDEzLjIyNjY2NjcsMjAuMTQ1MTQ3NyBDMjAuOTE3NDY4NCw4LjI5MDI5NTM2IDMyLjAxNjIwMjUsMCA0NC43NDU5OTE2LDAgTDQ0LjQ3NTk0OTQsMTYuODY2ODM1NCBaIiBmaWxsPSJ1cmwoI2xpbmVhckdyYWRpZW50LTIpIj48L3BhdGg+CiAgICAgICAgPHBhdGggZD0iTTE4Ny45MTY5NjIsMy4yNjIxMDk3IEwyMDcuMzIyMTk0LDMuMjYyMTA5NyBMMjQwLjMxNTk0OSw2Mi45NTIyMzYzIEwyNzMuMzE1MTA1LDMuMjYyMTA5NyBMMjkyLjI5OTA3MiwzLjI2MjEwOTcgTDI5Mi4yOTkwNzIsMTAxLjM0MTQzNSBMMjc2LjQ2OTE5OCwxMDEuMzQxNDM1IEwyNzYuNDY5MTk4LDI2LjE3MjQ4OTUgTDI0Ny41MzE0NzcsNzguMjI1ODIyOCBMMjMyLjY3OTE1Niw3OC4yMjU4MjI4IEwyMDMuNzQ2ODM1LDI2LjE3MjQ4OTUgTDIwMy43NDY4MzUsMTAxLjM0MTQzNSBMMTg3LjkxNjk2MiwxMDEuMzQxNDM1IEwxODcuOTE2OTYyLDMuMjYyMTA5NyBaIE0zNDEuOTAwNDIyLDM5LjgzMTIyMzYgQzMzMC41NDc4NDgsMzkuODMxMjIzNiAzMjMuNzEwMzgsNDguMzc1MzU4NiAzMjIuMDczOTI0LDU4Ljk1NTYxMTggTDM2MC42MDM1NDQsNTguOTU1NjExOCBDMzU5LjgwOTYyLDQ4LjA1NjcwODkgMzUzLjUyMzAzOCwzOS44MzEyMjM2IDM0MS45MDA0MjIsMzkuODMxMjIzNiBaIE0zMDYuMzc5MDcyLDY0Ljk4Mjk1MzYgQzMwNi4zNzkwNzIsNDIuNzIwNjc1MSAzMjAuNzY2OTIsMjYuNTE4MTQzNSAzNDIuMTc1ODY1LDI2LjUxODE0MzUgQzM2My4yMzM3NTUsMjYuNTE4MTQzNSAzNzUuODA2OTIsNDIuNTE1NDQzIDM3NS44MDY5Miw2Ni4xNzExMzkyIEwzNzUuODA2OTIsNzAuNTE4ODE4NiBMMzIyLjA3MzkyNCw3MC41MTg4MTg2IEMzMjMuOTgwNDIyLDgyLjAyODAxNjkgMzMxLjYxNzIxNSw4OS43ODM2Mjg3IDM0My45MzExMzksODkuNzgzNjI4NyBDMzUzLjc1NTI3NCw4OS43ODM2Mjg3IDM1OS44OTYwMzQsODYuNzg2MTYwMyAzNjUuNzE4MTQzLDgxLjMwNDMwMzggTDM3NC4xMjcyNTcsOTEuNjAzNzEzMSBDMzY2LjIwNDIxOSw5OC44ODk0NTE1IDM1Ni4xMjYyNDUsMTAzLjA5MTMwOCAzNDMuMzY5NDUxLDEwMy4wOTEzMDggQzMyMC4xOTQ0MywxMDMuMDkxMzA4IDMwNi4zNzkwNzIsODYuMTkyMDY3NSAzMDYuMzc5MDcyLDY0Ljk4Mjk1MzYgWiBNMzk1LjAwMTUxOSw0MS4yMzU0NDMgTDM4MC40MzAwNDIsNDEuMjM1NDQzIEwzODAuNDMwMDQyLDI4LjI3MzQxNzcgTDM5NS4wMDE1MTksMjguMjczNDE3NyBMMzk1LjAwMTUxOSw2LjgzNzQ2ODM1IEw0MTAuMjc1MTA1LDYuODM3NDY4MzUgTDQxMC4yNzUxMDUsMjguMjczNDE3NyBMNDMyLjQxMzE2NSwyOC4yNzM0MTc3IEw0MzIuNDEzMTY1LDQxLjIzNTQ0MyBMNDEwLjI3NTEwNSw0MS4yMzU0NDMgTDQxMC4yNzUxMDUsNzQuMDg4Nzc2NCBDNDEwLjI3NTEwNSw4NS4zMDYzMjkxIDQxMy44NjEyNjYsODkuMjkyMTUxOSA0MjIuNjc1NDQzLDg5LjI5MjE1MTkgQzQyNi42OTkwNzIsODkuMjkyMTUxOSA0MjkuMDA1MjMyLDg4Ljk0NjQ5NzkgNDMyLjQxMzE2NSw4OC4zNzk0MDkzIEw0MzIuNDEzMTY1LDEwMS4yMDEwMTMgQzQyOC4xNjgxMDEsMTAyLjQgNDI0LjExNzQ2OCwxMDIuOTUwODg2IDQxOS43MzE5ODMsMTAyLjk1MDg4NiBDNDAzLjI0MzIwNywxMDIuOTUwODg2IDM5NS4wMDE1MTksOTMuOTQyMjc4NSAzOTUuMDAxNTE5LDc1LjkwODg2MDggTDM5NS4wMDE1MTksNDEuMjM1NDQzIFogTTQ5Ni43MjY0MTQsNTMuODQxMDEyNyBDNDkzLjY1ODczNCw0Ni4wOTYyMDI1IDQ4Ni44MTU4NjUsNDAuMzkyOTExNCA0NzYuNzU5NDk0LDQwLjM5MjkxMTQgQzQ2My42ODk0NTEsNDAuMzkyOTExNCA0NTUuMzIzNTQ0LDQ5LjY2NjE2MDMgNDU1LjMyMzU0NCw2NC43NzIzMjA3IEM0NTUuMzIzNTQ0LDc5LjUwMDQyMTkgNDYzLjAyNTE0OCw4OS4yMjE5NDA5IDQ3Ni4xMzI5OTYsODkuMjIxOTQwOSBDNDg2LjQzNzgwNiw4OS4yMjE5NDA5IDQ5My43OTM3NTUsODMuMjI3MDA0MiA0OTYuNzI2NDE0LDc1Ljc2ODQzODggTDQ5Ni43MjY0MTQsNTMuODQxMDEyNyBaIE01MTIsMTAxLjM0MTQzNSBMNDk3LjAwNzI1NywxMDEuMzQxNDM1IEw0OTcuMDA3MjU3LDkxLjExMjIzNjMgQzQ5Mi44MTYyMDMsOTcuMTM0MTc3MiA0ODUuMTkwMjExLDEwMy4wOTEzMDggNDcyLjgzODQ4MSwxMDMuMDkxMzA4IEM0NTIuOTc0MTc3LDEwMy4wOTEzMDggNDM5LjY5ODkwMyw4Ni40NjIxMDk3IDQzOS42OTg5MDMsNjQuNzcyMzIwNyBDNDM5LjY5ODkwMyw0Mi44NzcyOTk2IDQ1My4yOTI4MjcsMjYuNTE4MTQzNSA0NzMuNjgxMDEzLDI2LjUxODE0MzUgQzQ4My43NTg5ODcsMjYuNTE4MTQzNSA0OTEuNjY1ODIzLDMwLjU0NzE3MyA0OTcuMDA3MjU3LDM3LjY2MDA4NDQgTDQ5Ny4wMDcyNTcsMjguMjczNDE3NyBMNTEyLDI4LjI3MzQxNzcgTDUxMiwxMDEuMzQxNDM1IFoiIGZpbGw9IiMxOTI4MzAiPjwvcGF0aD4KICAgIDwvZz4KPC9zdmc+Cg==")}
+.lg.amazon{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDMyIDMyIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yOC4zMTIgMjguMjZDMjUuMDAzIDMwLjcgMjAuMjA4IDMyIDE2LjA4IDMyYy01LjggMC0xMS4wMDItMi4xNC0xNC45NDUtNS43MDMtLjMtLjI4LS4wMzItLjY2Mi4zNC0uNDQ0QzUuNzMgMjguMzMgMTEgMjkuODIgMTYuNDI2IDI5LjgyYTI5LjczIDI5LjczIDAgMCAwIDExLjQwNi0yLjMzMmMuNTYtLjIzOCAxLjAzLjM2Ny40OC43NzNtMS4zNzYtMS41NzVjLS40Mi0uNTQtMi43OTYtLjI1NS0zLjg2LS4xMy0uMzI1LjA0LS4zNzQtLjI0My0uMDgyLS40NDYgMS45LTEuMzMgNC45OTQtLjk0NyA1LjM1Ni0uNXMtLjA5NCAzLjU2LTEuODcgNS4wNDRjLS4yNzMuMjI4LS41MzMuMTA3LS40LS4xOTYuNC0uOTk2IDEuMjk0LTMuMjMuODctMy43NzIiIGZpbGw9IiNmOTAiLz48cGF0aCBkPSJNMTguNDMgMTMuODY0YzAgMS42OTIuMDQzIDMuMTAzLS44MTIgNC42MDUtLjcgMS4yMi0xLjggMS45NzMtMy4wMDUgMS45NzMtMS42NjcgMC0yLjY0NC0xLjI3LTIuNjQ0LTMuMTQ1IDAtMy43IDMuMzE2LTQuMzczIDYuNDYyLTQuMzczdi45NG00LjM4IDEwLjU4NGMtLjI4Ny4yNTctLjcwMi4yNzUtMS4wMjYuMTA0LTEuNDQtMS4xOTctMS43MDQtMS43NTMtMi40OTItMi44OTUtMi4zODIgMi40My00LjA3NCAzLjE1Ny03LjE1OCAzLjE1Ny0zLjY1OCAwLTYuNDk4LTIuMjU0LTYuNDk4LTYuNzY3IDAtMy41MjQgMS45MDUtNS45MjQgNC42My03LjA5NyAyLjM1Ny0xLjAzOCA1LjY1LTEuMjIgOC4xNjUtMS41VjguOWMwLTEuMDMyLjA4LTIuMjU0LS41My0zLjE0NS0uNTI1LS44LTEuNTQtMS4xMy0yLjQzNy0xLjEzLTEuNjU1IDAtMy4xMjcuODUtMy40ODcgMi42MDgtLjA3My40LS4zNi43NzYtLjc1Ny43OTRMNyA3LjU1NWMtLjM1NC0uMDgtLjc1LS4zNjYtLjY0Ny0uOUM3LjMyOCAxLjU0IDExLjk0NSAwIDE2LjA3NCAwYzIuMTEzIDAgNC44NzQuNTYyIDYuNTQgMi4xNjIgMi4xMTMgMS45NzMgMS45MTIgNC42MDUgMS45MTIgNy40N1YxNi40YzAgMi4wMzQuODQzIDIuOTI1IDEuNjM3IDQuMDI1LjI3NS40LjMzNi44Ni0uMDE4IDEuMTU0YTE4NC4yNiAxODQuMjYgMCAwIDAtMy4zMjggMi44ODNsLS4wMDYtLjAxMiIgZmlsbD0iIzIyMWYxZiIvPjxwYXRoIGQ9Ik0tMjkuNjUgMzU1Ljg2OGMtMzUgMjUuNzk3LTg1LjczIDM5LjU2LTEyOS40MDYgMzkuNTYtNjEuMjQzIDAtMTE2LjM3Ny0yMi42NS0xNTguMDg4LTYwLjMyNS0zLjI3Ny0yLjk2My0uMzQtNyAzLjU5Mi00LjY5MyA0NS4wMTQgMjYuMiAxMDAuNjczIDQxLjk0NyAxNTguMTY2IDQxLjk0NyAzOC43NzUgMCA4MS40My04LjAyMiAxMjAuNjUtMjQuNjcgNS45MjUtMi41MTcgMTAuODggMy44OCA1LjA4NiA4LjE4bTE0LjU1LTE2LjY0N2MtNC40NTctNS43MTUtMjkuNTczLTIuNy00MC44NDYtMS4zNjMtMy40MzQuNDItMy45Ni0yLjU3LS44NjUtNC43MiAyMC4wMDMtMTQuMDc4IDUyLjgyNy0xMC4wMTUgNTYuNjU1LTUuMjk2IDMuODI4IDQuNzQ1LS45OTYgMzcuNjQ3LTE5Ljc5NCA1My4zNS0yLjg4NCAyLjQxMi01LjYzNyAxLjEyNy00LjM1Mi0yLjA3IDQuMjItMTAuNTQgMTMuNjg1LTM0LjE2IDkuMjAyLTM5LjkwMiIgZmlsbD0iI2Y5MCIvPjxwYXRoIGQ9Ik0tNTUuMTYgMjMzLjc1di0xMy42ODVjMC0yLjA3IDEuNTczLTMuNDYgMy40Ni0zLjQ2SDkuNTdjMS45NjYgMCAzLjU0IDEuNDE2IDMuNTQgMy40NnYxMS43MmMtLjAyNiAxLjk2Ni0xLjY3OCA0LjUzNi00LjYxNCA4LjZsLTMxLjc1IDQ1LjMzYzExLjc5OC0uMjg4IDI0LjI1IDEuNDY4IDM0Ljk0NyA3LjQ5OCAyLjQxMiAxLjM2MyAzLjA2NyAzLjM1NiAzLjI1IDUuMzIydjE0LjYwM2MwIDEuOTkyLTIuMjAyIDQuMzI2LTQuNSAzLjEyLTE4Ljg1LTkuODg0LTQzLjg4Ny0xMC45Ni02NC43My4xMDUtMi4xMjQgMS4xNTQtNC4zNTItMS4xNTQtNC4zNTItMy4xNDZ2LTEzLjg3YzAtMi4yMjguMDI2LTYuMDMgMi4yNTUtOS40MTJsMzYuNzgyLTUyLjc0OGgtMzJjLTEuOTY2IDAtMy41NC0xLjQtMy41NC0zLjQzNG0tMjIzLjQ5NSA4NS4zODVoLTE4LjY0Yy0xLjc4My0uMTMtMy4xOTgtMS40NjgtMy4zMy0zLjE3MlYyMjAuM2MwLTEuOTE0IDEuNi0zLjQzNCAzLjU5Mi0zLjQzNGgxNy4zODJjMS44LjA4IDMuMjUgMS40NjggMy4zODIgMy4xOTh2MTIuNTA1aC4zNGM0LjUzNi0xMi4wODYgMTMuMDU2LTE3LjcyMyAyNC41NC0xNy43MjMgMTEuNjY2IDAgMTguOTU1IDUuNjM3IDI0LjE5OCAxNy43MjMgNC41LTEyLjA4NiAxNC43Ni0xNy43MjMgMjUuNzQ1LTE3LjcyMyA3LjgxMyAwIDE2LjM2IDMuMjI1IDIxLjU3NiAxMC40NiA1LjkgOC4wNSA0LjY5MyAxOS43NCA0LjY5MyAyOS45OTJsLS4wMjYgNjAuMzc3YzAgMS45MTQtMS42IDMuNDYtMy41OTIgMy40NmgtMTguNjE0Yy0xLjg2LS4xMy0zLjM1Ni0xLjYyNS0zLjM1Ni0zLjQ2di01MC43MDNjMC00LjAzNy4zNjctMTQuMTA1LS41MjQtMTcuOTMyLTEuNC02LjQyMy01LjU1OC04LjIzMi0xMC45Ni04LjIzMi00LjUgMC05LjIyOCAzLjAxNS0xMS4xNDIgNy44NHMtMS43MyAxMi45LTEuNzMgMTguMzI2djUwLjcwM2MwIDEuOTE0LTEuNiAzLjQ2LTMuNTkyIDMuNDZoLTE4LjYxNGMtMS44ODgtLjEzLTMuMzU2LTEuNjI1LTMuMzU2LTMuNDZsLS4wMjYtNTAuNzAzYzAtMTAuNjcgMS43NTctMjYuMzc0LTExLjQ4My0yNi4zNzQtMTMuMzk3IDAtMTIuODcyIDE1LjMtMTIuODcyIDI2LjM3NHY1MC43MDNjMCAxLjkxNC0xLjYgMy40Ni0zLjU5MiAzLjQ2bTM0NC40OTYtMTA0LjNjMjcuNjYgMCA0Mi42MyAyMy43NTIgNDIuNjMgNTMuOTU0IDAgMjkuMTgtMTYuNTQzIDUyLjMzLTQyLjYzIDUyLjMzLTI3LjE2IDAtNDEuOTQ3LTIzLjc1Mi00MS45NDctNTMuMzUgMC0yOS43ODIgMTQuOTctNTIuOTMyIDQxLjk0Ny01Mi45MzJtLjE1NyAxOS41MzJjLTEzLjczOCAwLTE0LjYwMyAxOC43Mi0xNC42MDMgMzAuMzg1IDAgMTEuNjkzLS4xODQgMzYuNjUgMTQuNDQ1IDM2LjY1IDE0LjQ0NSAwIDE1LjEyNy0yMC4xMzUgMTUuMTI3LTMyLjQwNCAwLTguMDc1LS4zNC0xNy43MjMtMi43OC0yNS4zNzgtMi4wOTctNi42Ni02LjI2Ni05LjI1NS0xMi4yLTkuMjU1bTc4LjMzOCA4NC43NThIMTI1LjhjLTEuODYtLjEzLTMuMzU2LTEuNjI1LTMuMzU2LTMuNDZsLS4wMjYtOTUuN2MuMTU3LTEuNzU3IDEuNzA0LTMuMTIgMy41OTItMy4xMmgxNy4yNzdjMS42MjUuMDggMi45NjIgMS4xOCAzLjMzIDIuNjc0djE0LjYzaC4zNGM1LjIxNy0xMy4wODIgMTIuNTMyLTE5LjMyMiAyNS40MDQtMTkuMzIyIDguMzYzIDAgMTYuNTE3IDMuMDE1IDIxLjc2IDExLjI3MyA0Ljg3NiA3LjY1NSA0Ljg3NiAyMC41MjggNC44NzYgMjkuNzgydjYwLjIyYy0uMiAxLjY3OC0xLjc1NyAzLjAxNS0zLjU5MiAzLjAxNWgtMTguNjkzYy0xLjcwNC0uMTMtMy4xMi0xLjQtMy4zMDMtMy4wMTV2LTUxLjk2MmMwLTEwLjQ2IDEuMjA2LTI1Ljc3LTExLjY2Ny0yNS43Ny00LjUzNSAwLTguNzA0IDMuMDQtMTAuNzc1IDcuNjU1LTIuNjIyIDUuODQ2LTIuOTYyIDExLjY2Ny0yLjk2MiAxOC4xMTZ2NTEuNTE2Yy0uMDI2IDEuOTE0LTEuNjUyIDMuNDYtMy42NDQgMy40Nm02Ni4yOTMtNy41OTRjMC00LjgyNCA0LjExNi04LjcwNCA5LjE3Ni04LjcwNHM5LjE3NiAzLjg4IDkuMTc2IDguNzA0YzAgNC43OTgtNC4xMTYgOC43My05LjE3NiA4Ljczcy05LjE3Ni0zLjkzMy05LjE3Ni04LjczbTE5Ny41IDcuNjNjLTEuOTQtLjA4LTMuNDYtMS41NzMtMy40Ni0zLjQ2VjIyMC4wNGMuMTA1LTEuNzA0IDEuNTQ3LTMuMDQgMy4zMy0zLjE0Nmg2Ljg0M2MxLjg4OCAwIDMuNDA4IDEuMzYzIDMuNTY1IDMuMTQ2djEzLjk0N2M0Ljg3Ni0xMS4wNjQgMTMuOTQ3LTE5LjcxNSAyNS40MDQtMTkuNzE1aDEuNGMxMi4xNjUgMCAyMS4wNTIgOC45NjYgMjQuMzU1IDIxLjk5NiA1LjE2NS0xMi44NzIgMTQuODY1LTIxLjk5NiAyNy42Ni0yMS45OTZoMS40MTZjOS4wNDUgMCAxNy43NSA1LjgyIDIyLjI1OCAxNC42OCA0LjM1MiA4LjQ2OCA0LjE5NSAxOS43NCA0LjE5NSAyOS4yMDZsLS4wMjYgNTcuNTQ2Yy4wMjYgMS44MzUtMS40NjggMy4zMy0zLjMzIDMuNDZoLTguMThjLTEuNzgzLS4wOC0zLjIyNS0xLjMzNy0zLjQ2LTN2LTU4LjAxOGMwLTYuODQzLjM0LTE0LjEwNS0yLjQzOC0yMC4zNDQtMi44My02LjM3LTguMjU4LTEwLjM1Ni0xNC4wNzgtMTAuNjQ0LTYuNTAyLjMxNS0xMi40OCA1LjA2LTE2LjM2IDExLjQ1Ny01LjAzNCA4LjI1OC00Ljg1IDE1LjcwNC00Ljg1IDI1LjM1MnY1Mi4yNWMtLjIzNiAxLjU3My0xLjYyNSAyLjgwNS0zLjMzIDIuOTM2aC04LjEyN2MtMS45NC0uMDgtMy40ODctMS41NzMtMy40ODctMy40NmwtLjA1Mi02MS4zNzRjMC01LjYzNy0uMzQtMTIuMjctMi45MzYtMTcuMzMtMy4wMTUtNS43NjgtOC40MTYtOS41NDMtMTQuMDc4LTkuODMtNS44NzMuMzQtMTEuNzk4IDQuODI0LTE1LjMgMTAuMDQtNC41MzYgNi42Ni01LjQgMTQuOS01LjQgMjMuMzZ2NTUuMTM0YzAgMS44MzUtMS40OTQgMy4zMy0zLjM1NiAzLjQ2aC04LjE1M00zNTIgMzIxLjE1N2MtMjYuNDUzIDAtMzguMzAzLTI2Ljk3Ny0zOC4zMDMtNTMuOTU0IDAtMjguMzY3IDEzLjkyLTUyLjkzMiA0MC41NTctNTIuOTMyaDEuNDE2YzI1LjkwMiAwIDM4LjggMjYuMTY0IDM4LjggNTMuMTQyIDAgMjguNTc2LTE0LjI4OCA1My43NDUtNDEuMDgyIDUzLjc0NWgtMS40bTEuOTQtMTMuMDgyYzguNzA0LS4yODggMTUuNTczLTUuNyAxOS42MzYtMTQuNjggMy42NDQtOC4wNzUgNC4zNTItMTcuMzMgNC4zNTItMjYuMiAwLTkuNjQ4LTEuMDUtMTkuNzE1LTUuNTg0LTI3Ljk3My00LjA2NC03LjItMTEuMDM3LTExLjc5OC0xOC40My0xMi4wNi04LjIzMi4yODgtMTUuNiA1Ljg3My0xOS4yOTYgMTQuNDcyLTMuMzMgNy40NDYtNC4zNTIgMTcuMzMtNC4zNTIgMjUuNTYgMCA5LjI1NSAxLjIwNiAxOS45NSA1LjAzNCAyOCAzLjcyMyA3LjYzIDEwLjg4IDEyLjU4NCAxOC42NCAxMi44NzJtLTg0LjYtLjQyMmMxMS44NzYtLjM2NyAxOC4xMTYtOS44ODQgMjAuNjg1LTIyLjIwNi41MjQtMS41NDcgMS43MDQtMi43MjcgMy40MzQtMi43MjdsNy44NC0uMDI2YzEuODYuMDggMy41NjUgMS40OTQgMy40MDggMy4yMjUtMy42MTggMjEtMTYuMjggMzUuMjM1LTM0LjMxOCAzNS4yMzVoLTEuNDE2Yy0yNi4yNyAwLTM3LjU5NS0yNi4zNzQtMzcuNTk1LTUzLjE0MiAwLTI2LjU1OCAxMS40ODMtNTMuNzQ1IDM3Ljc1Mi01My43NDVoMS40MTZjMTguMjQ3IDAgMzEuMjUgMTQuMDUyIDM0LjA4MiAzNS4wNTIgMCAxLjU3My0xLjQ2OCAyLjkzNi0zLjE5OCAzLjEybC04LjIwNi0uMTA1Yy0xLjczLS4yMzYtMi44NTgtMS43MDQtMy4xMi0zLjM1Ni0xLjk2Ni0xMS43Mi04LjcwNC0yMS4wNTItMTkuOTI1LTIxLjQyLTE3Ljg1NC41NzctMjIuOTQgMjIuNTQ2LTIyLjk0IDM5LjQ1NiAwIDE2LjI4IDQuMjQ3IDQwLjA2IDIyLjEgNDAuNjM2TS0xMDQgMjczLjQ0MmMwIDcuMjYyLjE4NCAxMy4zMTgtMy40ODcgMTkuNzY3LTIuOTYzIDUuMjQzLTcuNjgyIDguNDY4LTEyLjkgOC40NjgtNy4xNTcgMC0xMS4zNTItNS40NTMtMTEuMzUyLTEzLjUwMiAwLTE1Ljg4NyAxNC4yMzYtMTguNzcgMjcuNzM3LTE4Ljc3djQuMDM3bTE4Ljc5NyA0NS40MzRjLTEuMjMyIDEuMS0zLjAxNSAxLjE4LTQuNDA0LjQ0Ni02LjE4Ny01LjE0LTcuMzE1LTcuNTI0LTEwLjY5Ni0xMi40MjctMTAuMjI1IDEwLjQzNC0xNy40ODcgMTMuNTU0LTMwLjcyNiAxMy41NTQtMTUuNzA0IDAtMjcuODk1LTkuNjc0LTI3Ljg5NS0yOS4wNDggMC0xNS4xMjcgOC4xOC0yNS40MyAxOS44NzItMzAuNDY0IDEwLjEyLTQuNDU3IDI0LjI1LTUuMjQzIDM1LjA1Mi02LjQ3NnYtMi40MTJjMC00LjQzLjM0LTkuNjc0LTIuMjgtMTMuNTAyLTIuMjU1LTMuNDM0LTYuNjA3LTQuODUtMTAuNDYtNC44NS03LjEwNSAwLTEzLjQyMyAzLjY0NC0xNC45NyAxMS4xOTUtLjMxNSAxLjY3OC0xLjU0NyAzLjMzLTMuMjUgMy40MDhsLTE4LjA2My0xLjk0Yy0xLjUyLS4zNC0zLjIyNS0xLjU3My0yLjc4LTMuOTA2IDQuMTQyLTIxLjkxNyAyMy45NjItMjguNTI0IDQxLjY4NS0yOC41MjQgOS4wNyAwIDIwLjkyIDIuNDEyIDI4LjA3OCA5LjI4IDkuMDcgOC40NjggOC4yMDYgMTkuNzY3IDguMjA2IDMyLjA2M3YyOS4wNDhjMCA4LjczIDMuNjE4IDEyLjU1OCA3LjAyNiAxNy4yNzcgMS4xOCAxLjY3OCAxLjQ0MiAzLjY5Ny0uMDggNC45NTUtMy44IDMuMTcyLTEwLjU2NSA5LjA3LTE0LjI4OCAxMi4zNzRsLS4wMjYtLjA1M20tMjYzLjE2NC00NS40MzJjMCA3LjI2Mi4xODMgMTMuMzE4LTMuNDg3IDE5Ljc2Ny0yLjk2MyA1LjI0My03LjY1NSA4LjQ2OC0xMi45IDguNDY4LTcuMTU3IDAtMTEuMzI2LTUuNDUzLTExLjMyNi0xMy41MDIgMC0xNS44ODcgMTQuMjM2LTE4Ljc3IDI3LjctMTguNzd2NC4wMzdtMTguNzk3IDQ1LjQzNGMtMS4yMzIgMS4xLTMuMDE1IDEuMTgtNC40MDQuNDQ2LTYuMTg3LTUuMTQtNy4yODgtNy41MjQtMTAuNjk2LTEyLjQyNy0xMC4yMjUgMTAuNDM0LTE3LjQ2IDEzLjU1NC0zMC43MjYgMTMuNTU0LTE1LjY3OCAwLTI3Ljg5NS05LjY3NC0yNy44OTUtMjkuMDQ4IDAtMTUuMTI3IDguMjA2LTI1LjQzIDE5Ljg3Mi0zMC40NjQgMTAuMTItNC40NTcgMjQuMjUtNS4yNDMgMzUuMDUyLTYuNDc2di0yLjQxMmMwLTQuNDMuMzQtOS42NzQtMi4yNTUtMTMuNTAyLTIuMjgtMy40MzQtNi42MzMtNC44NS0xMC40Ni00Ljg1LTcuMTA1IDAtMTMuNDUgMy42NDQtMTQuOTk2IDExLjE5NS0uMzE1IDEuNjc4LTEuNTQ3IDMuMzMtMy4yMjUgMy40MDhsLTE4LjEtMS45NGMtMS41Mi0uMzQtMy4xOTgtMS41NzMtMi43OC0zLjkwNiA0LjE2OC0yMS45MTcgMjMuOTYyLTI4LjUyNCA0MS42ODUtMjguNTI0IDkuMDcgMCAyMC45MiAyLjQxMiAyOC4wNzggOS4yOCA5LjA3IDguNDY4IDguMjA2IDE5Ljc2NyA4LjIwNiAzMi4wNjN2MjkuMDQ4YzAgOC43MyAzLjYxOCAxMi41NTggNy4wMjYgMTcuMjc3IDEuMjA2IDEuNjc4IDEuNDY4IDMuNjk3LS4wNTIgNC45NTUtMy44IDMuMTcyLTEwLjU2NSA5LjA3LTE0LjI4OCAxMi4zNzRsLS4wNTItLjA1MyIgZmlsbD0iIzIyMWYxZiIvPjwvc3ZnPg==")}
+.lg.apple{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+QXBwbGU8L3RpdGxlPjxwYXRoIGQ9Ik0xMi4xNTIgNi44OTZjLS45NDggMC0yLjQxNS0xLjA3OC0zLjk2LTEuMDQtMi4wNC4wMjctMy45MSAxLjE4My00Ljk2MSAzLjAxNC0yLjExNyAzLjY3NS0uNTQ2IDkuMTAzIDEuNTE5IDEyLjA5IDEuMDEzIDEuNDU0IDIuMjA4IDMuMDkgMy43OTIgMy4wMzkgMS41Mi0uMDY1IDIuMDktLjk4NyAzLjkzNS0uOTg3IDEuODMxIDAgMi4zNS45ODcgMy45Ni45NDggMS42MzctLjAyNiAyLjY3Ni0xLjQ4IDMuNjc2LTIuOTQ4IDEuMTU2LTEuNjg4IDEuNjM2LTMuMzI1IDEuNjYyLTMuNDE1LS4wMzktLjAxMy0zLjE4Mi0xLjIyMS0zLjIyLTQuODU3LS4wMjYtMy4wNCAyLjQ4LTQuNDk0IDIuNTk3LTQuNTU5LTEuNDI5LTIuMDktMy42MjMtMi4zMjQtNC4zOS0yLjM3Ni0yLS4xNTYtMy42NzUgMS4wOS00LjYxIDEuMDl6TTE1LjUzIDMuODNjLjg0My0xLjAxMiAxLjQtMi40MjcgMS4yNDUtMy44My0xLjIwNy4wNTItMi42NjIuODA1LTMuNTMyIDEuODE4LS43OC44OTYtMS40NTQgMi4zMzgtMS4yNzMgMy43MTQgMS4zMzguMTA0IDIuNzE1LS42ODggMy41NTktMS43MDEiLz48L3N2Zz4=")}
+.lg.netflix{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRTUwOTE0IiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+TmV0ZmxpeDwvdGl0bGU+PHBhdGggZD0ibTUuMzk4IDAgOC4zNDggMjMuNjAyYzIuMzQ2LjA1OSA0Ljg1Ni4zOTggNC44NTYuMzk4TDEwLjExMyAwSDUuMzk4em04LjQ4OSAwdjkuMTcybDQuNzE1IDEzLjMzVjBoLTQuNzE1ek01LjM5OCAxLjVWMjRjMS44NzMtLjIyNSAyLjgxLS4zMTIgNC43MTUtLjM5OFYxNC44M0w1LjM5OCAxLjV6Ii8+PC9zdmc+")}
+.lg.google{aspect-ratio:0.977;background-image:url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjI1NnB4IiBoZWlnaHQ9IjI2MnB4IiB2aWV3Qm94PSIwIDAgMjU2IDI2MiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCI+Cgk8Zz4KCQk8cGF0aCBkPSJNMjU1Ljg3OCwxMzMuNDUxIEMyNTUuODc4LDEyMi43MTcgMjU1LjAwNywxMTQuODg0IDI1My4xMjIsMTA2Ljc2MSBMMTMwLjU1LDEwNi43NjEgTDEzMC41NSwxNTUuMjA5IEwyMDIuNDk3LDE1NS4yMDkgQzIwMS4wNDcsMTY3LjI0OSAxOTMuMjE0LDE4NS4zODEgMTc1LjgwNywxOTcuNTY1IEwxNzUuNTYzLDE5OS4xODcgTDIxNC4zMTgsMjI5LjIxIEwyMTcuMDAzLDIyOS40NzggQzI0MS42NjIsMjA2LjcwNCAyNTUuODc4LDE3My4xOTYgMjU1Ljg3OCwxMzMuNDUxIiBmaWxsPSIjNDI4NUY0Ij48L3BhdGg+CgkJPHBhdGggZD0iTTEzMC41NSwyNjEuMSBDMTY1Ljc5OCwyNjEuMSAxOTUuMzg5LDI0OS40OTUgMjE3LjAwMywyMjkuNDc4IEwxNzUuODA3LDE5Ny41NjUgQzE2NC43ODMsMjA1LjI1MyAxNDkuOTg3LDIxMC42MiAxMzAuNTUsMjEwLjYyIEM5Ni4wMjcsMjEwLjYyIDY2LjcyNiwxODcuODQ3IDU2LjI4MSwxNTYuMzcgTDU0Ljc1LDE1Ni41IEwxNC40NTIsMTg3LjY4NyBMMTMuOTI1LDE4OS4xNTIgQzM1LjM5MywyMzEuNzk4IDc5LjQ5LDI2MS4xIDEzMC41NSwyNjEuMSIgZmlsbD0iIzM0QTg1MyI+PC9wYXRoPgoJCTxwYXRoIGQ9Ik01Ni4yODEsMTU2LjM3IEM1My41MjUsMTQ4LjI0NyA1MS45MywxMzkuNTQzIDUxLjkzLDEzMC41NSBDNTEuOTMsMTIxLjU1NiA1My41MjUsMTEyLjg1MyA1Ni4xMzYsMTA0LjczIEw1Ni4wNjMsMTAzIEwxNS4yNiw3MS4zMTIgTDEzLjkyNSw3MS45NDcgQzUuMDc3LDg5LjY0NCAwLDEwOS41MTcgMCwxMzAuNTUgQzAsMTUxLjU4MyA1LjA3NywxNzEuNDU1IDEzLjkyNSwxODkuMTUyIEw1Ni4yODEsMTU2LjM3IiBmaWxsPSIjRkJCQzA1Ij48L3BhdGg+CgkJPHBhdGggZD0iTTEzMC41NSw1MC40NzkgQzE1NS4wNjQsNTAuNDc5IDE3MS42LDYxLjA2OCAxODEuMDI5LDY5LjkxNyBMMjE3Ljg3MywzMy45NDMgQzE5NS4yNDUsMTIuOTEgMTY1Ljc5OCwwIDEzMC41NSwwIEM3OS40OSwwIDM1LjM5MywyOS4zMDEgMTMuOTI1LDcxLjk0NyBMNTYuMTM2LDEwNC43MyBDNjYuNzI2LDczLjI1MyA5Ni4wMjcsNTAuNDc5IDEzMC41NSw1MC40NzkiIGZpbGw9IiNFQjQzMzUiPjwvcGF0aD4KCTwvZz4KPC9zdmc+")}
+
+/* ---------- Company sections ---------- */
+section{padding-top:46px}
+.co-head{display:flex; align-items:center; gap:14px; margin-bottom:6px; padding-bottom:14px; border-bottom:1px solid var(--border)}
+.co-head .lg{flex:none}
+h2{font-size:24px; font-weight:700; color:var(--dark)}
+.lede{color:var(--text-light); margin:14px 0 20px; max-width:64ch; font-size:15px}
+
+/* ---------- Question cards ---------- */
+.bank{display:grid; gap:12px; margin:18px 0}
+.qitem{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px}
+.qmeta{display:flex; align-items:center; gap:12px; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); margin-bottom:11px}
+.qmeta .diff{color:var(--dark-mid)}
+/* Four tiers, most to least prominent: the question, its follow-ups, what the
+   round is testing, then the constraints and the hint. Each tier steps down in
+   size and weight so the card can be skimmed for the question alone. */
+.qitem .q{font-family:'Merriweather',Georgia,serif; font-size:17px; font-weight:700; color:var(--dark); line-height:1.45}
+.qitem .qsub{list-style:none; margin-top:13px}
+.qitem .qsub li{font-size:14px; color:var(--text-light); padding-left:16px; position:relative; margin-bottom:6px; line-height:1.5}
+.qitem .qsub li::before{content:"\2192"; position:absolute; left:0; color:var(--yellow-hover); font-weight:700}
+/* Shared label for the lower tiers. */
+.lbl{display:block; font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px}
+.tests{margin-top:16px; padding-top:14px; border-top:1px solid var(--border); font-size:14px; color:var(--text-light)}
+.qitem .hint{margin-top:12px; font-size:13.5px; color:var(--text-light); font-style:italic}
+.qitem .hint .lbl{font-style:normal}
+.cols{margin-top:12px; font-size:13px; color:var(--text-light); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--cream); border:1px solid var(--border); border-radius:var(--radius); padding:9px 12px; overflow-x:auto; white-space:nowrap}
+/* What the interviewer hands you. Kept in the question, not the hint - several of
+   these cases are unanswerable without their numbers. */
+.given{margin-top:12px; font-size:13.5px; color:var(--text-light); background:var(--cream); border:1px solid var(--border); border-radius:var(--radius); padding:10px 13px}
+.given strong{color:var(--dark-mid); font-weight:600; display:block; font-size:11px; letter-spacing:.05em; text-transform:uppercase; margin-bottom:4px}
+
+/* ---------- Checklist ---------- */
+.checklist{background:#fff; border:2px solid var(--dark); border-radius:var(--radius); padding:28px 30px; margin-top:24px}
+.checklist h3{font-size:17px; font-weight:700; color:var(--dark); margin:0 0 6px}
+.checklist ul{list-style:none; margin-top:10px}
+.checklist li{padding:11px 0 11px 34px; position:relative; border-bottom:1px solid var(--border); font-size:15px}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:""; position:absolute; left:0; top:14px; width:18px; height:18px; border:2px solid var(--dark); border-radius:3px}
+
+/* ---------- Closing ---------- */
+.cta{background:var(--yellow); border-radius:var(--radius); padding:36px 32px; margin-top:56px; text-align:center}
+.cta h2{margin-bottom:12px}
+.cta p{color:var(--dark-mid); max-width:56ch; margin:0 auto}
+.cta p + p{margin-top:12px}
+footer{text-align:center; color:var(--text-muted); font-size:13px; margin-top:40px}
+
+/* ---------- Print ---------- */
+@media print{
+  body{background:#fff; font-size:11pt}
+  .sheet{max-width:100%; padding:0}
+  .cover{padding-top:0}
+  section{page-break-inside:avoid; padding-top:26px}
+  .cta{background:none; border:2px solid var(--dark)}
+  .checklist,.qitem{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<style>
+  .hid-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--cream, #fbf7f1);
+    border-bottom: 1px solid var(--border, #e0dcd6);
+  }
+  @supports (backdrop-filter: blur(8px)) {
+    .hid-nav { background: color-mix(in srgb, var(--cream, #fbf7f1) 92%, transparent); backdrop-filter: blur(8px); }
+  }
+  .hid-nav-wrap {
+    max-width: 68rem; margin: 0 auto; padding: 0 1.5rem;
+    min-height: 4.5rem; display: flex; align-items: center;
+  }
+  .hid-nav-logo {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    font-weight: 600; font-size: 1.05rem; letter-spacing: -0.02em;
+    color: var(--dark, #252525); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.55rem;
+  }
+  .hid-nav-mark { width: 40px; height: 40px; flex: none; display: block; }
+  /* Underline the name, not the mark. */
+  .hid-nav-logo:hover span { text-decoration: underline; text-underline-offset: 3px; }
+  .hid-nav-logo:focus-visible { outline: 2px solid var(--yellow-hover, #ffd633); outline-offset: 3px; }
+  /* The magnets are built to print cleanly. A sticky header is not part of that. */
+  @media print { .hid-nav { display: none; } }
+</style>
+<header class="hid-nav"><div class="hid-nav-wrap"><a class="hid-nav-logo" href="https://hiredindata.com/"><svg class="hid-nav-mark" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><pattern id="hid-grid-7" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.75" fill="#f0c62c"/></pattern></defs><rect width="32" height="32" rx="6" fill="#ffd633"/><rect width="32" height="32" rx="6" fill="url(#hid-grid-7)"/><g fill="#1c1d20"><g transform="translate(-0.244 7.111) scale(0.5556)"><path d="M8 7h4.5v6.9h7V7H24v18h-4.5v-6.9h-7V25H8Z"/></g><rect x="14.59" y="13.4" width="2.2" height="7.6"/><rect x="14.59" y="10.7" width="2.2" height="2.2"/><g transform="translate(15.29 8) scale(0.5)"><path fill-rule="evenodd" d="M6 6h9a10 10 0 0 1 0 20H6Zm4.5 4.5h4.5a5.5 5.5 0 0 1 0 11h-4.5Z"/></g></g></svg><span>Hired in Data</span></a></div></header>
+
+<div class="sheet">
+
+  <header class="cover">
+    <span class="kicker">Free Cheat Sheet</span>
+    <h1>Fifteen questions FAANG data teams are asking right now.</h1>
+    <p class="sub">Three each from Meta, Amazon, Apple, Netflix and Google, from our community and recent interview reports. Product sense, SQL, modelling, experiment design and the behavioural questions everyone under-prepares.</p>
+    <div class="cos">
+      <span><i class="lg meta" role="img" aria-label="Meta"></i></span>
+      <span><i class="lg amazon" role="img" aria-label="Amazon"></i></span>
+      <span><i class="lg apple" role="img" aria-label="Apple"></i></span>
+      <span><i class="lg netflix" role="img" aria-label="Netflix"></i></span>
+      <span><i class="lg google" role="img" aria-label="Google"></i></span>
+    </div>
+    <p class="byline">Compiled by <strong>Mandy Liu</strong> - ex-Meta Data Scientist, founder of Hired in Data. 50+ data professionals placed, averaging a $54K salary increase.</p>
+  </header>
+
+  <!-- ============ META ============ -->
+  <section>
+    <div class="co-head">
+      <i class="lg meta" role="img" aria-label="Meta"></i>
+      <h2>Meta</h2>
+    </div>
+    <p class="lede">Product sense on Instagram, SQL on the friend graph, and an experiment question about novelty wearing off. The cases name real products and real trade-offs.</p>
+
+    <div class="bank">
+      <div class="qitem">
+        <div class="qmeta"><span>Product sense</span><span class="diff">Medium</span></div>
+        <p class="q">Reels has grown fast and leadership wants to know whether it is actually working. How would you measure it?</p>
+        <ul class="qsub">
+          <li>Pick one headline metric, and say which smaller metrics sit under it.</li>
+          <li>Show how you'd tell real value apart from Reels simply taking time off Feed and Stories.</li>
+          <li>Say what you'd do when what's good for viewers, for creators and for ad revenue point in different directions.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Metric design, and whether you notice a number that flatters the product.</p>
+        <p class="hint"><span class="lbl">Hint</span>They're worried watch time flatters Reels. Answer the worry, not just the question.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>SQL</span><span class="diff">Medium</span></div>
+        <p class="q">Each user has a date on which they made their very first friend. Return every pair of users whose first-friend dates are no more than 7 days apart.</p>
+        <ul class="qsub">
+          <li>Use each user's earliest friendship timestamp as that date.</li>
+          <li>Return each pair once, with <code>user_id_1 &lt; user_id_2</code>, plus both timestamps and the absolute day difference.</li>
+          <li>Exclude users with no valid friendship timestamp. Order by days apart, then the two ids.</li>
+        </ul>
+        <p class="cols">friendships: friendship_id | user_id_1 | user_id_2 | became_friends_at | surface</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Self-joins, and returning each pair once instead of twice.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Experimentation</span><span class="diff">Medium</span></div>
+        <p class="q">After someone saves a Reel, Instagram wants to show a richer pop-up with more Reels like it. Product expects saving to go up. You expect a spike that fades. Design the test.</p>
+        <ul class="qsub">
+          <li>Say what you mean by a novelty effect, and give a hypothesis that tells a short-term spike apart from a lasting change.</li>
+          <li>Pick your main metric and two to four guardrail metrics - the ones that must not get worse.</li>
+          <li>Work out the smallest lift worth detecting, then how long the test needs to run at that traffic.</li>
+          <li>Say what you'd do if week one is up and week two falls back.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Experiment design against a real traffic and time budget.</p>
+        <p class="given"><span class="lbl">What you're given</span>6 million people watch Reels a day. You can put 10% in control, 10% in treatment, and must leave the other 80% alone. You have 14 days to decide.</p>
+        <p class="hint"><span class="lbl">Hint</span>Fourteen days is barely two weekly cycles. If your sizing needs longer than the window you've been given, say so - noticing the constraint bites is part of the answer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AMAZON ============ -->
+  <section>
+    <div class="co-head">
+      <i class="lg amazon" role="img" aria-label="Amazon"></i>
+      <h2>Amazon</h2>
+    </div>
+    <p class="lede">Scale, schema design, and a behavioural round that isn't a formality. Answers get mapped back to the Leadership Principles, so pick stories that fit one.</p>
+
+    <div class="bank">
+      <div class="qitem">
+        <div class="qmeta"><span>Product sense</span><span class="diff">Hard</span></div>
+        <p class="q">Someone types a query into Amazon search. How would you decide what order the results come back in?</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Whether you can hold relevance, revenue and seller fairness in one answer.</p>
+        <p class="hint"><span class="lbl">Hint</span>Relevance is the easy half. They want to hear you weigh it against conversion, margin, sponsored slots and long-tail sellers.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Data modelling</span><span class="diff">Medium</span></div>
+        <p class="q">Amazon is launching a new product line. How would you model the data behind it?</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Data modelling: grain, keys, and what breaks when the product changes.</p>
+        <p class="hint"><span class="lbl">Hint</span>Say what a single row in your main table represents before you draw anything. Skip that and you'll tie yourself in knots later.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Behavioural</span><span class="diff">Medium</span></div>
+        <p class="q">Tell me about a time you went digging in the data and found a problem nobody knew was there.</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Ownership, and whether you can put a number on what your digging was worth.</p>
+        <p class="hint"><span class="lbl">Hint</span>This is the Dive Deep principle, asked by name. Bring the numbers - the follow-up is always "how much".</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APPLE ============ -->
+  <section>
+    <div class="co-head">
+      <i class="lg apple" role="img" aria-label="Apple"></i>
+      <h2>Apple</h2>
+    </div>
+    <p class="lede">Device data and evaluation problems, and harder than anything else here - two of these three are rated Hard.</p>
+
+    <div class="bank">
+      <div class="qitem">
+        <div class="qmeta"><span>Product sense</span><span class="diff">Medium</span></div>
+        <p class="q">How would you measure whether Siri is giving people good answers, and whether they are happy with it?</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Measuring something that has no obvious right answer to compare against.</p>
+        <p class="hint"><span class="lbl">Hint</span>There's no clean label for satisfaction. Say what you'd use instead, and where it would mislead you.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Modelling</span><span class="diff">Hard</span></div>
+        <p class="q">Devices send back battery readings over time. How would you build something that reliably spots a reading that is not normal?</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Time-series judgement: what counts as normal, and normal for whom.</p>
+        <p class="hint"><span class="lbl">Hint</span>"Robust" is the bit they care about - seasonality, differences between devices, and what happens when the anomaly is already in your training data.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Experimentation</span><span class="diff">Hard</span></div>
+        <p class="q">You are running a test across the whole platform, and the people in your test group interact with the people in your control group. How do you handle that?</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Whether you know a test group can contaminate its own control.</p>
+        <p class="hint"><span class="lbl">Hint</span>The trap is that your control group isn't clean - treated users affect the people you're comparing them to. Say how you'd group people so the effect can't leak across.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NETFLIX ============ -->
+  <section>
+    <div class="co-head">
+      <i class="lg netflix" role="img" aria-label="Netflix"></i>
+      <h2>Netflix</h2>
+    </div>
+    <p class="lede">Defining metrics for playback that simply has to work, SQL on how users come and go, and a behavioural round about disagreement.</p>
+
+    <div class="bank">
+      <div class="qitem">
+        <div class="qmeta"><span>Product sense</span><span class="diff">Medium</span></div>
+        <p class="q">A team is shipping work to cut playback errors for viewers worldwide. How would you know whether it worked?</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Metric definition where a healthy average can hide a broken region.</p>
+        <p class="hint"><span class="lbl">Hint</span>Watch the word "globally". A metric that improves on average while one region gets worse is a wrong answer.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>SQL</span><span class="diff">Medium</span></div>
+        <p class="q">Month by month, work out who stayed subscribed, who dropped off, and who came back. Use conditional aggregation and ranking functions.</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Window functions, and a definition of churn you can defend.</p>
+        <p class="hint"><span class="lbl">Hint</span>The question hands you the tools, so name them as you use them. Decide early what "churned" means here - one quiet month, or three?</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Behavioural</span><span class="diff">Medium</span></div>
+        <p class="q">Tell me about a time a PM or an engineering lead wanted to define a metric one way and you disagreed. What did you do?</p>
+        <p class="tests"><span class="lbl">What they're testing</span>How you argue, and whether the disagreement changed anything.</p>
+        <p class="hint"><span class="lbl">Hint</span>Backing down scores badly. So does being right and saying so. Pick the time you changed how the decision got made.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GOOGLE ============ -->
+  <section>
+    <div class="co-head">
+      <i class="lg google" role="img" aria-label="Google"></i>
+      <h2>Google</h2>
+    </div>
+    <p class="lede">Stats against messy reality - what to do when you can't run a clean experiment, and how to talk about a result that's real but small.</p>
+
+    <div class="bank">
+      <div class="qitem">
+        <div class="qmeta"><span>System design</span><span class="diff">Hard</span></div>
+        <p class="q">Build the recommendation system behind YouTube Shorts. It has to keep people watching now, without burning out their interest over the months ahead.</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Balancing what people click now against what keeps them coming back.</p>
+        <p class="hint"><span class="lbl">Hint</span>The two goals pull against each other. Maximise watch time alone and you've answered half of it.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Statistics</span><span class="diff">Hard</span></div>
+        <p class="q">One of your main metrics has moved. How would you work out whether that is just the time of year, or something that genuinely changed?</p>
+        <ul class="qsub">
+          <li>Build a baseline from the same stretch of previous years.</li>
+          <li>Check whether what actually happened sits outside what that baseline predicted.</li>
+          <li>Control for day of week and holidays, so you don't credit a real change to the calendar.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Telling a calendar pattern apart from a real change.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Statistics</span><span class="diff">Medium</span></div>
+        <p class="q">Your test comes back significant, but the effect is tiny. How do you explain that to the people who have to decide what happens next?</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Turning a statistic into a decision someone can act on.</p>
+        <p class="hint"><span class="lbl">Hint</span>Statistical against practical significance, put plainly enough for a PM. They're testing how you explain it, not whether you know it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW TO USE ============ -->
+  <section>
+    <div class="checklist">
+      <h3>How to actually use this</h3>
+      <ul>
+        <li>Pick two from your target company and answer each one out loud, start to finish, before checking anything.</li>
+        <li>Name your metrics before you design the experiment, and say what one row means before you design the schema.</li>
+        <li>Ask what the goal and the constraints are before you start solving. The constraints are usually the real question.</li>
+        <li>For the behavioural ones, bring numbers. The follow-up is always "how much".</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h2>Pick two and say them out loud</h2>
+    <p>Reading all fifteen won't make you ready. Pick two, answer them out loud, and notice exactly where you stall. Go and read up on that bit, then answer again.</p>
+    <p>Having the pieces somewhere in your head isn't the same as being able to say them. Saying them is what you're marked on.</p>
+  </div>
+
+  <footer>Hired in Data</footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1504 @@
+/* Shared VSL page styles. Per-page accent is injected as --accent in the page <head>. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+:root {
+  --ink: #1c1d20;
+  --muted: #6f7378;
+  --bg: #ffffff;
+  --bg-alt: #f6f6f4;
+  --line: #e3e3e0;
+  --card: #ffffff;
+  --todo: #b4610a;
+  --todo-bg: #fdf4e7;
+  --todo-line: #e8b877;
+  --max: 68rem;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+.wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+.narrow { max-width: 46rem; }
+
+h1, h2, h3 { letter-spacing: -0.025em; line-height: 1.15; margin: 0; }
+.hl-text .hl { color: var(--accent-text); }
+/* A yellow brand can't colour text with its accent, so highlight by painting a
+   marker behind the phrase and keeping the text black. */
+.hl-mark .hl {
+  /* Highlighter swipe under the lower third of the text, not a full block:
+     a solid yellow field behind large headline type reads as a mistake. */
+  background: linear-gradient(transparent 62%, var(--mark, var(--accent)) 62%);
+  color: var(--ink);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ---------- placeholder treatment ---------- */
+
+.todo {
+  border: 2px dashed var(--todo-line);
+  background: var(--todo-bg);
+  color: var(--todo);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.todo-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.todo p { margin: 0.4rem 0 0; }
+.todo code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+.todo-inline {
+  display: inline;
+  border-bottom: 2px dashed var(--todo-line);
+  background: var(--todo-bg);
+  color: var(--todo);
+  padding: 0 0.25em;
+  font-weight: 500;
+}
+
+/* ---------- nav ---------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  /* 4.5rem, not 4: the brand mark is 40px and needs room to breathe. */
+  min-height: 4.5rem;
+}
+.nav-logo {
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  color: inherit;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- brand lockup (mark + wordmark) ---------- */
+
+/* Used in the header and the footer. The mark is a fixed square that never
+   shrinks; the wordmark beside it is live text.
+
+   40px, not an em multiple of the wordmark: the mark carries a dot grid and
+   three letters, and below roughly 40 both stop reading. That makes it taller
+   than the 4rem nav is used to, so the nav grows to suit rather than the mark
+   shrinking to fit. */
+.nav-logo,
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  display: block;
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+.btn:hover { filter: brightness(0.92); }
+.btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.btn-sm { padding: 0.6rem 1.15rem; font-size: 0.88rem; }
+.btn-lg { padding: 1.05rem 2.2rem; font-size: 1.05rem; }
+
+/* On a page whose nav CTA carries a long label, the button and the wordmark
+   together are wider than a phone. The mark alone still reads as the brand, so
+   the wordmark stands down and the button keeps the room. `nav-tight` is set by
+   the build from the label's length, so a short-label page is untouched. */
+@media (max-width: 46rem) {
+  .nav-tight .nav-logo span { display: none; }
+  .nav-tight .btn-sm { padding: 0.55rem 0.9rem; font-size: 0.82rem; }
+}
+
+/* ---------- section rhythm ---------- */
+
+section { padding: 4.5rem 0; }
+section.alt { background: var(--bg-alt); border-block: 1px solid var(--line); }
+
+.eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- hero ---------- */
+
+.hero { padding: 4rem 0 2.5rem; text-align: center; }
+.hero h1 {
+  font-size: clamp(1.9rem, 4.4vw, 3rem);
+  font-weight: 600;
+  max-width: 44ch;
+  margin: 0 auto;
+  text-wrap: balance;
+}
+/* The subhead under the headline. Sized between the h1 and body copy and kept
+   in full ink rather than muted grey: it carries the second half of the promise,
+   so it has to read as part of the headline, not as a caption under it. */
+.hero .body {
+  max-width: 40rem;
+  margin: 1rem auto 0;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  color: var(--ink);
+}
+.hero .body p { margin: 0 0 0.5rem; }
+
+/* ---------- vsl ---------- */
+
+.vsl { padding: 0 0 1.75rem; }
+.vsl-frame {
+  position: relative;
+  max-width: 52rem;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #000;
+}
+.vsl-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+/* Self-hosted <video>. object-fit:contain rather than cover so a source whose
+   aspect ratio is not exactly 16:9 letterboxes instead of being cropped. */
+.vsl-frame video { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; }
+.vsl-empty { background: var(--bg-alt); }
+/* The unmute button, over the video, on pages where the VSL autoplays muted.
+   Centred along the top edge. It is only ever added by script, once the player
+   API is ready - see VSL_UNMUTE in build.js. */
+.vsl-unmute {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  border: 0;
+  border-radius: 6px; /* the same corner as .btn, so it reads as one button family */
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.35);
+}
+.vsl-unmute:hover { filter: brightness(0.92); }
+.vsl-unmute:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.vsl-unmute-icon { font-size: 1.05rem; }
+
+/* The exit: a fade. Safe only because it starts after the hold - by then Vimeo
+   has cleared its own unmute prompt from behind, so there is nothing to show
+   through. Fading straight away would put theirs on display mid-fade. */
+.vsl-unmute { transition: opacity 0.35s ease; }
+.vsl-unmute.is-leaving { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .vsl-unmute { transition: none; }
+}
+
+/* The button under the video. It points at the form immediately below it, so it
+   is a prompt to act rather than a jump somewhere else on the page. */
+.vsl-cta { text-align: center; margin: 1.5rem 0 0; }
+
+/* The booking form under the video. Tight on both sides: attached to the button
+   above, and running straight into the proof block below rather than leaving a
+   full section gap under a 44rem calendar. */
+.booking-top { padding-top: 2rem; padding-bottom: 0.5rem; }
+
+/* Above the fold on a phone. The desktop spacing is unchanged; it is only on a
+   small screen that the gaps between headline, video, button and form add up to
+   more than the screen can spare. Measured on a 390x844 viewport: this pulls the
+   "Book a Call" heading roughly 90px up the page, which is the difference
+   between a phone showing the form and stopping at the button. */
+@media (max-width: 40rem) {
+  .hero { padding: 2rem 0 1.5rem; }
+  .hero .body { margin-top: 0.75rem; }
+  .vsl { padding-bottom: 1rem; }
+  .vsl-cta { margin-top: 1rem; }
+  .booking-top { padding-top: 1.25rem; }
+}
+
+/* The mid-page form, between the proof block and the argument. On the alternate
+   background so it reads as its own stop rather than as more of the logo wall
+   above it. */
+.booking-mid { padding-block: 3rem; }
+
+/* ---------- coaches (combined page) ---------- */
+
+.coaches { padding: 0 0 3.5rem; text-align: center; }
+.coaches .eyebrow { margin-bottom: 1.75rem; }
+
+.coach-grid {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+@media (min-width: 44rem) { .coach-grid { grid-template-columns: 1fr 1fr; } }
+
+.coach-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 2rem 1.75rem 1.75rem;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--coach, var(--accent));
+  border-radius: 8px;
+  background: var(--card);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+a.coach-card:hover { border-color: var(--coach, var(--accent)); transform: translateY(-2px); }
+a.coach-card:focus-visible { outline: 2px solid var(--coach, var(--accent)); outline-offset: 3px; }
+
+.coach-photo {
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+}
+.coach-photo-empty { background: var(--bg-alt); border: 1px dashed var(--line); }
+
+.coach-name { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; }
+.coach-role {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.coach-bio {
+  margin-top: 0.65rem;
+  font-size: 0.94rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.coach-more {
+  margin-top: 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--coach, var(--accent));
+}
+
+/* ---------- logo wall ---------- */
+
+/* The padding is asymmetric on purpose. Sitting under the first booking form,
+   the wall used to give itself 1.75rem of clearance above and 3rem below - and
+   because .proof then adds its own 4.5rem on top of that, the logos ended up
+   pinned to the form with a 120px hole beneath them, reading as an orphan strip
+   rather than the head of the proof block.
+   More space above than below groups it with what follows: the gap to the form
+   is a boundary between two different things, the gap to the stats is internal
+   to one argument - where people landed, then what they earned. The bottom
+   padding is 0 and the space below comes from the adjacency rule instead, so
+   the two sections cannot double up again. */
+.logowall { padding: 4rem 0 0; text-align: center; overflow-x: hidden; }
+.logowall + .proof { padding-top: 3rem; }
+.logowall .eyebrow { margin-bottom: 2rem; }
+/* One unbroken row, free to run wider than the page's content column.
+   It breaks out to the full viewport width rather than scrolling; the section
+   clips the ends so the row can overflow without the page scrolling sideways. */
+.logos-scroll {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  display: flex;
+  justify-content: center;
+}
+.logos {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2.75rem;
+  width: max-content;
+  padding-inline: 1.5rem;
+}
+.logos img {
+  height: 1.9rem;
+  width: auto;
+  max-width: 8.5rem;
+  flex: 0 0 auto;
+  object-fit: contain;
+  /* Real brand colours washed back so the row reads as one strip and no single
+     logo shouts over the others. Full colour returns on hover. */
+  opacity: 0.72;
+  filter: saturate(0.85);
+  transition: opacity 0.15s ease, filter 0.15s ease;
+}
+.logos img:hover { opacity: 1; filter: none; }
+
+/* On mobile the row can't stay on one line legibly, so wrap it into exactly two:
+   a flex-basis of one sixth forces 6 per row, and the remaining 5 centre
+   underneath. Full-bleed is dropped here so the rows sit inside the content column. */
+@media (max-width: 40rem) {
+  .logos-scroll { width: auto; margin-inline: 0; }
+  .logos {
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 1.1rem 0.6rem;
+    padding-inline: 0;
+  }
+  .logos img {
+    flex: 0 0 calc((100% - 3rem) / 6);
+    height: 1.15rem;
+    max-width: none;
+  }
+}
+
+/* ---------- three points ---------- */
+
+.points { padding: 4rem 0; }
+.pgrid { display: grid; gap: 2.5rem; }
+@media (min-width: 52rem) { .pgrid { grid-template-columns: repeat(3, 1fr); gap: 3rem; } }
+
+.pitem-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.1rem;
+}
+.pitem-icon svg { width: 1.4rem; height: 1.4rem; display: block; }
+
+.pitem h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  line-height: 1.25;
+}
+.pitem p { margin: 0; color: var(--muted); font-size: 0.96rem; }
+
+.pfootnote {
+  margin: 3rem 0 0;
+  text-align: center;
+  font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--accent-text);
+}
+
+/* ---------- booking ---------- */
+
+/* scroll-margin clears the sticky nav (4rem tall), which would otherwise cover
+   the heading when a CTA anchors to #book. */
+.booking { text-align: center; scroll-margin-top: 5rem; }
+.booking h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 600; margin-bottom: 2rem; }
+/* The scheduler sizes itself and this frame only holds space around it.
+   The embed is a bare <div data-aura-scheduler>; aura.js builds the iframe
+   into it on boot and writes width, height, border, radius and background
+   onto it as INLINE styles. Inline beats a stylesheet, so nothing here can
+   size or restyle that iframe - the rules below describe the frame only.
+   - No max-width: it gets the full content column rather than 52rem of it.
+   - min-height reserves space before boot so the page does not jump when the
+     widget appears. 560px is aura.js's own default floor and the fallback here;
+     a page whose form asks more questions overrides it with --booking-min-h,
+     set per page from booking.reserveHeight in its content.json. Note the embed
+     runs data-height="auto", so the widget sizes itself to its content and CAN
+     come in shorter than whatever is reserved - if that ever shows as dead
+     space under it, lower the page's reserveHeight.
+   - No overflow:hidden: it was only clipping to the border-radius, but it also
+     silently cropped horizontal overflow instead of showing it. The radius
+     sits on the iframe as well, so nothing needs clipping.
+   - No border or background: this frame used to draw a white bordered panel,
+     on the reasoning that a matching 12px radius would make it hug the widget.
+     It doesn't. aura.js renders its own bordered white card, narrower than the
+     full column, so the two never coincided - the result was a wide empty panel
+     with a smaller card floating inside it. The widget is already a card; it
+     doesn't need a second one drawn around it. All this rule does now is
+     reserve the space. */
+.booking-frame {
+  margin: 0 auto;
+  min-height: var(--booking-min-h, 560px);
+}
+
+/* ---------- proof ---------- */
+
+/* The win wall ends the section, and its own trailing margin stacked on top of
+   two full section paddings left a dead band before the client stories. */
+.proof { text-align: center; overflow: hidden; padding-bottom: 2.25rem; }
+.proof .marquee:last-child { margin-bottom: 0; }
+.proof h2 { font-size: clamp(1.9rem, 4.2vw, 2.8rem); font-weight: 600; margin-bottom: 0.75rem; }
+.proof .sub { max-width: 36rem; margin: 0 auto 2.5rem; color: var(--muted); font-size: 1.05rem; }
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.stat {
+  flex: 1 1 12rem;
+  max-width: 16rem;
+  padding: 1.75rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+}
+.stat-value {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 600;
+  color: var(--accent-text);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.stat-label {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.marquee { position: relative; overflow: hidden; margin-bottom: 1rem; }
+.marquee::before, .marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 5rem;
+  z-index: 2;
+  pointer-events: none;
+}
+.marquee::before { left: 0; background: linear-gradient(90deg, var(--bg-alt), transparent); }
+.marquee::after { right: 0; background: linear-gradient(270deg, var(--bg-alt), transparent); }
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: max-content;
+  animation: slide var(--speed, 90s) linear infinite;
+}
+.marquee-track.reverse { animation-direction: reverse; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Win screenshots. Fixed width, natural height — the source images run from
+   1.2:1 to 10.2:1, so a fixed height would stretch some to 2000px wide and a
+   fixed box would crop the text these are entirely made of. */
+.wincard {
+  flex: 0 0 30rem;
+  width: 30rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  overflow: hidden;
+  cursor: zoom-in;
+  position: relative;
+  display: block;
+  transition: border-color 0.15s ease;
+}
+.wincard:hover { border-color: var(--accent); }
+.wincard:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.wincard img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  object-position: top;
+}
+/* Anything past the cap is truncated, so fade the cut edge and say so. */
+.wincard.clipped::after {
+  content: 'Click to read';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 2.5rem 0 0.6rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  background: linear-gradient(transparent, var(--card) 60%);
+}
+
+@media (max-width: 34rem) {
+  .wincard { flex-basis: 20rem; width: 20rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee { overflow-x: auto; }
+}
+
+/* ---------- lightbox ---------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  place-items: center;
+  padding: 2rem 1rem;
+  background: rgba(15, 15, 18, 0.88);
+}
+.lightbox[open] { display: grid; }
+.lightbox img {
+  max-width: min(72rem, 100%);
+  max-height: 90vh;
+  width: auto;
+  border-radius: 8px;
+  background: #fff;
+}
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.28); }
+
+/* ---------- features ---------- */
+
+.features h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 600; margin-bottom: 1.5rem; }
+.features .intro { color: var(--muted); font-size: 1.05rem; margin-bottom: 2.5rem; }
+.features .intro p { margin: 0 0 0.85rem; }
+
+.flist { display: grid; gap: 1.75rem; }
+@media (min-width: 48rem) { .flist { grid-template-columns: 1fr 1fr; gap: 2rem 2.5rem; } }
+
+.fitem h3 { font-size: 1.08rem; font-weight: 600; margin-bottom: 0.4rem; }
+.fitem p { margin: 0; color: var(--muted); font-size: 0.96rem; }
+
+/* ---------- closing cta ---------- */
+
+/* Tight at the foot: the logo wall reads as the last line of the proof block
+   rather than a section of its own, so the story cards run almost straight into
+   it instead of leaving a full 4.5rem section gap. */
+.closing { text-align: center; padding-top: 2.25rem; padding-bottom: 1rem; }
+.closing h2 { font-size: clamp(1.7rem, 3.6vw, 2.3rem); font-weight: 600; margin-bottom: 2.5rem; }
+
+
+/* ---------- featured client stories (full display, as on /testimonials) ---------- */
+
+.closing { text-align: left; }
+.closing > .wrap > .eyebrow,
+.closing > .wrap > h2 { text-align: center; }
+
+.stories { margin: 3rem 0 0; }
+
+/* scroll-margin clears the sticky nav, same reasoning as .booking above - the
+   full story wall's quick-jump grid anchors straight to #story-<key>. */
+.story { padding: 3rem 0; border-top: 1px solid var(--line); scroll-margin-top: 5rem; }
+.story:first-child { border-top: 0; padding-top: 0; }
+
+.story-hero {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin-bottom: 2rem;
+}
+.hero-photo {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.hero-photo.avatar-fallback {
+  display: grid;
+  place-items: center;
+  background: var(--bg-alt);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 1.75rem;
+}
+.kicker {
+  margin: 0 0 0.5rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent-text);
+}
+.hero-text h3 {
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.three-col { display: grid; gap: 1rem; margin-bottom: 2rem; }
+@media (min-width: 48rem) { .three-col { grid-template-columns: repeat(3, 1fr); } }
+
+.three-col .card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.3rem 1.4rem;
+}
+.three-col .card h4 {
+  margin: 0 0 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-text);
+}
+.three-col .card ul { margin: 0; padding-left: 1.1rem; font-size: 0.92rem; line-height: 1.5; }
+.three-col .card li { margin-bottom: 0.45rem; }
+.three-col .card li:last-child { margin-bottom: 0; }
+.three-col .card img {
+  display: block;
+  width: 100%;
+  margin-top: 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.three-col .card img.zoomable { cursor: zoom-in; }
+.three-col .card img:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* The video runs the full width of the story. */
+.proof-row { display: block; }
+.proof-row img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.proof-row img.zoomable { cursor: zoom-in; }
+.proof-row img:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #000;
+}
+.video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* What stands in for a featured story's player until someone clicks it. Sized
+   by .video-embed above, so swapping in the real embed doesn't move the page.
+   The poster is a hand-picked still of the client - see the `poster` const in
+   build.js for why Loom's own thumbnail isn't used. It's optional: with no
+   poster the panel's black background shows through and the control still
+   reads. */
+.video-facade {
+  display: block;
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  cursor: pointer;
+  font: inherit;
+  color: #fff;
+  appearance: none;
+}
+/* Fills the frame whatever the still's own shape - Billy's recording is 4:3
+   while the screenshot of it is 16:9, so something has to be cropped. */
+.facade-shot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Darkens the still just enough that the white play button and the label below
+   it hold up over a bright frame. */
+.video-facade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, .28), rgba(0, 0, 0, .28) 55%, rgba(0, 0, 0, .55));
+}
+.facade-play, .facade-label { position: absolute; left: 50%; transform: translateX(-50%); z-index: 1; }
+.facade-play {
+  top: 50%;
+  margin-top: -34px;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .92);
+  transition: transform .15s ease;
+}
+/* The triangle, drawn rather than shipped as an asset. */
+.facade-play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  border-style: solid;
+  border-width: 11px 0 11px 18px;
+  border-color: transparent transparent transparent #111;
+}
+.facade-label {
+  bottom: 1.25rem;
+  width: max-content;
+  max-width: 90%;
+  font-size: .95rem;
+  font-weight: 500;
+  opacity: .85;
+}
+.video-facade:hover .facade-play { transform: translateX(-50%) scale(1.06); }
+.video-facade:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Between the click and Loom painting - ~250 requests, so several seconds -
+   the poster stays up under a spinner and the iframe is held invisible, rather
+   than handing over a black rectangle that reads as a broken video.
+
+   Deliberately no transition on that opacity: a fade is interpolated, and an
+   interpolation that never advances - a backgrounded tab, a throttled renderer -
+   leaves the video invisible. Binary is worth more here than 200ms of polish. */
+.video-loading iframe { opacity: 0; }
+.video-loading .facade-shot { filter: brightness(.5); }
+.facade-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border: 3px solid rgba(255, 255, 255, .35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: facade-spin .8s linear infinite;
+}
+@keyframes facade-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .facade-play { transition: none; }
+  .video-facade:hover .facade-play { transform: translateX(-50%); }
+  /* Still turns - a loading indicator has to indicate - but slowly enough not
+     to be the kind of motion the preference is asking us to drop. */
+  .facade-spinner { animation-duration: 2.4s; }
+}
+
+/* Introduces the row of other clients below it, and links to /testimonials -
+   the row of cards is proof of volume, not an exit on its own, so this quiet
+   line is the one way off the section. Extra margin-bottom (was 0) gives the
+   marquee row room to breathe instead of crowding straight in under it. */
+.swall-more {
+  margin: 1.25rem 0 2.5rem;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.swall-more a { color: var(--accent-text); text-decoration: none; }
+.swall-more a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.swall-more a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ---------- other-client cards, sliding under the featured stories ---------- */
+
+/* The win marquee sits on the alt background; this one sits on the page
+   background, so its edge fades need the other colour. */
+/* The 3px is not decoration. .marquee clips with overflow:hidden, and these
+   cards are exactly as tall as the track - unlike the win marquees, whose
+   images leave a gap - so the card's own bottom border sits on the clip edge and
+   gets shaved. The padding is inside the clip box, so it gives the border, the
+   hover colour and the focus ring somewhere to render. */
+.marquee-plain { margin: 1.75rem 0 2rem; padding-block: 3px; }
+.marquee-plain .marquee-track { align-items: stretch; }
+.marquee-plain::before { background: linear-gradient(90deg, var(--bg), transparent); }
+.marquee-plain::after { background: linear-gradient(270deg, var(--bg), transparent); }
+
+.scard {
+  flex: 0 0 13rem;
+  width: 13rem;
+  margin: 0;
+  padding: 1.5rem 1.1rem 1.35rem;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  appearance: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  transition: border-color 0.15s ease;
+}
+.scard:hover { border-color: var(--accent); }
+.scard:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.scard img,
+.scard .avatar-fallback {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+.scard .avatar-fallback {
+  display: grid;
+  place-items: center;
+  background: var(--bg-alt);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 1rem;
+}
+.scard-stat { font-size: 1rem; font-weight: 600; color: var(--accent-text); line-height: 1.2; }
+.scard-name { font-size: 0.88rem; font-weight: 500; }
+.scard-micro {
+  margin-top: auto;
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---------- full client-story wall (egor/thanks, results.fullStories) ---------- */
+
+/* A quick-jump grid of every client, reusing .scard from the sliding row
+   above rather than a second card component - same look, just laid out as a
+   responsive grid instead of a fixed-width marquee track. */
+.grid-lede {
+  max-width: 42em;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.story-grid .scard { flex: initial; width: auto; text-decoration: none; }
+.card-badge {
+  margin-top: 0.3rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+}
+.badge-experienced { background: #fbe3cd; color: #b85f14; }
+.badge-entryLevel { background: #dcf5e3; color: #1f7a3d; }
+.badge-transitions { background: #fbdce6; color: #a10f3d; }
+
+/* The closing note under the full wall - plain text and two outbound links,
+   not another booking CTA: the reader has already booked. */
+.stories-outro {
+  max-width: 42em;
+  margin: 3rem auto 0;
+  padding-top: 3rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.stories-outro p { margin: 0 0 0.6rem; color: var(--muted); }
+.stories-outro p:last-child { margin-bottom: 0; }
+.stories-outro a { color: var(--accent-text); }
+
+/* `results.outroTight` in content.json - no rule, less air above it. */
+.stories-outro-tight { margin-top: 1.25rem; padding-top: 0; border-top: 0; }
+
+/* ---------- prose sections (problem / not-a-course / guarantee) ---------- */
+
+.prose h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+.prose .eyebrow { margin-bottom: 0.9rem; }
+
+.prose-body {
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+.prose-body p { margin: 0 0 1.1rem; }
+.prose-body p:last-child { margin-bottom: 0; }
+
+/* The four failure modes in the problem section. Left rule and a dark label so
+   the set reads as a list to scan, not as more body copy. */
+.prose-items { margin: 2rem 0 0; }
+.prose-item {
+  padding: 0 0 0 1.25rem;
+  border-left: 2px solid var(--line);
+  margin-bottom: 1.6rem;
+}
+.prose-item:last-child { margin-bottom: 0; }
+.prose-item h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+.prose-item p { margin: 0; font-size: 1.02rem; color: var(--muted); line-height: 1.6; }
+
+/* What-you-get list. Round bullets in the page accent, drawn as a pseudo-
+   element so the marker sits on the first line of a wrapped item. */
+.prose h2 + .prose-list { margin-top: 0.5rem; }
+.prose-list {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.prose-list li {
+  position: relative;
+  padding: 0 0 0 1.35rem;
+  margin-bottom: 0.85rem;
+  line-height: 1.55;
+}
+.prose-list li:last-child { margin-bottom: 0; }
+@media (min-width: 44rem) {
+  .prose-list { columns: 2; column-gap: 3rem; }
+  .prose-list li { break-inside: avoid; margin-bottom: 0.75rem; }
+}
+.prose-list li::before {
+  content: '';
+  position: absolute;
+  left: 0.25rem;
+  top: 0.62em;
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 50%;
+  background: var(--accent-text);
+}
+
+/* The lines the section builds to. Wider than the column above it, and the
+   first line several steps larger so it reads as the conclusion. */
+.prose-outro {
+  margin-top: 3.25rem;
+  text-align: center;
+}
+.prose-outro p {
+  margin: 0;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+/* The statement. */
+.prose-outro p:first-child {
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+/* Everything after it is support, set at body size so the block has a way in
+   rather than being one slab of large type. */
+.prose-outro p + p {
+  margin-top: 1.15rem;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+/* The guarantee is the one place the page should raise its voice. Scoped to the
+   section itself, not to .alt, so another prose block can take the tinted
+   background without inheriting the shout. */
+.prose-guarantee .prose-body {
+  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  color: var(--ink);
+}
+
+/* ---------- faq ---------- */
+
+.faq h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.faq-list { border-top: 1px solid var(--line); }
+
+/* Answer blocks. The qualifying question is two lists rather than prose, so a
+   reader can find themselves in one of them without reading a paragraph. */
+.faq-subhead {
+  margin: 1.4rem 0 0.7rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.faq-points { list-style: none; margin: 0; padding: 0; }
+.faq-points li {
+  position: relative;
+  padding: 0 0 0 1.6rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.55;
+}
+.faq-points li:last-child { margin-bottom: 0; }
+/* Tick for the fits-you list. */
+.faq-points li::before {
+  content: '';
+  position: absolute;
+  left: 0.1rem;
+  top: 0.48em;
+  width: 0.6rem;
+  height: 0.32rem;
+  border-left: 2px solid var(--accent-text);
+  border-bottom: 2px solid var(--accent-text);
+  transform: rotate(-45deg);
+}
+/* Cross for the not-for-you list, drawn rather than set as an emoji so it
+   matches the rest of the page. */
+.faq-points.no li::before {
+  top: 0.55em;
+  width: 0.62rem;
+  height: 0.62rem;
+  border: 0;
+  transform: none;
+  background:
+    linear-gradient(currentColor, currentColor) center/100% 2px no-repeat,
+    linear-gradient(currentColor, currentColor) center/2px 100% no-repeat;
+  color: var(--muted);
+  rotate: 45deg;
+}
+
+.faq-item { border-bottom: 1px solid var(--line); }
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.15rem 2.5rem 1.15rem 0;
+  position: relative;
+  font-size: 1.02rem;
+  font-weight: 500;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Chevron, rotated when open. */
+.faq-item summary::after {
+  content: '';
+  position: absolute;
+  right: 0.4rem;
+  top: 1.55rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+}
+.faq-item[open] summary::after { transform: rotate(-135deg); top: 1.75rem; }
+
+.faq-answer {
+  padding: 0 2.5rem 1.4rem 0;
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+.faq-answer p { margin: 0 0 0.75rem; }
+.faq-answer p:last-child { margin-bottom: 0; }
+
+/* ---------- footer ---------- */
+
+/* Brand on the left, the coaches' profiles on the right. Stacks and centres
+   below 40rem, where two-up leaves neither side enough room. */
+.footer {
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem 1.5rem;
+}
+.footer-brand {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.footer-follow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+}
+.footer-follow-label { color: var(--muted); }
+.footer-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+}
+/* Separator between links. The links are inline-flex, so this has to be its
+   own element: an ::before on the link becomes a flex item inside it and lands
+   against the icon. line-height:1 keeps the dot on the same optical line as the
+   icons, which sit slightly taller than the text. */
+.footer-sep {
+  color: var(--muted);
+  line-height: 1;
+  user-select: none;
+}
+.footer-inline a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+/* Sized in em so the mark tracks the footer's type rather than needing its own
+   breakpoint. currentColor means it picks up the link hover for free. */
+.social-icon {
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 auto;
+}
+/* Underline the name on hover, not the icon. */
+.footer-inline a:hover span { text-decoration: underline; text-underline-offset: 3px; }
+.footer-inline a:hover { color: var(--ink); }
+.footer-inline a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+@media (max-width: 40rem) {
+  .footer-row { flex-direction: column; justify-content: center; text-align: center; }
+  .footer-follow { justify-content: center; }
+  .footer-inline { justify-content: center; }
+}
+
+/* ---------- thanks page: numbered steps ---------- */
+
+/* Bottom padding is larger than the top: on a video-only thanks page (see
+   `video` in content.json) there's just one short block here - a video and
+   maybe a link - where this section used to hold two full numbered steps, so
+   without the extra room the grey band reads as clipped short rather than a
+   deliberate pause before the results below. */
+.steps { padding: 3.5rem 0 2.75rem; }
+.step-list {
+  list-style: none;
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+}
+.step {
+  counter-increment: step;
+  position: relative;
+  padding-left: 3.5rem;
+  margin-bottom: 3rem;
+}
+.step:last-child { margin-bottom: 0; }
+/* A real counter rather than a hard-coded number, so adding a step can't put
+   the page out of sequence. */
+.step::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -0.15rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.step h3 {
+  font-size: clamp(1.2rem, 2.6vw, 1.45rem);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.step p {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+.step-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: zoom-in;
+  background: var(--card);
+}
+.step-img:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.step-video { max-width: 100%; }
+
+@media (max-width: 34rem) {
+  .step { padding-left: 0; padding-top: 3.25rem; }
+  .step::before { top: 0; }
+}
+
+/* Compact thanks page (2026-09-30, on request): the aim is the step-2 video
+   above the fold, so the hero, the band padding and the gaps between steps are
+   all pulled in, and the two stills are capped in width. Scoped to
+   body.thanks (set in template-thanks.html) so the landing pages' hero is
+   untouched. Checked with a script that measures the video's position at
+   1440x800, 1280x680 and 390x664. */
+.thanks .hero { padding: 1.75rem 0 1.25rem; }
+.thanks .hero h1 { font-size: clamp(1.75rem, 3.6vw, 2.4rem); }
+.thanks .hero .body { margin-top: 0.35rem; font-size: clamp(1rem, 1.6vw, 1.15rem); }
+.thanks .hero .body p { margin: 0; }
+.thanks .steps { padding: 1.5rem 0 2rem; }
+.thanks .step { padding-left: 3rem; margin-bottom: 1.25rem; }
+.thanks .step::before { top: 0; width: 2rem; height: 2rem; font-size: 0.95rem; }
+.thanks .step h3 { font-size: clamp(1.05rem, 2vw, 1.2rem); margin-bottom: 0.2rem; line-height: 1.35; }
+.thanks .step p { margin-bottom: 0.6rem; font-size: 0.98rem; }
+.thanks .step-img { max-width: 24rem; }
+/* The link under the step video. `.thanks .step p` outranks `.video-link` and
+   zeroes its top margin, so it is set here, on the link alone. */
+.thanks .step .video-link { margin-top: 1.1rem; }
+/* No header bar here (2026-09-30, on request): just the logo, top left,
+   sitting over the hero rather than in a sticky band above it. That buys the
+   room for the step-2 video to stay full width. There is no nav CTA on this
+   page anyway (see template-thanks.html), so the bar only ever held the logo. */
+.thanks .nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 0;
+}
+/* Full-bleed: the logo pins to the page's far-left edge, outside the centred
+   content column, rather than lining up with it. */
+.thanks .nav .wrap { min-height: 0; padding-top: 1rem; max-width: none; padding-left: 1.5rem; padding-right: 1.5rem; }
+.thanks .hero { padding-top: 1.5rem; }
+
+@media (max-width: 34rem) {
+  .thanks .nav { position: static; }
+  .thanks .nav .wrap { padding-top: 0.75rem; }
+  .thanks .hero { padding: 0.75rem 0 0.75rem; }
+  .thanks .steps { padding-top: 1.1rem; }
+  /* Number beside the title rather than stacked above it: the stacked layout
+     cost ~50px per step, which on a phone is the difference that matters. */
+  .thanks .step { padding-left: 2.4rem; padding-top: 0; margin-bottom: 1rem; }
+  .thanks .step::before { width: 1.75rem; height: 1.75rem; font-size: 0.85rem; }
+  .thanks .step p { font-size: 0.92rem; }
+}
+
+/* ---------- thanks page: results grid ---------- */
+
+/* Centred heading only, not the whole section: results.fullStories fills this
+   section with the same story-wall markup as .closing on the landing pages
+   (three-col challenge/focus/results cards, bullet lists), which reads left-
+   aligned there too - a blanket text-align: center here left every bullet
+   point ragged-centred and hard to read. */
+.results > .wrap > h2 {
+  text-align: center;
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+}
+/* A grid, not the scrolling wall: on a post-booking page the reader has time to
+   read these, and the set is one uniform ratio so it tiles without gaps. */
+.wingrid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 48rem) { .wingrid { grid-template-columns: 1fr 1fr; } }
+/* Override the marquee card's fixed width and height cap: in a grid the card
+   fills its column and shows the whole screenshot. */
+.wingrid .wincard {
+  flex: initial;
+  width: auto;
+}
+.wingrid .wincard img { max-height: none; }
+
+.more-link {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--accent-text);
+  text-decoration: none;
+}
+.more-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.more-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* The link under the steps-section video (see `video.link` in content.json).
+   Sitting directly under a video with no other cue, plain text here reads as
+   a caption rather than something to click - the play badge and the always-on
+   underline are what make it read as a link instead. `link.style: 'card'`
+   swaps the whole line for a bordered thumbnail card (below) instead. */
+.video-link { margin-top: 2.75rem; text-align: center; }
+.video-link > a {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--accent-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+}
+.video-link > a:hover { text-decoration-color: currentColor; }
+.video-link > a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Small play badge, shared by the icon-style link (inline, left of the text)
+   and the card-style link (larger, centred over the thumbnail). */
+.video-link-play {
+  position: relative;
+  flex: none;
+  width: 1.4em;
+  height: 1.4em;
+  margin-right: 0.5em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.video-link-play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-35%, -50%);
+  border-style: solid;
+  border-width: 0.32em 0 0.32em 0.5em;
+  border-color: transparent transparent transparent var(--accent-ink);
+}
+
+/* ---------- video-link card (link.style: 'card') ---------- */
+
+.video-link-card {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.55rem 1.2rem 0.55rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  text-decoration: none !important;
+  color: var(--ink) !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.video-link-card:hover { border-color: var(--accent); box-shadow: 0 8px 20px rgb(0 0 0 / 0.08); transform: translateY(-1px); }
+.video-link-card .video-link-thumb {
+  position: relative;
+  flex: none;
+  width: 5.5rem;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #000;
+}
+.video-link-card .video-link-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.video-link-card .video-link-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1.9rem;
+  height: 1.9rem;
+  background: rgba(255, 255, 255, 0.92);
+}
+.video-link-card .video-link-play::after { border-color: transparent transparent transparent #111; }
+.video-link-text { font-size: 0.95rem; font-weight: 600; text-align: left; max-width: 14rem; }
+
+/* ---------- story dialog ---------- */
+
+.story-dialog {
+  width: min(56rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 3rem);
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.story-dialog::backdrop { background: rgba(15, 15, 18, 0.72); }
+
+.dialog-body { padding: 2rem 2rem 2.25rem; }
+.dialog-body .story { padding: 0; border-top: 0; }
+.dialog-body .story-hero { margin-bottom: 1.75rem; }
+.dialog-body .hero-photo { width: 5.5rem; height: 5.5rem; }
+
+.dialog-close {
+  position: sticky;
+  top: 0.75rem;
+  float: right;
+  margin: 0.75rem 0.75rem 0 0;
+  z-index: 2;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.dialog-close:hover { color: var(--ink); border-color: var(--muted); }
+.dialog-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Stop the page behind the dialog from scrolling, and hold the carousel still
+   so the card you clicked hasn't slid away when you close it. */
+body.dialog-open { overflow: hidden; }
+body.dialog-open .marquee-track { animation-play-state: paused; }
+
+@media (max-width: 40rem) {
+  .dialog-body { padding: 1.25rem 1.25rem 1.75rem; }
+  .dialog-body .story-hero { flex-direction: column; text-align: center; align-items: center; }
+}

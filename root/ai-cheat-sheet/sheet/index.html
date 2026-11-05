@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1JE38D9B5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E1JE38D9B5');
+  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Data Interview Cheat Sheet | Hired in Data</title>
+<meta name="description" content="Fifteen questions asked in data interviews at OpenAI, Anthropic, xAI, Cohere and NVIDIA, from our community and recent interview reports. Free from Mandy Liu, ex-Meta Data Scientist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --yellow:#ffe578; --yellow-hover:#ffd633; --dark:#252525; --dark-mid:#333333;
+  --cream:#fbf7f1; --text:#333333; --text-light:#666666; --text-muted:#999999;
+  --border:#e0dcd6; --radius:6px;
+}
+body{
+  font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16px; line-height:1.6; color:var(--text); background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'Merriweather',Georgia,serif; line-height:1.3}
+.sheet{max-width:820px; margin:0 auto; padding:0 24px 80px}
+
+/* ---------- Cover ---------- */
+.cover{padding:64px 0 40px; border-bottom:3px solid var(--dark)}
+.kicker{
+  display:inline-block; background:var(--yellow); color:var(--dark);
+  font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  padding:6px 12px; border-radius:var(--radius); margin-bottom:20px;
+}
+h1{font-size:clamp(30px,5.2vw,46px); font-weight:900; color:var(--dark); margin-bottom:16px}
+.sub{font-size:18px; color:var(--text-light); max-width:62ch}
+.byline{margin-top:24px; font-size:14px; color:var(--text-muted)}
+.byline strong{color:var(--dark-mid)}
+
+/* ---------- Company strip ---------- */
+.cos{display:flex; flex-wrap:wrap; justify-content:center; gap:16px 30px; align-items:center; margin:30px 0 4px}
+.cos span{display:inline-flex; align-items:center}
+
+/* ---------- Logos ---------- */
+.lg{display:inline-block; height:16px; background-position:center; background-repeat:no-repeat; background-size:contain; vertical-align:middle}
+.cos .lg{height:26px}
+.co-head .lg{height:22px}
+.lg.openai{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+T3BlbkFJPC90aXRsZT48cGF0aCBkPSJNOS4yMDUgOC42NTh2LTIuMjZjMC0uMTkuMDcyLS4zMzMuMjM4LS40MjhsNC41NDMtMi42MTZjLjYxOS0uMzU3IDEuMzU2LS41MjMgMi4xMTctLjUyMyAyLjg1NCAwIDQuNjYyIDIuMjEyIDQuNjYyIDQuNTY2IDAgLjE2NyAwIC4zNTctLjAyNC41NDdsLTQuNzEtMi43NTlhLjc5Ny43OTcgMCAwMC0uODU2IDBsLTUuOTcgMy40NzN6bTEwLjYwOSA4LjhWMTIuMDZjMC0uMzMzLS4xNDMtLjU3LS40MjktLjczN2wtNS45Ny0zLjQ3MyAxLjk1LTEuMTE4YS40MzMuNDMzIDAgMDEuNDc2IDBsNC41NDMgMi42MTdjMS4zMDkuNzYgMi4xODkgMi4zNzggMi4xODkgMy45NDggMCAxLjgwOC0xLjA3IDMuNDczLTIuNzYgNC4xNjN6TTcuODAyIDEyLjcwM2wtMS45NS0xLjE0MmMtLjE2Ny0uMDk1LS4yMzktLjIzOC0uMjM5LS40MjhWNS44OTljMC0yLjU0NSAxLjk1LTQuNDcyIDQuNTkxLTQuNDcyIDEgMCAxLjkyNy4zMzMgMi43MTIuOTI4TDguMjMgNS4wNjdjLS4yODUuMTY2LS40MjguNDA0LS40MjguNzM3djYuODk4ek0xMiAxNS4xMjhsLTIuNzk1LTEuNTd2LTMuMzNMMTIgOC42NThsMi43OTUgMS41N3YzLjMzTDEyIDE1LjEyOHptMS43OTYgNy4yM2MtMSAwLTEuOTI3LS4zMzItMi43MTItLjkyN2w0LjY4Ni0yLjcxMmMuMjg1LS4xNjYuNDI4LS40MDQuNDI4LS43Mzd2LTYuODk4bDEuOTc0IDEuMTQyYy4xNjcuMDk1LjIzOC4yMzguMjM4LjQyOHY1LjIzM2MwIDIuNTQ1LTEuOTc0IDQuNDcyLTQuNjE0IDQuNDcyem0tNS42MzctNS4zMDNsLTQuNTQ0LTIuNjE3Yy0xLjMwOC0uNzYxLTIuMTg4LTIuMzc4LTIuMTg4LTMuOTQ4QTQuNDgyIDQuNDgyIDAgMDE0LjIxIDYuMzI3djUuNDIzYzAgLjMzMy4xNDMuNTcxLjQyOC43MzhsNS45NDcgMy40NDktMS45NSAxLjExOGEuNDMyLjQzMiAwIDAxLS40NzYgMHptLS4yNjIgMy45Yy0yLjY4OCAwLTQuNjYyLTIuMDIxLTQuNjYyLTQuNTE5IDAtLjE5LjAyNC0uMzguMDQ3LS41N2w0LjY4NiAyLjcxYy4yODYuMTY3LjU3MS4xNjcuODU2IDBsNS45Ny0zLjQ0OHYyLjI2YzAgLjE5LS4wNy4zMzMtLjIzNy40MjhsLTQuNTQzIDIuNjE2Yy0uNjE5LjM1Ny0xLjM1Ni41MjMtMi4xMTcuNTIzem01Ljg5OSAyLjgzYTUuOTQ3IDUuOTQ3IDAgMDA1LjgyNy00Ljc1NkMyMi4yODcgMTguMzM5IDI0IDE1Ljg0IDI0IDEzLjI5NmMwLTEuNjY1LS43MTMtMy4yODItMS45OTgtNC40NDguMTE5LS41LjE5LS45OTkuMTktMS40OTggMC0zLjQwMS0yLjc1OS01Ljk0Ny01Ljk0Ni01Ljk0Ny0uNjQyIDAtMS4yNi4wOTUtMS44OC4zMUE1Ljk2MiA1Ljk2MiAwIDAwMTAuMjA1IDBhNS45NDcgNS45NDcgMCAwMC01LjgyNyA0Ljc1N0MxLjcxMyA1LjQ0NyAwIDcuOTQ1IDAgMTAuNDljMCAxLjY2Ni43MTMgMy4yODMgMS45OTggNC40NDgtLjExOS41LS4xOSAxLS4xOSAxLjQ5OSAwIDMuNDAxIDIuNzU5IDUuOTQ2IDUuOTQ2IDUuOTQ2LjY0MiAwIDEuMjYtLjA5NSAxLjg4LS4zMDlhNS45NiA1Ljk2IDAgMDA0LjE2MiAxLjcxM3oiPjwvcGF0aD48L3N2Zz4=")}
+.lg.anthropic{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMTkxOTE5IiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+QW50aHJvcGljPC90aXRsZT48cGF0aCBkPSJNMTcuMzA0MSAzLjU0MWgtMy42NzE4bDYuNjk2IDE2LjkxOEgyNFptLTEwLjYwODIgMEwwIDIwLjQ1OWgzLjc0NDJsMS4zNjkzLTMuNTUyN2g3LjAwNTJsMS4zNjkzIDMuNTUyOGgzLjc0NDJMMTAuNTM2MyAzLjU0MDlabS0uMzcxMiAxMC4yMjMyIDIuMjkxNC01Ljk0NTYgMi4yOTE0IDUuOTQ1NloiLz48L3N2Zz4=")}
+.lg.xai{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+eEFJPC90aXRsZT48cGF0aCBkPSJNNi40NjkgOC43NzZMMTYuNTEyIDIzaC00LjQ2NEwyLjAwNSA4Ljc3Nkg2LjQ3em0tLjAwNCA3LjlsMi4yMzMgMy4xNjRMNi40NjcgMjNIMmw0LjQ2NS02LjMyNHpNMjIgMi41ODJWMjNoLTMuNjU5VjcuNzY0TDIyIDIuNTgyek0yMiAxbC05Ljk1MiAxNC4wOTUtMi4yMzMtMy4xNjNMMTcuNTMzIDFIMjJ6Ij48L3BhdGg+PC9zdmc+")}
+.lg.cohere{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHRpdGxlPkNvaGVyZTwvdGl0bGU+PHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNOC4xMjggMTQuMDk5Yy41OTIgMCAxLjc3LS4wMzMgMy4zOTgtLjcwMyAxLjg5Ny0uNzgxIDUuNjcyLTIuMiA4LjM5NS0zLjY1NiAxLjkwNS0xLjAxOCAyLjc0LTIuMzY2IDIuNzQtNC4xOEE0LjU2IDQuNTYgMCAwMDE4LjEgMUg3LjU0OUE2LjU1IDYuNTUgMCAwMDEgNy41NWMwIDMuNjE3IDIuNzQ1IDYuNTQ5IDcuMTI4IDYuNTQ5eiIgZmlsbD0iIzM5NTk0RCIgZmlsbC1ydWxlPSJldmVub2RkIj48L3BhdGg+PHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNOS45MTIgMTguNjFhNC4zODcgNC4zODcgMCAwMTIuNzA1LTQuMDUybDMuMzIzLTEuMzhjMy4zNjEtMS4zOTQgNy4wNiAxLjA3NiA3LjA2IDQuNzE1YTUuMTA0IDUuMTA0IDAgMDEtNS4xMDUgNS4xMDRsLTMuNTk3LS4wMDFhNC4zODYgNC4zODYgMCAwMS00LjM4Ni00LjM4N3oiIGZpbGw9IiNEMThFRTIiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PC9wYXRoPjxwYXRoIGQ9Ik00Ljc3NiAxNC45NjJBMy43NzUgMy43NzUgMCAwMDEgMTguNzM4di40ODlhMy43NzYgMy43NzYgMCAwMDcuNTUxIDB2LS40OWEzLjc3NSAzLjc3NSAwIDAwLTMuNzc1LTMuNzc1eiIgZmlsbD0iI0ZGNzc1OSI+PC9wYXRoPjwvc3ZnPg==")}
+.lg.nvidia{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjNzZCOTAwIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+TlZJRElBPC90aXRsZT48cGF0aCBkPSJNOC45NDggOC43OTh2LTEuNDNhNi43IDYuNyAwIDAgMSAuNDI0LS4wMThjMy45MjItLjEyNCA2LjQ5MyAzLjM3NCA2LjQ5MyAzLjM3NHMtMi43NzQgMy44NTEtNS43NSAzLjg1MWMtLjM5OCAwLS43ODctLjA2Mi0xLjE1OC0uMTg1di00LjM0NmMxLjUyOC4xODUgMS44MzcuODU3IDIuNzQ3IDIuMzg1bDIuMDQtMS43MTRzLTEuNDkyLTEuOTUyLTQtMS45NTJhNi4wMTYgNi4wMTYgMCAwIDAtLjc5Ni4wMzVtMC00LjczNXYyLjEzOGwuNDI0LS4wMjdjNS40NS0uMTg1IDkuMDEgNC40NyA5LjAxIDQuNDdzLTQuMDggNC45NjQtOC4zMyA0Ljk2NGMtLjM3IDAtLjczMy0uMDM1LTEuMDk1LS4wOTd2MS4zMjVjLjMuMDM1LjYxLjA2Mi45MS4wNjIgMy45NTcgMCA2LjgyLTIuMDIzIDkuNTkzLTQuNDA4LjQ1OS4zNzEgMi4zNCAxLjI2MyAyLjczIDEuNjUyLTIuNjMzIDIuMjA4LTguNzcyIDMuOTg0LTEyLjI1MyAzLjk4NC0uMzM1IDAtLjY1My0uMDE4LS45NzEtLjA1M3YxLjg2NEgyNFY0LjA2M3ptMCAxMC4zMjZ2MS4xMzFjLTMuNjU3LS42NTQtNC42NzMtNC40Ni00LjY3My00LjQ2czEuNzU4LTEuOTQ0IDQuNjczLTIuMjYydjEuMjM3SDguOTRjLTEuNTI4LS4xODYtMi43MyAxLjI0NS0yLjczIDEuMjQ1cy42OCAyLjQxMiAyLjczOSAzLjExTTIuNDU2IDEwLjlzMi4xNjQtMy4xOTcgNi41LTMuNTMzVjYuMjAxQzQuMTUzIDYuNTkgMCAxMC42NTMgMCAxMC42NTNzMi4zNSA2LjgwMiA4Ljk0OCA3LjQydi0xLjIzN2MtNC44NC0uNi02LjQ5Mi01LjkzNi02LjQ5Mi01LjkzNnoiLz48L3N2Zz4=")}
+
+/* ---------- Company sections ---------- */
+section{padding-top:46px}
+.co-head{display:flex; align-items:center; gap:14px; margin-bottom:6px; padding-bottom:14px; border-bottom:1px solid var(--border)}
+.co-head .lg{flex:none}
+h2{font-size:24px; font-weight:700; color:var(--dark)}
+.lede{color:var(--text-light); margin:14px 0 20px; max-width:64ch; font-size:15px}
+
+/* ---------- Question cards ---------- */
+.bank{display:grid; gap:12px; margin:18px 0}
+.qitem{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px}
+.qmeta{display:flex; align-items:center; gap:12px; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--text-muted); margin-bottom:11px}
+.qmeta .diff{color:var(--dark-mid)}
+/* Four tiers, most to least prominent: the question, its follow-ups, what the
+   round is testing, then the constraints and the hint. Each tier steps down in
+   size and weight so the card can be skimmed for the question alone. */
+.qitem .q{font-family:'Merriweather',Georgia,serif; font-size:17px; font-weight:700; color:var(--dark); line-height:1.45}
+.qitem .qsub{list-style:none; margin-top:13px}
+.qitem .qsub li{font-size:14px; color:var(--text-light); padding-left:16px; position:relative; margin-bottom:6px; line-height:1.5}
+.qitem .qsub li::before{content:"\2192"; position:absolute; left:0; color:var(--yellow-hover); font-weight:700}
+/* Shared label for the lower tiers. */
+.lbl{display:block; font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px}
+.tests{margin-top:16px; padding-top:14px; border-top:1px solid var(--border); font-size:14px; color:var(--text-light)}
+.qitem .hint{margin-top:12px; font-size:13.5px; color:var(--text-light); font-style:italic}
+.qitem .hint .lbl{font-style:normal}
+.cols{margin-top:12px; font-size:13px; color:var(--text-light); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; background:var(--cream); border:1px solid var(--border); border-radius:var(--radius); padding:9px 12px; overflow-x:auto; white-space:nowrap}
+/* What the interviewer hands you. Kept in the question, not the hint - several of
+   these cases are unanswerable without their numbers. */
+.given{margin-top:12px; font-size:13.5px; color:var(--text-light); background:var(--cream); border:1px solid var(--border); border-radius:var(--radius); padding:10px 13px}
+.given strong{color:var(--dark-mid); font-weight:600; display:block; font-size:11px; letter-spacing:.05em; text-transform:uppercase; margin-bottom:4px}
+
+/* ---------- Checklist ---------- */
+.checklist{background:#fff; border:2px solid var(--dark); border-radius:var(--radius); padding:28px 30px; margin-top:24px}
+.checklist h3{font-size:17px; font-weight:700; color:var(--dark); margin:0 0 6px}
+.checklist ul{list-style:none; margin-top:10px}
+.checklist li{padding:11px 0 11px 34px; position:relative; border-bottom:1px solid var(--border); font-size:15px}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:""; position:absolute; left:0; top:14px; width:18px; height:18px; border:2px solid var(--dark); border-radius:3px}
+
+/* ---------- Closing ---------- */
+.cta{background:var(--yellow); border-radius:var(--radius); padding:36px 32px; margin-top:56px; text-align:center}
+.cta h2{margin-bottom:12px}
+.cta p{color:var(--dark-mid); max-width:56ch; margin:0 auto}
+.cta p + p{margin-top:12px}
+footer{text-align:center; color:var(--text-muted); font-size:13px; margin-top:40px}
+
+/* ---------- Print ---------- */
+@media print{
+  body{background:#fff; font-size:11pt}
+  .sheet{max-width:100%; padding:0}
+  .cover{padding-top:0}
+  section{page-break-inside:avoid; padding-top:26px}
+  .cta{background:none; border:2px solid var(--dark)}
+  .checklist,.qitem{box-shadow:none}
+}
+</style>
+</head>
+<body>
+<style>
+  .hid-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--cream, #fbf7f1);
+    border-bottom: 1px solid var(--border, #e0dcd6);
+  }
+  @supports (backdrop-filter: blur(8px)) {
+    .hid-nav { background: color-mix(in srgb, var(--cream, #fbf7f1) 92%, transparent); backdrop-filter: blur(8px); }
+  }
+  .hid-nav-wrap {
+    max-width: 68rem; margin: 0 auto; padding: 0 1.5rem;
+    min-height: 4.5rem; display: flex; align-items: center;
+  }
+  .hid-nav-logo {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    font-weight: 600; font-size: 1.05rem; letter-spacing: -0.02em;
+    color: var(--dark, #252525); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.55rem;
+  }
+  .hid-nav-mark { width: 40px; height: 40px; flex: none; display: block; }
+  /* Underline the name, not the mark. */
+  .hid-nav-logo:hover span { text-decoration: underline; text-underline-offset: 3px; }
+  .hid-nav-logo:focus-visible { outline: 2px solid var(--yellow-hover, #ffd633); outline-offset: 3px; }
+  /* The magnets are built to print cleanly. A sticky header is not part of that. */
+  @media print { .hid-nav { display: none; } }
+</style>
+<header class="hid-nav"><div class="hid-nav-wrap"><a class="hid-nav-logo" href="https://hiredindata.com/"><svg class="hid-nav-mark" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><pattern id="hid-grid-11" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.75" fill="#f0c62c"/></pattern></defs><rect width="32" height="32" rx="6" fill="#ffd633"/><rect width="32" height="32" rx="6" fill="url(#hid-grid-11)"/><g fill="#1c1d20"><g transform="translate(-0.244 7.111) scale(0.5556)"><path d="M8 7h4.5v6.9h7V7H24v18h-4.5v-6.9h-7V25H8Z"/></g><rect x="14.59" y="13.4" width="2.2" height="7.6"/><rect x="14.59" y="10.7" width="2.2" height="2.2"/><g transform="translate(15.29 8) scale(0.5)"><path fill-rule="evenodd" d="M6 6h9a10 10 0 0 1 0 20H6Zm4.5 4.5h4.5a5.5 5.5 0 0 1 0 11h-4.5Z"/></g></g></svg><span>Hired in Data</span></a></div></header>
+
+<div class="sheet">
+
+  <header class="cover">
+    <span class="kicker">Free Cheat Sheet</span>
+    <h1>Fifteen questions the AI companies are asking data candidates right now.</h1>
+    <p class="sub">Three each from OpenAI, Anthropic, xAI, Cohere and NVIDIA, from our community and recent interview reports. Measuring a model in the wild, statistics on data that is nothing like normal, and the maths rounds nobody revises.</p>
+    <div class="cos">
+      <span><i class="lg openai" role="img" aria-label="OpenAI"></i></span>
+      <span><i class="lg anthropic" role="img" aria-label="Anthropic"></i></span>
+      <span><i class="lg xai" role="img" aria-label="xAI"></i></span>
+      <span><i class="lg cohere" role="img" aria-label="Cohere"></i></span>
+      <span><i class="lg nvidia" role="img" aria-label="NVIDIA"></i></span>
+    </div>
+    <p class="byline">Compiled by <strong>Mandy Liu</strong> - ex-Meta Data Scientist, founder of Hired in Data. 50+ data professionals placed, averaging a $54K salary increase.</p>
+  </header>
+
+  <!-- ============ OPENAI ============ -->
+  <section>
+    <div class="co-head">
+      <i class="lg openai" role="img" aria-label="OpenAI"></i>
+      <h2>OpenAI</h2>
+    </div>
+    <p class="lede">Product analytics on things nobody had metrics for two years ago. Two of these three are about defining what "good" even means, and the third is a technique most candidates have only heard of.</p>
+
+    <div class="bank">
+      <div class="qitem">
+        <div class="qmeta"><span>Product sense</span><span class="diff">Medium</span></div>
+        <p class="q">Set the north-star metric for an AI coding tool like Codex, and the feature-level metrics underneath it. How would you measure whether suggestions get accepted, and whether the session was actually productive?</p>
+        <ul class="qsub">
+          <li>Say which single number the team should be judged on, and why that one.</li>
+          <li>Say how you would count an accepted suggestion, including the ones accepted then deleted.</li>
+          <li>Say what "productive session" means in data you could actually collect.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Metric design for a product where the obvious measure is easy to game.</p>
+        <p class="hint"><span class="lbl">Hint</span>Acceptance rate goes up if you suggest less and safer. Say what stops your north star rewarding that.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Metrics</span><span class="diff">Medium</span></div>
+        <p class="q">A new model has shipped. How would you measure its real-world safety impact, and whether the mitigations are working?</p>
+        <ul class="qsub">
+          <li>Say what you would count, given most harm never gets reported.</li>
+          <li>Separate the model getting safer from people asking it less.</li>
+          <li>Say how you would spot a new kind of harm you were not already counting.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Measuring something that has no clean label and no ground truth.</p>
+        <p class="hint"><span class="lbl">Hint</span>The reported rate is not the real rate. Name that gap yourself, then say what you would use to estimate around it.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Experimentation</span><span class="diff">Medium</span></div>
+        <p class="q">Explain how you would use CUPED, or another variance reduction technique, to get experiments finished faster without giving up statistical power.</p>
+        <ul class="qsub">
+          <li>Say in plain words what variance reduction is doing and why it buys you time.</li>
+          <li>Say which pre-experiment data you would use, and what makes a good choice.</li>
+          <li>Say when it does not help.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Whether you know the technique or only the acronym.</p>
+        <p class="hint"><span class="lbl">Hint</span>This is the question that separates people who have run experiments at scale from people who have read about them. If you cannot explain why using someone's past behaviour shrinks the noise, do not name-drop it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ANTHROPIC ============ -->
+  <section>
+    <div class="co-head">
+      <i class="lg anthropic" role="img" aria-label="Anthropic"></i>
+      <h2>Anthropic</h2>
+    </div>
+    <p class="lede">Enterprise usage data, which is skewed to the point of being awkward, plus one question that puts safety and retention directly against each other. Expect to be asked what you would do if the safe answer costs the business.</p>
+
+    <div class="bank">
+      <div class="qitem">
+        <div class="qmeta"><span>Product sense</span><span class="diff">Medium</span></div>
+        <p class="q">A stricter safety safeguard is going in. How would you measure what it does to engagement and retention over the long run?</p>
+        <ul class="qsub">
+          <li>Say which users you would expect to be affected, and how you would find them in the data.</li>
+          <li>Say how you separate a real retention effect from people who were leaving anyway.</li>
+          <li>Say what you would report if the safeguard is right and the number is bad.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Whether you can measure a trade-off honestly when one side is not negotiable.</p>
+        <p class="hint"><span class="lbl">Hint</span>The wrong answer is treating this as an optimisation. The safeguard is not coming out. Measure the cost, do not argue against paying it.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Statistics</span><span class="diff">Hard</span></div>
+        <p class="q">Token usage across enterprise customers is wildly skewed - a handful of accounts dwarf everyone else. How do you establish statistical significance on data shaped like that?</p>
+        <ul class="qsub">
+          <li>Say what goes wrong if you run a standard test on it anyway.</li>
+          <li>Give two ways of handling the skew, and what each one costs you.</li>
+          <li>Say what unit you would analyse: the account, the seat, or the request.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Statistics on a distribution that breaks the assumptions you were taught with.</p>
+        <p class="hint"><span class="lbl">Hint</span>One customer can move the mean on their own. Say that out loud, then talk about what you would do instead of the mean.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>SQL</span><span class="diff">Hard</span></div>
+        <p class="q">A query joining several enormous event logs times out in production. How would you make it finish?</p>
+        <ul class="qsub">
+          <li>Say how you would find out where the time is actually going.</li>
+          <li>Give the changes you would try, in the order you would try them.</li>
+          <li>Say what you would change about the tables, not just the query.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Whether you have debugged a slow query, or only written queries.</p>
+        <p class="hint"><span class="lbl">Hint</span>Read the plan before you touch anything. An answer that starts "I'd add an index" without looking is the wrong answer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ xAI ============ -->
+  <section>
+    <div class="co-head">
+      <i class="lg xai" role="img" aria-label="xAI"></i>
+      <h2>xAI</h2>
+    </div>
+    <p class="lede">Training-scale infrastructure and maths from scratch. All three of these are rated Hard, and none of them can be answered with a library name.</p>
+
+    <div class="bank">
+      <div class="qitem">
+        <div class="qmeta"><span>System design</span><span class="diff">Hard</span></div>
+        <p class="q">Ten billion documents get scraped every day and have to become training data. Design the system that takes them in, throws away the duplicates, and processes the rest.</p>
+        <ul class="qsub">
+          <li>Say what counts as a duplicate when two pages are similar but not identical.</li>
+          <li>Say how you deduplicate at that size without comparing everything to everything.</li>
+          <li>Say what happens to the run when a machine dies halfway through.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Whether your design survives contact with the number in the question.</p>
+        <p class="hint"><span class="lbl">Hint</span>Ten billion a day is the whole question. Any answer that would work at ten million is a fail, so say the scale out loud and design to it.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Machine learning</span><span class="diff">Hard</span></div>
+        <p class="q">Derive the backpropagation updates for a custom loss function from scratch.</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Whether the chain rule is something you can do, or something you know the name of.</p>
+        <p class="hint"><span class="lbl">Hint</span>Custom means they will invent a loss you have never seen, so there is nothing to recall. Practise the mechanics on a loss you make up yourself.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Problem solving</span><span class="diff">Hard</span></div>
+        <p class="q">A probability puzzle where you make a decision, see what happens, then decide again - and you have to work out the best strategy under uncertainty.</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Thinking in probabilities out loud, under pressure, with someone watching.</p>
+        <p class="hint"><span class="lbl">Hint</span>They are watching how you set the problem up, not whether you land the number. Define the states and what you know at each one before you compute anything.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COHERE ============ -->
+  <section>
+    <div class="co-head">
+      <i class="lg cohere" role="img" aria-label="Cohere"></i>
+      <h2>Cohere</h2>
+    </div>
+    <p class="lede">The most model-heavy set here. You are expected to know how a transformer works from the inside, and how a benchmark is actually run.</p>
+
+    <div class="bank">
+      <div class="qitem">
+        <div class="qmeta"><span>Coding</span><span class="diff">Hard</span></div>
+        <p class="q">Code the attention module of a transformer from scratch.</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Whether you understand attention or have only ever imported it.</p>
+        <p class="hint"><span class="lbl">Hint</span>Say the shapes out loud as you go. Most people who fail this one fail on the dimensions, not the concept.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Evaluation</span><span class="diff">Hard</span></div>
+        <p class="q">Walk me through an evaluation framework you have built for a benchmark like HellaSwag - and what you would do differently next time.</p>
+        <ul class="qsub">
+          <li>Say what the benchmark is actually measuring, and where it is weak.</li>
+          <li>Say how you scored it, and what made a result trustworthy.</li>
+          <li>Say what you would change, and why.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Whether you have run an evaluation end to end, or only quoted someone else's numbers.</p>
+        <p class="hint"><span class="lbl">Hint</span>The second half is the graded half. Have a specific thing you would change, and the reason - "more data" is not an answer.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>SQL</span><span class="diff">Medium</span></div>
+        <p class="q">From a table of user interactions, find the most common paths people take before they adopt a feature. Use lead and lag.</p>
+        <ul class="qsub">
+          <li>Define adoption before you write anything.</li>
+          <li>Build the sequence of steps per user, then count the sequences.</li>
+          <li>Say how far back a path should go, and why you stopped there.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Window functions on sequences, and a definition you chose on purpose.</p>
+        <p class="hint"><span class="lbl">Hint</span>The question names the functions, so use them by name as you go. The judgement being marked is where the path starts and ends.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NVIDIA ============ -->
+  <section>
+    <div class="co-head">
+      <i class="lg nvidia" role="img" aria-label="NVIDIA"></i>
+      <h2>NVIDIA</h2>
+    </div>
+    <p class="lede">Hardware-aware data work, plus safety. They will expect you to know what runs where and why, which is unusual for a data role and is exactly why people are caught out.</p>
+
+    <div class="bank">
+      <div class="qitem">
+        <div class="qmeta"><span>Product and safety</span><span class="diff">Hard</span></div>
+        <p class="q">Design the policy and red-teaming approach for catching people getting round the prompt rules.</p>
+        <ul class="qsub">
+          <li>Say how you would find the attempts you have not thought of yet.</li>
+          <li>Say how you measure whether red-teaming is working.</li>
+          <li>Say what you do when the rules block something that was fine.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Adversarial thinking - designing against someone who is trying to beat you.</p>
+        <p class="hint"><span class="lbl">Hint</span>A fixed list of banned phrases is the answer they are expecting you to give. Say why it fails, then design something that keeps learning.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Systems</span><span class="diff">Hard</span></div>
+        <p class="q">Explain the trade-offs between CPU and GPU for data processing and for inference.</p>
+        <p class="tests"><span class="lbl">What they're testing</span>Whether you know what your code is actually running on.</p>
+        <p class="hint"><span class="lbl">Hint</span>"GPUs are faster" is not an answer. Talk about the shape of the work, moving data on and off the device, batch sizes, and when a CPU genuinely wins.</p>
+      </div>
+
+      <div class="qitem">
+        <div class="qmeta"><span>Modelling</span><span class="diff">Hard</span></div>
+        <p class="q">Design a feature engineering pipeline for telemetry signals that arrive at irregular intervals, and explain where it could leak.</p>
+        <ul class="qsub">
+          <li>Say how you turn irregular readings into features with a fixed shape.</li>
+          <li>Point at every place a future value could sneak into a past row.</li>
+          <li>Say how you would test for leakage rather than hope there is none.</li>
+        </ul>
+        <p class="tests"><span class="lbl">What they're testing</span>Time-series feature engineering, and whether you spot leakage before it flatters your model.</p>
+        <p class="hint"><span class="lbl">Hint</span>They asked for the leakage risks in the question, so lead with them. A model that looks too good in validation is the symptom they want you to name.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW TO USE ============ -->
+  <section>
+    <div class="checklist">
+      <h3>How to actually use this</h3>
+      <ul>
+        <li>Pick two from your target company and answer each one out loud, start to finish, before checking anything.</li>
+        <li>Name your metrics before you design the experiment, and say what one row means before you design the pipeline.</li>
+        <li>For the maths rounds, practise the mechanics on a problem you invented. There is nothing here to memorise.</li>
+        <li>Ask what the goal and the constraints are before you start solving. The constraints are usually the real question.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h2>Pick two and say them out loud</h2>
+    <p>Reading all fifteen won't make you ready. Pick two, answer them out loud, and notice exactly where you stall. Go and read up on that bit, then answer again.</p>
+    <p>Having the pieces somewhere in your head isn't the same as being able to say them. Saying them is what you're marked on.</p>
+  </div>
+
+  <footer>Hired in Data</footer>
+
+</div>
+
+</body>
+</html>

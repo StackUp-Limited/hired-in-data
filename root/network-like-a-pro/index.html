@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1JE38D9B5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E1JE38D9B5');
+  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Like a Pro | Hired in Data</title>
+<meta name="description" content="Most data jobs are filled before they're ever posted. Here's how to build the network that gets you in - the mindset, the research, and DM templates that actually get replies. Free from Hired in Data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --yellow:#ffe578; --yellow-hover:#ffd633; --dark:#252525; --dark-mid:#333333;
+  --cream:#fbf7f1; --red:#d4174a; --orange:#e87c1e; --green:#2eac4a;
+  --text:#333333; --text-light:#666666; --text-muted:#999999; --border:#e0dcd6;
+  --radius:6px;
+}
+body{
+  font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16px; line-height:1.6; color:var(--text); background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'Merriweather',Georgia,serif; line-height:1.3}
+.sheet{max-width:820px; margin:0 auto; padding:0 24px 80px}
+
+/* ---------- Cover ---------- */
+.cover{padding:60px 0 40px; border-bottom:3px solid var(--dark)}
+.kicker{display:inline-block; background:var(--yellow); color:var(--dark); font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:6px 12px; border-radius:var(--radius); margin-bottom:20px}
+h1{font-size:clamp(32px,5.5vw,48px); font-weight:900; color:var(--dark); margin-bottom:16px}
+.sub{font-size:18px; color:var(--text-light); max-width:60ch}
+.byline{margin-top:24px; font-size:14px; color:var(--text-muted)}
+.byline strong{color:var(--dark-mid)}
+
+/* ---------- Sections ---------- */
+section{padding-top:48px}
+.step{display:flex; align-items:center; gap:12px; margin-bottom:10px}
+.step-num{flex:none; width:32px; height:32px; border-radius:50%; background:var(--dark); color:var(--yellow); font-family:'Poppins',sans-serif; font-size:15px; font-weight:700; display:flex; align-items:center; justify-content:center}
+h2{font-size:25px; font-weight:700; color:var(--dark)}
+.lede{color:var(--text-light); margin:10px 0 20px; max-width:64ch}
+p.body{color:var(--dark-mid); margin:0 0 14px; max-width:64ch}
+
+/* ---------- The ladder ---------- */
+.ladder{list-style:none; display:grid; gap:8px; margin:20px 0}
+.ladder li{display:flex; align-items:center; gap:14px; flex-wrap:wrap; background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:14px 18px}
+.ladder li .num{flex:none; width:26px; height:26px; background:#eee6db; color:var(--text-light); border-radius:50%; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif}
+.ladder li .txt{flex:1 1 60%; font-size:15px; color:var(--dark-mid); line-height:1.45}
+.ladder li .txt b{color:var(--dark)}
+.ladder li .pill{flex:none; margin-left:auto; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; padding:5px 12px; border-radius:20px; white-space:nowrap; background:#f0ece5; color:var(--text-muted)}
+.ladder li.hot .num{background:var(--green); color:#fff}
+.ladder li.hot .pill{background:#e7f6ea; color:var(--green)}
+.ladder li.mid .num{background:var(--orange); color:#fff}
+.ladder li.mid .pill{background:#fdf0e3; color:var(--orange)}
+.ladder li.last .num{background:var(--red); color:#fff}
+.ladder li.last .pill{background:#fdeef2; color:var(--red)}
+
+/* ---------- Insight callout ---------- */
+.insight{background:var(--dark); color:#fff; border-radius:var(--radius); padding:28px 30px; margin:22px 0}
+.insight .ilabel{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--yellow); margin-bottom:12px}
+.insight p{font-family:'Merriweather',Georgia,serif; font-size:19px; line-height:1.55; color:#fff}
+.insight p + p{margin-top:12px; font-family:'Poppins',sans-serif; font-size:15px; color:#d8d8d8; font-weight:400}
+
+/* ---------- Story quote ---------- */
+.story{background:#fff; border-left:4px solid var(--yellow-hover); border-radius:0 var(--radius) var(--radius) 0; padding:18px 22px; margin:20px 0}
+.story p{font-size:14.5px; color:var(--text-light); line-height:1.6}
+.story p b{color:var(--dark)}
+
+/* ---------- Tiers ---------- */
+.tiers{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:20px 0}
+@media(max-width:640px){.tiers{grid-template-columns:1fr}}
+.tier{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px}
+.tier .tt{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--orange); margin-bottom:6px}
+.tier h3{font-family:'Poppins',sans-serif; font-size:16px; font-weight:700; color:var(--dark); margin-bottom:4px}
+.tier p{font-size:13.5px; color:var(--text-light); line-height:1.5}
+.tier.a3{border-top:4px solid var(--green)}
+.tier.a2{border-top:4px solid var(--yellow-hover)}
+.tier.a1{border-top:4px solid var(--orange)}
+
+/* ---------- Research chips ---------- */
+.chips{display:flex; flex-wrap:wrap; gap:10px; margin:16px 0}
+.chip{background:#fff; border:1px solid var(--border); border-radius:20px; padding:8px 16px; font-size:13.5px; color:var(--dark-mid)}
+.chip b{color:var(--dark)}
+.fact{background:#fff; border:1px solid var(--border); border-left:4px solid var(--yellow-hover); border-radius:var(--radius); padding:16px 20px; margin:16px 0; font-size:14.5px; color:var(--dark-mid); line-height:1.55}
+.fact b{color:var(--dark)}
+
+/* ---------- Tests (compact) ---------- */
+.tests{list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:8px 20px; margin:16px 0}
+@media(max-width:600px){.tests{grid-template-columns:1fr}}
+.tests li{position:relative; padding-left:26px; font-size:14px; color:var(--dark-mid); line-height:1.5}
+.tests li::before{content:"\2713"; position:absolute; left:0; top:0; color:var(--green); font-weight:700}
+.tests li b{color:var(--dark)}
+
+/* ---------- Good/bad ---------- */
+.compare{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0}
+@media(max-width:600px){.compare{grid-template-columns:1fr}}
+.col{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px}
+.col.bad{border-top:4px solid var(--red)}
+.col.good{border-top:4px solid var(--green)}
+.col .clabel{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; margin-bottom:10px}
+.col.bad .clabel{color:var(--red)}
+.col.good .clabel{color:var(--green)}
+.col .msg{font-family:'Merriweather',Georgia,serif; font-size:14.5px; color:var(--dark-mid); line-height:1.6; font-style:italic}
+.col .why{font-size:13px; color:var(--text-muted); margin-top:12px; line-height:1.5}
+
+/* ---------- Template cards ---------- */
+.tpl{background:#fff; border:1px solid var(--border); border-radius:var(--radius); margin:14px 0; overflow:hidden}
+.tpl-head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 18px; background:#faf7f1; border-bottom:1px solid var(--border)}
+.tpl-head .name{font-size:13px; font-weight:700; color:var(--dark); text-transform:uppercase; letter-spacing:.05em}
+.tpl-head .use{font-size:12px; color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0; margin-left:8px}
+.copy{font-family:'Poppins',sans-serif; font-size:12px; font-weight:600; color:var(--dark); background:var(--yellow); border:none; border-radius:20px; padding:6px 14px; cursor:pointer; white-space:nowrap; transition:background .15s ease}
+.copy:hover{background:var(--yellow-hover)}
+.copy.done{background:var(--green); color:#fff}
+.tpl-body{padding:18px 20px; font-size:14.5px; color:var(--dark-mid); line-height:1.65}
+.tpl-body p{margin:0}
+.tpl-body p + p{margin-top:10px}
+.ph{background:#fff4c9; color:#8a6d00; border-radius:3px; padding:0 4px; font-size:13px; font-weight:600}
+
+/* ---------- Humor openers ---------- */
+.openers{display:grid; gap:10px; margin:16px 0}
+.opener{display:flex; gap:12px; align-items:center; background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:12px 16px}
+.opener .ot{flex:1; font-family:'Merriweather',Georgia,serif; font-size:14px; color:var(--dark-mid); font-style:italic; line-height:1.5}
+.opener .copy{flex:none}
+
+/* ---------- Cadence ---------- */
+.facts{display:flex; flex-wrap:wrap; gap:12px; margin:18px 0}
+.fbox{background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:16px 20px; flex:1; min-width:220px}
+.fbox .k{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--text-muted); margin-bottom:6px}
+.fbox .v{font-size:20px; font-weight:700; color:var(--dark); font-variant-numeric:tabular-nums; letter-spacing:.02em}
+.fbox .d{font-size:13px; color:var(--text-light); margin-top:4px}
+
+/* ---------- Closing ---------- */
+.cta{background:var(--yellow); border-radius:var(--radius); padding:34px 32px; margin-top:52px; text-align:center}
+.cta h2{margin-bottom:12px; font-size:24px; color:var(--dark)}
+.cta p{color:var(--dark-mid); max-width:56ch; margin:0 auto}
+.cta p + p{margin-top:12px}
+footer{text-align:center; color:var(--text-muted); font-size:13px; margin-top:40px}
+
+/* ---------- Print ---------- */
+@media print{
+  body{background:#fff; font-size:11pt}
+  .sheet{max-width:100%; padding:0}
+  .cover{padding-top:0}
+  section{page-break-inside:avoid; padding-top:26px}
+  .insight{background:none; border:2px solid var(--dark); color:var(--dark)}
+  .insight .ilabel,.insight p{color:var(--dark)}
+  .copy{display:none}
+  .tpl,.tier,.col,.opener{box-shadow:none}
+  .cta{background:none; border:2px solid var(--dark)}
+}
+</style>
+</head>
+<body>
+<style>
+  .hid-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--cream, #fbf7f1);
+    border-bottom: 1px solid var(--border, #e0dcd6);
+  }
+  @supports (backdrop-filter: blur(8px)) {
+    .hid-nav { background: color-mix(in srgb, var(--cream, #fbf7f1) 92%, transparent); backdrop-filter: blur(8px); }
+  }
+  .hid-nav-wrap {
+    max-width: 68rem; margin: 0 auto; padding: 0 1.5rem;
+    min-height: 4.5rem; display: flex; align-items: center;
+  }
+  .hid-nav-logo {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    font-weight: 600; font-size: 1.05rem; letter-spacing: -0.02em;
+    color: var(--dark, #252525); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.55rem;
+  }
+  .hid-nav-mark { width: 40px; height: 40px; flex: none; display: block; }
+  /* Underline the name, not the mark. */
+  .hid-nav-logo:hover span { text-decoration: underline; text-underline-offset: 3px; }
+  .hid-nav-logo:focus-visible { outline: 2px solid var(--yellow-hover, #ffd633); outline-offset: 3px; }
+  /* The magnets are built to print cleanly. A sticky header is not part of that. */
+  @media print { .hid-nav { display: none; } }
+</style>
+<header class="hid-nav"><div class="hid-nav-wrap"><a class="hid-nav-logo" href="https://hiredindata.com/"><svg class="hid-nav-mark" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><pattern id="hid-grid-3" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.75" fill="#f0c62c"/></pattern></defs><rect width="32" height="32" rx="6" fill="#ffd633"/><rect width="32" height="32" rx="6" fill="url(#hid-grid-3)"/><g fill="#1c1d20"><g transform="translate(-0.244 7.111) scale(0.5556)"><path d="M8 7h4.5v6.9h7V7H24v18h-4.5v-6.9h-7V25H8Z"/></g><rect x="14.59" y="13.4" width="2.2" height="7.6"/><rect x="14.59" y="10.7" width="2.2" height="2.2"/><g transform="translate(15.29 8) scale(0.5)"><path fill-rule="evenodd" d="M6 6h9a10 10 0 0 1 0 20H6Zm4.5 4.5h4.5a5.5 5.5 0 0 1 0 11h-4.5Z"/></g></g></svg><span>Hired in Data</span></a></div></header>
+<div class="sheet">
+
+  <header class="cover">
+    <span class="kicker">Free Networking Playbook</span>
+    <h1>Network like a pro</h1>
+    <p class="sub">Most data roles are filled before they're ever posted. In a market flooded with AI-generated applications, who you know - and who trusts you - is the real edge. Here's how to build that network from scratch: the mindset, the research, and the messages that actually get replies.</p>
+    <p class="byline">From <strong>Mandy Liu</strong> - ex-Meta Data Scientist, founder of Hired in Data. 50+ data professionals placed, averaging a $54K salary increase.</p>
+  </header>
+
+  <section>
+    <div class="step"><span class="step-num">1</span><h2>Why your network is everything now</h2></div>
+    <p class="lede">The market is brutal for a reason: hundreds of thousands of experienced people were laid off, and within seconds of a junior role going live, hundreds of AI-generated resumes flood the system. Applying cold means competing with all of it.</p>
+    <p class="body">So how do the good roles actually get filled? Watch what a hiring manager really does, in order:</p>
+    <ol class="ladder">
+      <li class="hot"><span class="num">1</span><span class="txt"><b>People they already know.</b> They scan their own contacts first and reach out directly.</span><span class="pill">Get in here</span></li>
+      <li class="hot"><span class="num">2</span><span class="txt"><b>Their team's networks.</b> "Anyone know someone great?" - a trusted referral, and it's nearly done.</span><span class="pill">Or here</span></li>
+      <li class="mid"><span class="num">3</span><span class="txt"><b>An internal posting.</b> Someone already at the company - low risk of a bad hire.</span><span class="pill">Harder</span></li>
+      <li class="last"><span class="num">4</span><span class="txt"><b>A public job posting.</b> The last resort, drowning in applicants.</span><span class="pill">Where most start</span></li>
+    </ol>
+    <div class="insight">
+      <div class="ilabel">The whole game in one line</div>
+      <p>The public posting is the last resort, not the first. By the time a job is public, it's already the hardest way in.</p>
+      <p>Networking is simply how you get in at steps one and two - where the hiring manager knows you directly, or knows someone who does. That's built on one thing: trust.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="step"><span class="step-num">2</span><h2>The mindset (and who to reach out to)</h2></div>
+    <p class="lede">Networking isn't fake or slimy - it's how hidden opportunities reach you. People control resources and know about roles long before they're posted.</p>
+    <div class="story">
+      <p><b>It really does create jobs that don't exist yet.</b> One coffee chat with a university department head - just mentioning a genuine interest and some knowledge in AI - turned into an honorary-professor role advising their staff. The job was never posted. It didn't exist until the conversation did. That's what a real connection can do.</p>
+    </div>
+    <p class="body">Start with the right targets, and don't only chase recruiters. The people who can change your career are often your future manager, a potential teammate, or someone whose work you admire - not just the person screening resumes.</p>
+    <div class="tiers">
+      <div class="tier a3"><div class="tt">Start here</div><h3>Safety</h3><p>You're qualified but not thrilled. Perfect for warming up your outreach with low stakes.</p></div>
+      <div class="tier a2"><div class="tt">Then</div><h3>Matching</h3><p>You'd genuinely be happy here and you're qualified. Move up as you get more comfortable.</p></div>
+      <div class="tier a1"><div class="tt">Save for last</div><h3>Dream</h3><p>You admire the people and the work. By now your outreach is sharp - spend it here.</p></div>
+    </div>
+    <div class="fact"><b>Help yourself first.</b> As Chris Rock put it: nobody stops for a broken-down car, but if you're pushing it yourself, people get out and push with you. If you want 15 minutes of someone's time, spend at least 15 minutes doing your homework - and show them you did.</div>
+  </section>
+
+  <section>
+    <div class="step"><span class="step-num">3</span><h2>Do your homework: research that gives you an in</h2></div>
+    <p class="lede">Every strong message is built on one specific, genuine detail about the person. Spend a few minutes on their profile and you'll always find one.</p>
+    <p class="body">Look for something real to connect on:</p>
+    <div class="chips">
+      <span class="chip"><b>Same school</b> or alumni network</span>
+      <span class="chip"><b>A non-traditional path</b> into data (acknowledge the switch)</span>
+      <span class="chip">A <b>recent post</b> that genuinely resonated</span>
+      <span class="chip">A <b>hobby or side project</b> they've made visible</span>
+      <span class="chip">Their <b>GitHub</b> or personal site</span>
+    </div>
+    <p class="body">To find people, search LinkedIn by <em>job title + company + location</em>, and favour second-degree connections. For company context, skim their investor-relations page or a stock-analysis write-up, and search for talks or podcasts by their executives - instant common ground, and great interview prep too.</p>
+    <div class="fact"><b>The numbers game:</b> landing around two offers tends to take reaching out to roughly 150 people. That sounds like a lot - but at just three a day, it's very doable. Consistency beats intensity.</div>
+  </section>
+
+  <section>
+    <div class="step"><span class="step-num">4</span><h2>Messages that actually get replies</h2></div>
+    <p class="lede">The golden rule: make it about them, and give before you ask. Most messages fail because they're one big withdrawal - "can you review my resume, can you refer me?" - before any deposit.</p>
+    <p class="body">Before you send, check it passes all four:</p>
+    <ul class="tests">
+      <li><b>Under 5 minutes to reply?</b> Ask something specific.</li>
+      <li><b>Acknowledges something unique</b> about them?</li>
+      <li><b>Shares who you are,</b> briefly?</li>
+      <li><b>Clear intent, not transactional?</b> No hard sell.</li>
+    </ul>
+    <div class="compare">
+      <div class="col bad">
+        <div class="clabel">Forgettable</div>
+        <p class="msg">"Hi [name], I saw you work at [company] and I want to break into data science. Any tips? I've attached my resume."</p>
+        <p class="why">All about you, slow to answer, and nothing specific. Straight to the ignore pile.</p>
+      </div>
+      <div class="col good">
+        <div class="clabel">Gets a reply</div>
+        <p class="msg">"Hi [name], your post on the senior-vs-junior mindset really made me reflect on my own work. Curious - what do you think is the biggest difference between the two?"</p>
+        <p class="why">Specific, flattering in a genuine way, and a one-minute question they'll enjoy answering.</p>
+      </div>
+    </div>
+
+    <div class="tpl">
+      <div class="tpl-head"><span class="name">Common-ground opener<span class="use">shared path or school</span></span><button class="copy" type="button">Copy</button></div>
+      <div class="tpl-body">
+        <p>Hi <span class="ph">[name]</span>, I saw we both <span class="ph">[went to X / came into data from a non-traditional background]</span> - I really admire your work at <span class="ph">[company]</span>.</p>
+        <p>As I'm exploring the <span class="ph">[specialism]</span> space, I'd love to learn from how you got into it. What's one thing you wish you'd known starting out?</p>
+      </div>
+    </div>
+    <div class="tpl">
+      <div class="tpl-head"><span class="name">"Your post made me think" opener<span class="use">they post content</span></span><button class="copy" type="button">Copy</button></div>
+      <div class="tpl-body">
+        <p>Hi <span class="ph">[name]</span>, I loved your post on <span class="ph">[topic]</span> - it really made me reflect on <span class="ph">[specific thing]</span>.</p>
+        <p>Quick question: <span class="ph">[one specific, genuinely curious question about their experience]</span>?</p>
+      </div>
+    </div>
+    <div class="tpl">
+      <div class="tpl-head"><span class="name">The ask (once you've built rapport)<span class="use">move it to a call</span></span><button class="copy" type="button">Copy</button></div>
+      <div class="tpl-body">
+        <p>By the way, I'm currently <span class="ph">[your situation]</span>. Would love to pick your brain for about 10 minutes if you're open to it - no pressure at all. I really respect your path and would love to learn from it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="step"><span class="step-num">5</span><h2>Stand out in a crowded inbox</h2></div>
+    <p class="lede">Busy people get a wall of "Hi [name], I hope this finds you well!" It's polite - and instantly forgettable. A little warmth or humour makes you the message they actually remember.</p>
+    <div class="openers">
+      <div class="opener"><span class="ot">"Hey [name], I hope today's coffee stays hot and the memes in your inbox are elite."</span><button class="copy" type="button">Copy</button></div>
+      <div class="opener"><span class="ot">"Hey [name], I hope the winning lottery numbers find you today."</span><button class="copy" type="button">Copy</button></div>
+      <div class="opener"><span class="ot">"Hey [name], you know that feeling when you stub your toe on a table corner? That's how I'll feel if you ghost me. Could we chat about how you got into [area]?"</span><button class="copy" type="button">Copy</button></div>
+    </div>
+    <p class="body">Use your judgement on who this suits - but when in doubt, be a real human, not a template. Different and fun beats polished and generic.</p>
+  </section>
+
+  <section>
+    <div class="step"><span class="step-num">6</span><h2>Follow up without feeling gross</h2></div>
+    <p class="lede">People are busy and miss messages - a nudge is normal, not needy. Then know when to stop.</p>
+    <div class="facts">
+      <div class="fbox"><div class="k">General connection</div><div class="v">Day 5 &middot; 14</div><div class="d">Two gentle nudges on those business days, then move on.</div></div>
+      <div class="fbox"><div class="k">In an active conversation</div><div class="v">Day 3 &middot; 7 &middot; 14</div><div class="d">A little more often when things are already moving, then close it out.</div></div>
+    </div>
+    <p class="body">No reply after a nudge or two? Leave it, and find a new person. There are always more - and nobody worth knowing minds a polite follow-up.</p>
+  </section>
+
+  <section>
+    <div class="step"><span class="step-num">7</span><h2>From a DM to a relationship that pays off</h2></div>
+    <p class="lede">The goal of a message is never the referral. It's a short, genuine conversation - and, over time, a relationship.</p>
+    <p class="body">Get someone on a 10-minute call and make it entirely about them: their path, their team, what they're working on. Give value where you can, stay curious, and the fact that you're job-searching can come up naturally later. That's how a stranger becomes an advocate.</p>
+    <div class="insight">
+      <div class="ilabel">The habit that compounds</div>
+      <p>Add value when you least need it. Be part of a community, show up, and be helpful - long before you're asking for anything.</p>
+      <p>Answer a question in a group. Share something useful. Comment thoughtfully on someone's work. Do it consistently and you build trust that quietly turns into jobs, mentors, and opportunities you'd never have found on a job board.</p>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h2>Start today, not when you need it.</h2>
+    <p>The best time to build your network was a year ago; the second best is now. Pick three people this week - one from a safety company to warm up - do your homework, and send one genuine message each.</p>
+    <p>Turning those conversations into referrals and offers is a craft of its own - the calls, the timing, the ask. That's the part we coach. Getting started is all on you, and it's simpler than it looks.</p>
+  </div>
+
+  <footer>
+    <p>Hired in Data</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var btns = document.querySelectorAll('.copy');
+  Array.prototype.forEach.call(btns, function(btn){
+    btn.addEventListener('click', function(){
+      var host = btn.closest('.tpl') ? btn.closest('.tpl').querySelector('.tpl-body') : btn.closest('.opener').querySelector('.ot');
+      var text = (host.innerText || host.textContent || '').replace(/\n{3,}/g,'\n\n').trim();
+      function done(){ btn.textContent='Copied'; btn.classList.add('done'); setTimeout(function(){ btn.textContent='Copy'; btn.classList.remove('done'); }, 1600); }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(text, done); });
+      } else { fallback(text, done); }
+    });
+  });
+  function fallback(text, cb){
+    var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); cb(); }catch(e){}
+    document.body.removeChild(ta);
+  }
+})();
+</script>
+</body>
+</html>

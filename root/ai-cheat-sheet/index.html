@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E1JE38D9B5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E1JE38D9B5');
+  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free AI Data Interview Cheat Sheet | Hired in Data</title>
+<meta name="description" content="Fifteen real data-interview questions from OpenAI, Anthropic, xAI, Cohere and NVIDIA, from our community and recent interview reports. Free from Mandy Liu, ex-Meta Data Scientist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --yellow:#ffe578; --yellow-hover:#ffd633; --dark:#252525; --dark-mid:#333333;
+  --cream:#fbf7f1; --red:#d4174a; --green:#2eac4a;
+  --text:#333333; --text-light:#666666; --text-muted:#999999; --border:#e0dcd6;
+  --radius:6px;
+}
+body{
+  font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16px; line-height:1.6; color:var(--text); background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'Merriweather',Georgia,serif; line-height:1.3}
+.sheet{max-width:680px; margin:0 auto; padding:52px 24px 72px}
+
+/* ---------- Hero ---------- */
+.kicker{
+  display:inline-block; background:var(--yellow); color:var(--dark);
+  font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  padding:6px 12px; border-radius:var(--radius); margin-bottom:22px;
+}
+h1{font-size:clamp(31px,5.4vw,46px); font-weight:900; color:var(--dark); margin-bottom:18px}
+.sub{font-size:18px; color:var(--text-light); max-width:58ch}
+
+/* ---------- Company logo row ---------- */
+/* Same treatment as the bank's cover: real brand logos, height-normalised,
+   sitting straight on the page. The .lg rules below are copied from bank.html
+   so this page stays self-contained (see README). */
+.cos{display:flex; flex-wrap:wrap; align-items:center; gap:14px 24px; margin:26px 0 4px}
+.cos span{display:inline-flex; align-items:center}
+.lg{
+  display:inline-block; height:24px; background-position:center;
+  background-repeat:no-repeat; background-size:contain; vertical-align:middle;
+}
+
+/* ---------- Opt-in form (two instances: hero + closing) ---------- */
+.optin-block{margin-top:30px}
+/* Name + email share a row; the button takes the full width beneath. */
+.form{display:flex; flex-wrap:wrap; gap:10px}
+.form .fld{
+  flex:1 1 calc(50% - 5px); min-width:0; font-family:inherit; font-size:16px; color:var(--dark);
+  background:#fff; border:1px solid var(--border); border-radius:var(--radius);
+  padding:13px 15px;
+}
+.form .fld::placeholder{color:#a8a8a8}
+.form .fld:focus{outline:none; border-color:var(--dark); box-shadow:0 0 0 3px rgba(255,229,120,.55)}
+.btn{
+  flex:1 1 100%; font-family:inherit; font-size:16px; font-weight:600; cursor:pointer;
+  background:var(--yellow); color:var(--dark); border:1px solid transparent;
+  border-radius:var(--radius); padding:13px 22px; transition:background .15s ease;
+}
+@media(max-width:520px){
+  /* Stack all three. flex-wrap must be reset too: wrap + column lets the
+     items size past the padded container and pushes the page sideways. */
+  .form{flex-direction:column; flex-wrap:nowrap}
+  .form .fld,.btn{flex:0 0 auto; width:100%}
+}
+.btn:hover:not(:disabled){background:var(--yellow-hover)}
+.btn:disabled{opacity:.65; cursor:default}
+.hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+.trust{font-size:14px; color:var(--text-muted); margin-top:14px; max-width:64ch}
+.trust strong{color:var(--dark-mid); font-weight:600}
+.err{
+  display:none; font-size:14px; color:#8c0f31; background:rgba(212,23,74,.10);
+  border-radius:var(--radius); padding:10px 14px; margin-top:12px;
+}
+.err.show{display:block}
+.spinner{
+  display:inline-block; width:14px; height:14px; vertical-align:-2px; margin-right:7px;
+  border:2px solid rgba(37,37,37,.3); border-top-color:var(--dark); border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- Pull quote ---------- */
+/* No left accent rail - the white card on cream separates it well enough, and
+   the rail is the thing that makes these pages read as templated. */
+.pull{
+  background:#fff;
+  padding:22px 26px; margin:52px 0 0; border-radius:var(--radius);
+}
+.pull p{font-family:'Merriweather',Georgia,serif; font-size:18px; color:var(--dark); line-height:1.6}
+.pull p + p{margin-top:12px}
+
+/* ---------- What's inside ---------- */
+section{padding-top:44px}
+h2{font-size:20px; font-weight:700; color:var(--dark); margin-bottom:18px}
+.inside{list-style:none}
+.inside li{position:relative; padding:0 0 13px 30px; font-size:15.5px; color:var(--text-light)}
+.inside li:last-child{padding-bottom:0}
+.inside li::before{
+  content:"\2713"; position:absolute; left:0; top:0;
+  color:var(--green); font-weight:700; font-size:15px;
+}
+.inside li strong{color:var(--dark); font-weight:600}
+.spec{margin-top:22px; font-size:14px; color:var(--text-muted); font-style:italic}
+
+/* ---------- Closing opt-in (dark) ---------- */
+.closing{
+  margin-top:48px; background:var(--dark); border-radius:var(--radius);
+  padding:32px 30px;
+}
+.closing h2{font-size:22px; color:#fff; margin-bottom:8px}
+.closing > p{color:#c9c9c9; font-size:15px; max-width:46ch; margin-bottom:20px}
+.closing .form{max-width:none}
+.closing .form .fld{border-color:transparent}
+.closing .form .fld:focus{border-color:var(--yellow); box-shadow:none}
+.closing .trust{color:#8f8f8f; margin-top:14px}
+.closing .err{color:#ffc4d2; background:rgba(212,23,74,.22); max-width:none}
+
+/* ---------- Byline ---------- */
+.byline{margin-top:36px; padding-top:26px; border-top:1px solid var(--border); font-size:15px; color:var(--text-light)}
+.byline strong{color:var(--dark)}
+.byline .stats{display:block; margin-top:6px; font-size:14px; color:var(--text-muted)}
+footer{text-align:center; color:var(--text-muted); font-size:13px; margin-top:40px}
+.lg.openai{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+T3BlbkFJPC90aXRsZT48cGF0aCBkPSJNOS4yMDUgOC42NTh2LTIuMjZjMC0uMTkuMDcyLS4zMzMuMjM4LS40MjhsNC41NDMtMi42MTZjLjYxOS0uMzU3IDEuMzU2LS41MjMgMi4xMTctLjUyMyAyLjg1NCAwIDQuNjYyIDIuMjEyIDQuNjYyIDQuNTY2IDAgLjE2NyAwIC4zNTctLjAyNC41NDdsLTQuNzEtMi43NTlhLjc5Ny43OTcgMCAwMC0uODU2IDBsLTUuOTcgMy40NzN6bTEwLjYwOSA4LjhWMTIuMDZjMC0uMzMzLS4xNDMtLjU3LS40MjktLjczN2wtNS45Ny0zLjQ3MyAxLjk1LTEuMTE4YS40MzMuNDMzIDAgMDEuNDc2IDBsNC41NDMgMi42MTdjMS4zMDkuNzYgMi4xODkgMi4zNzggMi4xODkgMy45NDggMCAxLjgwOC0xLjA3IDMuNDczLTIuNzYgNC4xNjN6TTcuODAyIDEyLjcwM2wtMS45NS0xLjE0MmMtLjE2Ny0uMDk1LS4yMzktLjIzOC0uMjM5LS40MjhWNS44OTljMC0yLjU0NSAxLjk1LTQuNDcyIDQuNTkxLTQuNDcyIDEgMCAxLjkyNy4zMzMgMi43MTIuOTI4TDguMjMgNS4wNjdjLS4yODUuMTY2LS40MjguNDA0LS40MjguNzM3djYuODk4ek0xMiAxNS4xMjhsLTIuNzk1LTEuNTd2LTMuMzNMMTIgOC42NThsMi43OTUgMS41N3YzLjMzTDEyIDE1LjEyOHptMS43OTYgNy4yM2MtMSAwLTEuOTI3LS4zMzItMi43MTItLjkyN2w0LjY4Ni0yLjcxMmMuMjg1LS4xNjYuNDI4LS40MDQuNDI4LS43Mzd2LTYuODk4bDEuOTc0IDEuMTQyYy4xNjcuMDk1LjIzOC4yMzguMjM4LjQyOHY1LjIzM2MwIDIuNTQ1LTEuOTc0IDQuNDcyLTQuNjE0IDQuNDcyem0tNS42MzctNS4zMDNsLTQuNTQ0LTIuNjE3Yy0xLjMwOC0uNzYxLTIuMTg4LTIuMzc4LTIuMTg4LTMuOTQ4QTQuNDgyIDQuNDgyIDAgMDE0LjIxIDYuMzI3djUuNDIzYzAgLjMzMy4xNDMuNTcxLjQyOC43MzhsNS45NDcgMy40NDktMS45NSAxLjExOGEuNDMyLjQzMiAwIDAxLS40NzYgMHptLS4yNjIgMy45Yy0yLjY4OCAwLTQuNjYyLTIuMDIxLTQuNjYyLTQuNTE5IDAtLjE5LjAyNC0uMzguMDQ3LS41N2w0LjY4NiAyLjcxYy4yODYuMTY3LjU3MS4xNjcuODU2IDBsNS45Ny0zLjQ0OHYyLjI2YzAgLjE5LS4wNy4zMzMtLjIzNy40MjhsLTQuNTQzIDIuNjE2Yy0uNjE5LjM1Ny0xLjM1Ni41MjMtMi4xMTcuNTIzem01Ljg5OSAyLjgzYTUuOTQ3IDUuOTQ3IDAgMDA1LjgyNy00Ljc1NkMyMi4yODcgMTguMzM5IDI0IDE1Ljg0IDI0IDEzLjI5NmMwLTEuNjY1LS43MTMtMy4yODItMS45OTgtNC40NDguMTE5LS41LjE5LS45OTkuMTktMS40OTggMC0zLjQwMS0yLjc1OS01Ljk0Ny01Ljk0Ni01Ljk0Ny0uNjQyIDAtMS4yNi4wOTUtMS44OC4zMUE1Ljk2MiA1Ljk2MiAwIDAwMTAuMjA1IDBhNS45NDcgNS45NDcgMCAwMC01LjgyNyA0Ljc1N0MxLjcxMyA1LjQ0NyAwIDcuOTQ1IDAgMTAuNDljMCAxLjY2Ni43MTMgMy4yODMgMS45OTggNC40NDgtLjExOS41LS4xOSAxLS4xOSAxLjQ5OSAwIDMuNDAxIDIuNzU5IDUuOTQ2IDUuOTQ2IDUuOTQ2LjY0MiAwIDEuMjYtLjA5NSAxLjg4LS4zMDlhNS45NiA1Ljk2IDAgMDA0LjE2MiAxLjcxM3oiPjwvcGF0aD48L3N2Zz4=")}
+.lg.anthropic{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMTkxOTE5IiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+QW50aHJvcGljPC90aXRsZT48cGF0aCBkPSJNMTcuMzA0MSAzLjU0MWgtMy42NzE4bDYuNjk2IDE2LjkxOEgyNFptLTEwLjYwODIgMEwwIDIwLjQ1OWgzLjc0NDJsMS4zNjkzLTMuNTUyN2g3LjAwNTJsMS4zNjkzIDMuNTUyOGgzLjc0NDJMMTAuNTM2MyAzLjU0MDlabS0uMzcxMiAxMC4yMjMyIDIuMjkxNC01Ljk0NTYgMi4yOTE0IDUuOTQ1NloiLz48L3N2Zz4=")}
+.lg.xai{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+eEFJPC90aXRsZT48cGF0aCBkPSJNNi40NjkgOC43NzZMMTYuNTEyIDIzaC00LjQ2NEwyLjAwNSA4Ljc3Nkg2LjQ3em0tLjAwNCA3LjlsMi4yMzMgMy4xNjRMNi40NjcgMjNIMmw0LjQ2NS02LjMyNHpNMjIgMi41ODJWMjNoLTMuNjU5VjcuNzY0TDIyIDIuNTgyek0yMiAxbC05Ljk1MiAxNC4wOTUtMi4yMzMtMy4xNjNMMTcuNTMzIDFIMjJ6Ij48L3BhdGg+PC9zdmc+")}
+.lg.cohere{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHRpdGxlPkNvaGVyZTwvdGl0bGU+PHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNOC4xMjggMTQuMDk5Yy41OTIgMCAxLjc3LS4wMzMgMy4zOTgtLjcwMyAxLjg5Ny0uNzgxIDUuNjcyLTIuMiA4LjM5NS0zLjY1NiAxLjkwNS0xLjAxOCAyLjc0LTIuMzY2IDIuNzQtNC4xOEE0LjU2IDQuNTYgMCAwMDE4LjEgMUg3LjU0OUE2LjU1IDYuNTUgMCAwMDEgNy41NWMwIDMuNjE3IDIuNzQ1IDYuNTQ5IDcuMTI4IDYuNTQ5eiIgZmlsbD0iIzM5NTk0RCIgZmlsbC1ydWxlPSJldmVub2RkIj48L3BhdGg+PHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNOS45MTIgMTguNjFhNC4zODcgNC4zODcgMCAwMTIuNzA1LTQuMDUybDMuMzIzLTEuMzhjMy4zNjEtMS4zOTQgNy4wNiAxLjA3NiA3LjA2IDQuNzE1YTUuMTA0IDUuMTA0IDAgMDEtNS4xMDUgNS4xMDRsLTMuNTk3LS4wMDFhNC4zODYgNC4zODYgMCAwMS00LjM4Ni00LjM4N3oiIGZpbGw9IiNEMThFRTIiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PC9wYXRoPjxwYXRoIGQ9Ik00Ljc3NiAxNC45NjJBMy43NzUgMy43NzUgMCAwMDEgMTguNzM4di40ODlhMy43NzYgMy43NzYgMCAwMDcuNTUxIDB2LS40OWEzLjc3NSAzLjc3NSAwIDAwLTMuNzc1LTMuNzc1eiIgZmlsbD0iI0ZGNzc1OSI+PC9wYXRoPjwvc3ZnPg==")}
+.lg.nvidia{aspect-ratio:1;background-image:url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjNzZCOTAwIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+TlZJRElBPC90aXRsZT48cGF0aCBkPSJNOC45NDggOC43OTh2LTEuNDNhNi43IDYuNyAwIDAgMSAuNDI0LS4wMThjMy45MjItLjEyNCA2LjQ5MyAzLjM3NCA2LjQ5MyAzLjM3NHMtMi43NzQgMy44NTEtNS43NSAzLjg1MWMtLjM5OCAwLS43ODctLjA2Mi0xLjE1OC0uMTg1di00LjM0NmMxLjUyOC4xODUgMS44MzcuODU3IDIuNzQ3IDIuMzg1bDIuMDQtMS43MTRzLTEuNDkyLTEuOTUyLTQtMS45NTJhNi4wMTYgNi4wMTYgMCAwIDAtLjc5Ni4wMzVtMC00LjczNXYyLjEzOGwuNDI0LS4wMjdjNS40NS0uMTg1IDkuMDEgNC40NyA5LjAxIDQuNDdzLTQuMDggNC45NjQtOC4zMyA0Ljk2NGMtLjM3IDAtLjczMy0uMDM1LTEuMDk1LS4wOTd2MS4zMjVjLjMuMDM1LjYxLjA2Mi45MS4wNjIgMy45NTcgMCA2LjgyLTIuMDIzIDkuNTkzLTQuNDA4LjQ1OS4zNzEgMi4zNCAxLjI2MyAyLjczIDEuNjUyLTIuNjMzIDIuMjA4LTguNzcyIDMuOTg0LTEyLjI1MyAzLjk4NC0uMzM1IDAtLjY1My0uMDE4LS45NzEtLjA1M3YxLjg2NEgyNFY0LjA2M3ptMCAxMC4zMjZ2MS4xMzFjLTMuNjU3LS42NTQtNC42NzMtNC40Ni00LjY3My00LjQ2czEuNzU4LTEuOTQ0IDQuNjczLTIuMjYydjEuMjM3SDguOTRjLTEuNTI4LS4xODYtMi43MyAxLjI0NS0yLjczIDEuMjQ1cy42OCAyLjQxMiAyLjczOSAzLjExTTIuNDU2IDEwLjlzMi4xNjQtMy4xOTcgNi41LTMuNTMzVjYuMjAxQzQuMTUzIDYuNTkgMCAxMC42NTMgMCAxMC42NTNzMi4zNSA2LjgwMiA4Ljk0OCA3LjQydi0xLjIzN2MtNC44NC0uNi02LjQ5Mi01LjkzNi02LjQ5Mi01LjkzNnoiLz48L3N2Zz4=")}
+</style>
+</head>
+<body>
+<style>
+  .hid-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--cream, #fbf7f1);
+    border-bottom: 1px solid var(--border, #e0dcd6);
+  }
+  @supports (backdrop-filter: blur(8px)) {
+    .hid-nav { background: color-mix(in srgb, var(--cream, #fbf7f1) 92%, transparent); backdrop-filter: blur(8px); }
+  }
+  .hid-nav-wrap {
+    max-width: 68rem; margin: 0 auto; padding: 0 1.5rem;
+    min-height: 4.5rem; display: flex; align-items: center;
+  }
+  .hid-nav-logo {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    font-weight: 600; font-size: 1.05rem; letter-spacing: -0.02em;
+    color: var(--dark, #252525); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.55rem;
+  }
+  .hid-nav-mark { width: 40px; height: 40px; flex: none; display: block; }
+  /* Underline the name, not the mark. */
+  .hid-nav-logo:hover span { text-decoration: underline; text-underline-offset: 3px; }
+  .hid-nav-logo:focus-visible { outline: 2px solid var(--yellow-hover, #ffd633); outline-offset: 3px; }
+  /* The magnets are built to print cleanly. A sticky header is not part of that. */
+  @media print { .hid-nav { display: none; } }
+</style>
+<header class="hid-nav"><div class="hid-nav-wrap"><a class="hid-nav-logo" href="https://hiredindata.com/"><svg class="hid-nav-mark" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><pattern id="hid-grid-10" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.75" fill="#f0c62c"/></pattern></defs><rect width="32" height="32" rx="6" fill="#ffd633"/><rect width="32" height="32" rx="6" fill="url(#hid-grid-10)"/><g fill="#1c1d20"><g transform="translate(-0.244 7.111) scale(0.5556)"><path d="M8 7h4.5v6.9h7V7H24v18h-4.5v-6.9h-7V25H8Z"/></g><rect x="14.59" y="13.4" width="2.2" height="7.6"/><rect x="14.59" y="10.7" width="2.2" height="2.2"/><g transform="translate(15.29 8) scale(0.5)"><path fill-rule="evenodd" d="M6 6h9a10 10 0 0 1 0 20H6Zm4.5 4.5h4.5a5.5 5.5 0 0 1 0 11h-4.5Z"/></g></g></svg><span>Hired in Data</span></a></div></header>
+<div class="sheet">
+
+  <header>
+    <span class="kicker">Free Cheat Sheet</span>
+    <h1>Fifteen questions the AI companies are asking data candidates right now.</h1>
+    <p class="sub">Three each from OpenAI, Anthropic, xAI, Cohere and NVIDIA, from our community and recent interview reports.</p>
+
+    <div class="cos">
+      <span><i class="lg openai" role="img" aria-label="OpenAI"></i></span>
+      <span><i class="lg anthropic" role="img" aria-label="Anthropic"></i></span>
+      <span><i class="lg xai" role="img" aria-label="xAI"></i></span>
+      <span><i class="lg cohere" role="img" aria-label="Cohere"></i></span>
+      <span><i class="lg nvidia" role="img" aria-label="NVIDIA"></i></span>
+    </div>
+
+    <div class="optin-block">
+      <form class="form optin-form" novalidate>
+        <label for="name-hero" class="hp">Your first name</label>
+        <input type="text" id="name-hero" name="name" class="fld" placeholder="First name" autocomplete="given-name" maxlength="80" required>
+        <label for="email-hero" class="hp">Your email address</label>
+        <input type="email" id="email-hero" name="email" class="fld" placeholder="your@email.com" autocomplete="email" required>
+        <label for="company-hero" class="hp">Company</label>
+        <input type="text" id="company-hero" name="company" class="hp" tabindex="-1" autocomplete="off">
+        <button type="submit" class="btn"><span class="btn-label">Send Me the Cheat Sheet</span></button>
+      </form>
+      <p class="err"></p>
+      <p class="trust">From <strong>Mandy Liu</strong>, ex-Meta Data Scientist. 50+ data professionals placed. No spam, unsubscribe whenever you like.</p>
+    </div>
+  </header>
+
+  <div class="pull">
+    <p>These are the most wanted data jobs going, and the least practised.</p>
+    <p>The rounds are different too. Nobody asks you to measure a model's safety impact at a bank, and nobody asks you to derive backpropagation by hand.</p>
+  </div>
+
+  <section>
+    <h2>What you walk away with</h2>
+    <ul class="inside">
+      <li><strong>Three questions for each of the five</strong> - OpenAI, Anthropic, xAI, Cohere and NVIDIA, organised by company so you read only the ones that matter to you.</li>
+      <li><strong>The metrics questions nobody has good answers to yet</strong> - the north star for an AI coding tool, the real-world safety impact of a model that has just shipped, and what a stricter safeguard costs you in retention.</li>
+      <li><strong>Statistics on data that breaks the textbook</strong> - establishing significance when a handful of enterprise accounts dwarf everyone else, and using CUPED to finish experiments faster without losing power.</li>
+      <li><strong>The maths rounds you cannot revise for</strong> - deriving backpropagation for a loss function they invent on the spot, and a probability puzzle you have to reason through out loud.</li>
+      <li><strong>Real engineering, not hand-waving</strong> - deduplicating ten billion scraped documents a day, coding transformer attention from scratch, fixing a query that times out in production, and knowing when a CPU beats a GPU.</li>
+      <li><strong>What each question is actually testing</strong> - a line under every one on the trap in it, and what a strong answer does that an average one does not.</li>
+    </ul>
+    <p class="spec">15 questions. 5 companies. Read it in 10 minutes, then practise from it for weeks.</p>
+  </section>
+
+  <div class="closing">
+    <h2>Send me the cheat sheet</h2>
+    <p>It opens straight away, and a copy lands in your inbox for the night before your next screen.</p>
+    <div class="optin-block" style="margin-top:0">
+      <form class="form optin-form" novalidate>
+        <label for="name-closing" class="hp">Your first name</label>
+        <input type="text" id="name-closing" name="name" class="fld" placeholder="First name" autocomplete="given-name" maxlength="80" required>
+        <label for="email-closing" class="hp">Your email address</label>
+        <input type="email" id="email-closing" name="email" class="fld" placeholder="your@email.com" autocomplete="email" required>
+        <label for="company-closing" class="hp">Company</label>
+        <input type="text" id="company-closing" name="company" class="hp" tabindex="-1" autocomplete="off">
+        <button type="submit" class="btn"><span class="btn-label">Send Me the Cheat Sheet</span></button>
+      </form>
+      <p class="err"></p>
+      <p class="trust">No spam. Unsubscribe whenever you like.</p>
+    </div>
+  </div>
+
+  <p class="byline">
+    Compiled by <strong>Mandy Liu</strong> - ex-Meta Data Scientist, founder of Hired in Data - from our community and recent interview reports.
+    <span class="stats">50+ data professionals placed, averaging a $54K salary increase plus $19K negotiated on top.</span>
+  </p>
+
+  <footer>
+    <p>Hired in Data</p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var SHEET_URL = '/ai-cheat-sheet/sheet/';
+
+  // Both forms (hero + closing) share one handler. Each lives inside an
+  // .optin-block alongside its own .err element, so state stays scoped to the
+  // form the reader actually used.
+  Array.prototype.forEach.call(document.querySelectorAll('.optin-form'), function (form) {
+    var block = form.closest('.optin-block');
+    var nameInput = form.querySelector('input[name=name]');
+    var emailInput = form.querySelector('input[type=email]');
+    var honeypot = form.querySelector('input[name=company]');
+    var btn = form.querySelector('.btn');
+    var btnLabel = btn.querySelector('.btn-label');
+    var errorEl = block.querySelector('.err');
+    var defaultLabel = btnLabel.textContent;
+
+    function showError(message) {
+      errorEl.textContent = message;
+      errorEl.classList.add('show');
+    }
+
+    function clearError() {
+      errorEl.textContent = '';
+      errorEl.classList.remove('show');
+    }
+
+    function setLoading(loading) {
+      btn.disabled = loading;
+      btnLabel.innerHTML = loading
+        ? '<span class="spinner"></span>Sending'
+        : defaultLabel;
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearError();
+
+      var name = nameInput.value.trim();
+      var email = emailInput.value.trim();
+
+      if (!name) {
+        showError('Please enter your first name.');
+        nameInput.focus();
+        return;
+      }
+      if (!email) {
+        showError('Please enter your email address.');
+        emailInput.focus();
+        return;
+      }
+
+      setLoading(true);
+
+      fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          magnet: 'ai-cheat-sheet',
+          first_name: name,
+          email: email,
+          company: honeypot.value
+        })
+      })
+        .then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (data) {
+            return { ok: res.ok, data: data };
+          });
+        })
+        .then(function (result) {
+          if (!result.ok) {
+            setLoading(false);
+            showError(result.data.error || 'Something went wrong. Please try again.');
+            return;
+          }
+          // Capture succeeded - hand over the sheet immediately rather than
+          // making them wait on the email.
+          window.location.href = SHEET_URL;
+        })
+        .catch(function () {
+          setLoading(false);
+          showError('Could not reach the server. Please check your connection and try again.');
+        });
+    });
+  });
+})();
+</script>
+</body>
+</html>

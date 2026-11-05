@@ -1,0 +1,1365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hired in Data — Client Stories</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Hired in Data brand palette — matches lead-magnets/*/index.html + styles.css */
+    --bg: #fbf7f1;
+    --fg: #252525;
+    --dark-mid: #333333;
+    --muted: #666666;
+    --text-muted: #999999;
+    --accent: #e87c1e;
+    --accent-soft: #ffe578;
+    --yellow-hover: #ffd633;
+    --red: #d4174a;
+    --green: #2eac4a;
+    --card-bg: #ffffff;
+    --card-border: #e0dcd6;
+    --shadow: rgba(0,0,0,0.06);
+    --header-h: 72px;
+    --brand-radius: 6px;
+  }
+
+  * { box-sizing: border-box; }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 16px);
+  }
+  body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--fg);
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  /* ---- fixed header ---- */
+  .site-header {
+    position: fixed; top: 0; left: 0; right: 0;
+    min-height: var(--header-h);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0 2rem;
+    background: rgba(251,247,241,0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--card-border);
+    z-index: 100;
+  }
+  .brand {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--fg);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .brand-mark { width: 40px; height: 40px; flex: none; display: block; }
+  .brand span { font-family: 'Poppins', sans-serif; font-weight: 500; color: var(--muted); font-size: 0.85rem; }
+  .to-grid {
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s, opacity 0.25s ease, transform 0.25s ease;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+  }
+  @media (max-width: 520px) {
+    .site-header { padding: 0 1rem; }
+    .brand { font-size: 1rem; }
+    .brand span { display: none; }
+    .to-grid { font-size: 0.8rem; padding: 0.45rem 0.8rem; }
+  }
+  .to-grid:hover { background: var(--accent-soft); border-color: var(--accent-soft); }
+  .to-grid.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+  main { padding-top: var(--header-h); }
+
+  /* ---- grid / landing section ---- */
+  .grid-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+    text-align: center;
+  }
+  .grid-section h1 {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    margin: 0 0 0.8rem 0;
+  }
+  .grid-section .lede { max-width: 46em; margin: 0 auto 3rem; color: var(--muted); font-size: 1.15rem; line-height: 1.5; }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+  .story-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex; flex-direction: column; align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    animation: card-in 0.5s ease forwards;
+    animation-delay: calc(var(--i, 0) * 45ms);
+  }
+  .story-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px var(--shadow);
+    border-color: var(--accent);
+  }
+  @keyframes card-in {
+    to { opacity: 1; transform: none; }
+  }
+  .card-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    margin-top: 0.9rem;
+  }
+  .badge-experienced { background: #fbe3cd; color: #b85f14; }
+  .badge-entryLevel { background: #dcf5e3; color: #1f7a3d; }
+  .badge-transitions { background: #fbdce6; color: #a10f3d; }
+
+  .story-card img, .avatar-fallback {
+    width: 84px; height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.9rem;
+    border: 1px solid var(--card-border);
+  }
+  .avatar-fallback {
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-soft);
+    color: var(--fg);
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+  .card-stat {
+    font-family: 'Merriweather', Georgia, serif;
+    font-weight: 900;
+    font-size: 1.25rem;
+    color: var(--accent);
+    margin-bottom: 0.2rem;
+  }
+  .card-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.4rem; }
+  .card-micro { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+
+  /* ---- story sections ---- */
+  .story {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .kicker {
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+
+  h2 {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    margin: 0;
+    font-weight: 700;
+    color: var(--fg);
+    line-height: 1.35;
+  }
+
+  .lede {
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 42em;
+  }
+
+  .story-hero {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  .hero-photo {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 8px 20px var(--shadow);
+  }
+  .hero-photo.avatar-fallback { font-size: 2rem; }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1.4rem 1.5rem;
+    text-align: left;
+  }
+  .card h3 {
+    margin: 0 0 0.8rem 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+  .card-challenges h3 { color: var(--red); }
+  .card-results h3 { color: var(--green); }
+  .card ul { margin: 0; padding-left: 1.1rem; color: var(--fg); font-size: 0.92rem; line-height: 1.5; }
+  .card li { margin-bottom: 0.5rem; }
+
+  .proof-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .proof-row img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  .proof-row img.zoomable {
+    cursor: zoom-in;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .proof-row img.zoomable:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 32px var(--shadow);
+  }
+  .video-proof .footnote { text-align: center; }
+
+  .video-embed {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px var(--shadow);
+  }
+  .video-embed iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  /* ---- lightbox ---- */
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(20,17,13,0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4vh 4vw;
+    z-index: 200;
+    cursor: zoom-out;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+  }
+  .lightbox.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.35s ease, visibility 0s linear 0s;
+  }
+  .lightbox img {
+    max-width: 100%;
+    max-height: 92vh;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease;
+  }
+  .lightbox.open img {
+    transform: scale(1);
+    opacity: 1;
+  }
+  .lightbox-close {
+    position: fixed;
+    top: 1.5rem; right: 2rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.35s ease 0.1s;
+  }
+  .lightbox.open .lightbox-close { opacity: 0.85; }
+  .lightbox-close:hover { opacity: 1 !important; }
+
+  .footnote { margin-top: 0.6rem; font-size: 0.85rem; color: var(--muted); }
+
+  .closing { text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .closing .lede { margin-bottom: 0.6rem; }
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1.8rem;
+    background: var(--accent-soft);
+    color: var(--fg);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.9rem 2.2rem;
+    border-radius: var(--brand-radius);
+    font-size: 1.05rem;
+    transition: all 0.2s ease;
+  }
+  .cta-button:hover {
+    background: var(--yellow-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  /* ---- floating book-a-call ---- */
+  .floating-cta {
+    position: fixed;
+    bottom: 1.5rem; right: 1.5rem;
+    margin-top: 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    z-index: 150;
+    transition: all 0.2s ease, opacity 0.3s ease, transform 0.3s ease;
+  }
+  .floating-cta.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+  @media (max-width: 520px) {
+    .floating-cta { bottom: 1rem; right: 1rem; padding: 0.7rem 1.1rem; font-size: 0.85rem; }
+  }
+
+  /* ---- scroll reveal ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .three-col.reveal { transition-delay: 0.1s; }
+  .proof-row.reveal { transition-delay: 0.2s; }
+
+  @media (max-width: 720px) {
+    .three-col, .proof-row { grid-template-columns: 1fr; }
+    .story-hero { flex-direction: column; text-align: center; }
+  }
+
+  /* ---- keyboard focus ---- */
+  a:focus-visible, button:focus-visible, img.zoomable:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  img.zoomable:focus-visible { border-radius: 8px; }
+
+  /* ---- respect reduced-motion preference ---- */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Footer, matching the landing pages. */
+  .site-footer {
+    border-top: 1px solid var(--card-border);
+    padding: 1.75rem 2rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .footer-row {
+    max-width: 68rem; margin: 0 auto;
+    display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: space-between; gap: 0.9rem 1.5rem;
+  }
+  .footer-brand {
+    margin: 0;
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    font-size: 1rem; font-weight: 600; letter-spacing: -0.02em; color: var(--fg);
+  }
+  .footer-follow, .footer-inline {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.55rem;
+  }
+  .footer-inline a {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    color: var(--muted); text-decoration: none;
+  }
+  .footer-inline a:hover { color: var(--fg); }
+  .footer-inline a:hover span { text-decoration: underline; text-underline-offset: 3px; }
+  .social-icon { width: 1.05em; height: 1.05em; flex: 0 0 auto; }
+  .footer-sep { color: var(--muted); line-height: 1; user-select: none; }
+  @media (max-width: 40rem) {
+    .footer-row { flex-direction: column; justify-content: center; text-align: center; }
+    .footer-follow, .footer-inline { justify-content: center; }
+  }
+  @media print { .site-footer, .site-header, .floating-cta { display: none; } }
+  /* ---- two-column story layout (wide screens) ---- */
+  .story-columns { max-width: 1240px; margin: 0 auto; }
+  @media (min-width: 1000px) {
+    .story-columns { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2.5rem; padding: 0 2rem; align-items: start; }
+    .story-columns > .story { display: flex; flex-direction: column; max-width: none; margin: 0; padding: 3rem 0; }
+    .story-columns .story-hero { order: 0; gap: 1.2rem; margin-bottom: 1.5rem; }
+    .story-columns .proof-row { order: 1; gap: 1.25rem; margin-bottom: 1.5rem; }
+    .story-columns .three-col { order: 2; grid-template-columns: 1fr; gap: 0.75rem; margin-bottom: 0; }
+    .story-columns .hero-photo { width: 84px; height: 84px; }
+    .story-columns .story h2 { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="https://hiredindata.com/"><svg class="brand-mark" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><pattern id="hid-grid-brand" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.75" fill="#f0c62c"/></pattern></defs><rect width="32" height="32" rx="6" fill="#ffd633"/><rect width="32" height="32" rx="6" fill="url(#hid-grid-brand)"/><g fill="#1c1d20"><g transform="translate(-0.244 7.111) scale(0.5556)"><path d="M8 7h4.5v6.9h7V7H24v18h-4.5v-6.9h-7V25H8Z"/></g><rect x="14.59" y="13.4" width="2.2" height="7.6"/><rect x="14.59" y="10.7" width="2.2" height="2.2"/><g transform="translate(15.29 8) scale(0.5)"><path fill-rule="evenodd" d="M6 6h9a10 10 0 0 1 0 20H6Zm4.5 4.5h4.5a5.5 5.5 0 0 1 0 11h-4.5Z"/></g></g></svg>Hired in Data <span>· Client Stories</span></a>
+  <button class="to-grid" id="to-top" onclick="scrollToTop()">↑ Back to top</button>
+</header>
+
+<a class="cta-button floating-cta" id="floating-cta" href="https://hiredindata.com/">Book a Free Strategy Call</a>
+
+<main>
+  <section class="grid-section" id="grid">
+    <h1>Stuck. Underpaid. Rejected. Then this happened.</h1>
+    <p class="lede">23 Hired in Data clients on the offers, raises, and pivots they landed. Click anyone below to jump straight to their story.</p>
+    <div class="story-grid">
+
+      <button class="story-card" style="--i:0" data-target="story-stella" onclick="jumpTo('story-stella')">
+        <img src="assets/cropped/headshot_stella.png" alt="Stella" loading="lazy">
+        <div class="card-stat">Offer in under 2.5 months</div>
+        <div class="card-name">Stella</div>
+        <div class="card-micro">Stella Landed a Product Data Scientist Offer in Under 2.5 Months After a Layoff</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:1" data-target="story-mark" onclick="jumpTo('story-mark')">
+        <img src="assets/cropped/headshot_mark.png" alt="Mark" loading="lazy">
+        <div class="card-stat">+£21K</div>
+        <div class="card-name">Mark</div>
+        <div class="card-micro">Mark Became Trainline DS Manager with a £21K Bump</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:2" data-target="story-billy" onclick="jumpTo('story-billy')">
+        <img src="assets/cropped/headshot_billy.png" alt="Billy" loading="lazy">
+        <div class="card-stat">Offer in 1.5 months</div>
+        <div class="card-name">Billy</div>
+        <div class="card-micro">Billy Landed a Senior Data Scientist Offer in 1.5 Months</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:3" data-target="story-bach" onclick="jumpTo('story-bach')">
+        <img src="assets/cropped/headshot_bach.png" alt="Bach" loading="lazy">
+        <div class="card-stat">+57% pay</div>
+        <div class="card-name">Bach</div>
+        <div class="card-micro">Bach Landed Senior &amp; a 57% Pay Bump in 3 Months</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:4" data-target="story-adel" onclick="jumpTo('story-adel')">
+        <img src="assets/cropped/headshot_adel.png" alt="Adel" loading="lazy">
+        <div class="card-stat">+$50K</div>
+        <div class="card-name">Adel</div>
+        <div class="card-micro">Adel Transitioned to The Private Sector with a $50K Pay Bump</div>
+        <div class="card-badge badge-transitions">Transition</div>
+      </button>
+
+      <button class="story-card" style="--i:5" data-target="story-masego" onclick="jumpTo('story-masego')">
+        <img src="assets/cropped/headshot_masego.png" alt="Masego" loading="lazy">
+        <div class="card-stat">+22% salary</div>
+        <div class="card-name">Masego</div>
+        <div class="card-micro">Masego Landed a Data Role at RBC With a 22% Raise, Through an Unposted Job</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:6" data-target="story-teresa" onclick="jumpTo('story-teresa')">
+        <img src="assets/cropped/headshot_teresa.png" alt="Teresa" loading="lazy">
+        <div class="card-stat">+20% salary</div>
+        <div class="card-name">Teresa</div>
+        <div class="card-micro">Teresa Landed a Senior Financial Analyst Role in 2 Months With a 20% Raise</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:7" data-target="story-michael" onclick="jumpTo('story-michael')">
+        <img src="assets/cropped/headshot_michael.png" alt="Michael" loading="lazy">
+        <div class="card-stat">3 offers</div>
+        <div class="card-name">Michael</div>
+        <div class="card-micro">Michael Landed 3 Offers &amp; Moved From Product Data Science Into a Senior ML Role</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:8" data-target="story-islam" onclick="jumpTo('story-islam')">
+        <img src="assets/cropped/headshot_islam.png" alt="Islam" loading="lazy">
+        <div class="card-stat">£45K → £136K</div>
+        <div class="card-name">Islam</div>
+        <div class="card-micro">Islam Went From Redundancy to a £136K Pro-Rata Role, 3x His Old Salary</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:9" data-target="story-aman" onclick="jumpTo('story-aman')">
+        <div class="avatar-fallback">AM</div>
+        <div class="card-stat">$295K TC</div>
+        <div class="card-name">Aman</div>
+        <div class="card-micro">Aman Landed a $295K Senior Data Scientist Role at Meta</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:10" data-target="story-sehaj" onclick="jumpTo('story-sehaj')">
+        <img src="assets/cropped/headshot_sehaj.png" alt="Sehaj" loading="lazy">
+        <div class="card-stat">+$18K CAD</div>
+        <div class="card-name">Sehaj</div>
+        <div class="card-micro">Sehaj Landed in Machine Learning &amp; a $18K CAD Raise</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:11" data-target="story-mansi" onclick="jumpTo('story-mansi')">
+        <img src="assets/cropped/headshot_mansi.png" alt="Mansi" loading="lazy">
+        <div class="card-stat">6-figure @ Meta</div>
+        <div class="card-name">Mansi</div>
+        <div class="card-micro">Mansi landed a 6-figure Junior DS Role at Meta on a Student Visa</div>
+        <div class="card-badge badge-entryLevel">Entry Level</div>
+      </button>
+
+      <button class="story-card" style="--i:12" data-target="story-zack" onclick="jumpTo('story-zack')">
+        <img src="assets/cropped/headshot_zack.png" alt="Zack" loading="lazy">
+        <div class="card-stat">$150K TC</div>
+        <div class="card-name">Zack</div>
+        <div class="card-micro">Zack Landed a $150K Business Analyst Role</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:13" data-target="story-souravi" onclick="jumpTo('story-souravi')">
+        <img src="assets/cropped/headshot_souravi.png" alt="Souravi" loading="lazy">
+        <div class="card-stat">Senior DS role</div>
+        <div class="card-name">Souravi</div>
+        <div class="card-micro">Souravi Bagged a Senior DS Role After a 1-Year Career Break</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:14" data-target="story-atera" onclick="jumpTo('story-atera')">
+        <img src="assets/cropped/headshot_atera.png" alt="Atera" loading="lazy">
+        <div class="card-stat">$88K</div>
+        <div class="card-name">Atera</div>
+        <div class="card-micro">Atera Broke into Data From Biotech within 3 Months &amp; an $88k Pay</div>
+        <div class="card-badge badge-transitions">Transition</div>
+      </button>
+
+      <button class="story-card" style="--i:15" data-target="story-abrar" onclick="jumpTo('story-abrar')">
+        <img src="assets/cropped/headshot_abrar.png" alt="Abrar" loading="lazy">
+        <div class="card-stat">First job, 2 months</div>
+        <div class="card-name">Abrar</div>
+        <div class="card-micro">Abrar Landed His First Job in 2 Months with Pay Range $70-100k</div>
+        <div class="card-badge badge-entryLevel">Entry Level</div>
+      </button>
+
+      <button class="story-card" style="--i:16" data-target="story-satyajit" onclick="jumpTo('story-satyajit')">
+        <img src="assets/cropped/headshot_satyajit.png" alt="Satyajit" loading="lazy">
+        <div class="card-stat">Industry role, 3 months</div>
+        <div class="card-name">Satyajit</div>
+        <div class="card-micro">Satyajit Turned Academic Experience to Industry in 3 Months</div>
+        <div class="card-badge badge-transitions">Transition</div>
+      </button>
+
+      <button class="story-card" style="--i:17" data-target="story-ahmed" onclick="jumpTo('story-ahmed')">
+        <img src="assets/cropped/headshot_ahmed.png" alt="Ahmed" loading="lazy">
+        <div class="card-stat">82 days</div>
+        <div class="card-name">Ahmed</div>
+        <div class="card-micro">Ahmed Landed His First Data Job in 3 Months in Paris</div>
+        <div class="card-badge badge-entryLevel">Entry Level</div>
+      </button>
+
+      <button class="story-card" style="--i:18" data-target="story-cristina" onclick="jumpTo('story-cristina')">
+        <img src="assets/cropped/headshot_cristina.png" alt="Cristina" loading="lazy">
+        <div class="card-stat">38K → 82K</div>
+        <div class="card-name">Cristina</div>
+        <div class="card-micro">Cristina Landed a $82K Senior ML Engineer Role at a Gaming Company</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:19" data-target="story-phoebe" onclick="jumpTo('story-phoebe')">
+        <img src="assets/cropped/headshot_phoebe.png" alt="Phoebe" loading="lazy">
+        <div class="card-stat">76K → 100K</div>
+        <div class="card-name">Phoebe</div>
+        <div class="card-micro">How Phoebe Made the Jump from Software Engineering to $100K Senior Data Analyst</div>
+        <div class="card-badge badge-transitions">Transition</div>
+      </button>
+
+      <button class="story-card" style="--i:20" data-target="story-anthony" onclick="jumpTo('story-anthony')">
+        <img src="assets/cropped/headshot_anthony.png" alt="Anthony" loading="lazy">
+        <div class="card-stat">$148K AUD TC</div>
+        <div class="card-name">Anthony</div>
+        <div class="card-micro">Anthony Landed a $148K Data Scientist Role at Visa in 4 Months</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:21" data-target="story-shilpa" onclick="jumpTo('story-shilpa')">
+        <img src="assets/cropped/headshot_shilpa.png" alt="Shilpa" loading="lazy">
+        <div class="card-stat">4 offers</div>
+        <div class="card-name">Shilpa</div>
+        <div class="card-micro">Shilpa Landed 4 Offers &amp; a PM Role at TikTok Shop in 4 Months</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:22" data-target="story-aaron" onclick="jumpTo('story-aaron')">
+        <img src="assets/cropped/headshot_aaron.png" alt="Aaron" loading="lazy">
+        <div class="card-stat">Upleveled offer</div>
+        <div class="card-name">Aaron</div>
+        <div class="card-micro">Aaron Got Upleveled to a Senior Financial Analyst Offer Mid Interview</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+    </div>
+  </section>
+
+
+<div class="story-columns">
+    <section class="story" id="story-stella">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_stella.png" alt="Stella">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Stella</div>
+          <h2>From a Layoff and Zero Hiring Manager Rounds to a Product Data Scientist Offer: How Stella Landed Her Next Role in Under 2.5 Months</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Stella's challenges</h3>
+          <ul><li>Laid off with three months&rsquo; severance and savings that would only last 6&ndash;8 months</li><li>Getting recruiter calls (5 in total) but zero hiring manager rounds</li><li>Two months of searching alone with no progress, and unsure whether she fit data scientist roles</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Finding her niche in product data science, with two resumes: one for marketing analytics, one for product DS</li><li>A systematic LinkedIn and application strategy for reaching the right people</li><li>Targeted interview prep on what each hiring manager and stakeholder round would focus on, without over-preparing</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Product data scientist offer in under 2.5 months, faster than the four months she expected</li><li>Her first-ever data scientist interviews, plus hiring managers reaching out on LinkedIn, including the company she&rsquo;s joining</li><li>Negotiated her salary for the first time: an 8&ndash;10% increase on her previous total comp</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><div class="video-embed"><iframe src="https://www.loom.com/embed/266b02ef2fc647bd90dcc7fe1dbb3808" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-mark">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_mark.png" alt="Mark">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Mark</div>
+          <h2>From 3 Months Wasted Prep to a £21K Bump in 4 Months: How Mark Became Trainline DS Manager with 100% Inbound Interview Invites</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Mark's challenges</h3>
+          <ul><li>Spent 3 months on unfocused prep without submitting a single application</li><li>Balancing fulltime work and an efficient approach</li><li>Underutilizing LinkedIn to attract interview invites</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Repositioning his LinkedIn to attract interview requests</li><li>Cutting focus from 6 potential areas down to 3 core topics for deep prep</li><li>Installing clear frameworks to structure his thinking and demonstrate strategic value</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Secured a Trainline manager role with a £21K bump</li><li>All 5 of his interviews came from inbound recruiter outreach on LinkedIn</li><li>Massive visibility boost: profile now appears in 200+ searches per week</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_mark.png" alt="Mark's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}">
+<div class="video-embed"><iframe src="https://www.loom.com/embed/760a289674704109bf71178b3a0fced0" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-billy">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_billy.png" alt="Billy">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Billy</div>
+          <h2>From Dozens of Applications and Almost No Replies to a Senior Data Scientist Offer: Four Times Faster Than Billy Planned</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Billy's challenges</h3>
+          <ul><li>Applied to dozens of jobs with a conversion rate he called "quite low, if I’m honest"</li><li>Was not communicating his experience effectively on his CV or LinkedIn profile</li><li>No real experience handling recruiters or answering the questions they ask</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>How to respond to recruiters, using feedback from the community and directly from Egor</li><li>Rewriting the CV and LinkedIn profile, including putting revenue numbers on the CV</li><li>Candid, no-fluff feedback: 10 hours on the first CV rewrite, 20–30 hours on coding practice</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Senior Data Scientist offer in 1.5 months, when he had given himself six months</li><li>Revenue numbers on the CV took him from barely any replies to "a lot of interviews", including from big-name companies</li><li>The role hit every box from his first call: senior title, global company, and deploying machine learning models</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><div class="video-embed"><iframe src="https://www.loom.com/embed/018ab08f3e784f8fb6bf074e0487eae2" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-bach">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_bach.png" alt="Bach">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Bach</div>
+          <h2>From Stuck and Underpaid to Senior &amp; a 57% Pay Jump: How Bach Broke Career Stagnation in 3 Months</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Bach's challenges</h3>
+          <ul><li>Stuck on his job for 5 years - underpaid and no promotion path</li><li>Applied for over a year with only 3 calls and zero offer</li><li>Demotivated by technical screen difficulty and lost self-esteem due to the long haul</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Revamped his resume for crystal clarity and tailored impact</li><li>Interview preparation through modules on ML, A/B testing, statistics, and behavioral questions</li><li>Empowered him to negotiate for the first time</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Landed a 130K Senior Data Scientist role - a 57% pay increase</li><li>Negotiated successfully for the first time</li><li>Doubled interview conversion rate</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_bach.png" alt="Bach's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}">
+<div class="video-embed"><iframe src="https://www.loom.com/embed/b556112fbc274af4adfd2cae4422a9c8" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-adel">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_adel.png" alt="Adel">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Adel</div>
+          <h2>From Overwhelmed to 2 Offers &amp; a $50K Pay Jump: How Adel Transitioned to The Private Sector</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Adel's challenges</h3>
+          <ul><li>Drowning in information but unsure how to take action</li><li>Struggling to transition from the public to private sector</li><li>Blending in instead of standing out in a crowded job market</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Building a winner’s mindset to approach interviews with confidence</li><li>Optimizing his LinkedIn to double recruiter outreach</li><li>Mastering storytelling frameworks to turn interviews into offers</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>2 offers, one from a data consultancy and one from a startup</li><li>$50K salary jump, negotiated a later start date to maximize flexibility</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_adel.png" alt="Adel's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}">
+<div class="video-embed"><iframe src="https://www.loom.com/embed/721d78a0e05643948e230c0f64fd10fc" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-masego">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_masego.png" alt="Masego">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Masego</div>
+          <h2>From Business Intelligence Analyst to a Data Role at RBC: How Masego Got Hired Into a Job That Was Never Posted</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Masego's challenges</h3>
+          <ul><li>Working as a business intelligence analyst but wanting to move back into data science</li><li>A long search with, in her words, “a lot of ups and downs”</li><li>Interview anxiety — an overthinker who never knew mid-interview how it was going</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Finding a way into companies through referrals rather than cold applications</li><li>Rewriting the resume so those referrals actually converted into interviews</li><li>Posting on LinkedIn as often as possible to pull in inbound</li><li>Mock interviews for immediate feedback, to take the edge off the nerves</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Landed a data role at RBC, one of Canada’s biggest banks</li><li>22% salary increase</li><li>Hired through a referral into a role that was never posted</li><li>Achieved significant inbound traffic from posting on LinkedIn</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><div class="video-embed"><iframe src="https://www.loom.com/embed/e636a41069544c0aac87b5d257576cb5" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-teresa">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_teresa.png" alt="Teresa">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Teresa</div>
+          <h2>From Resume Struggles and No Clear Direction to Senior Financial Analyst: How Teresa Landed the Role in 2 Months With a 20% Raise</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Teresa's challenges</h3>
+          <ul><li>Unsure which specific direction to take the next step of the career</li><li>Resume writing was the biggest struggle</li><li>No idea how to set up a LinkedIn profile that works</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Resume modules plus live rewrite sessions with Mandy: three full rewrites of the resume</li><li>LinkedIn profile modules and a live LinkedIn session with Egor</li><li>Interview modules as a refresher on existing interview experience</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Landed a Senior Financial Analyst role, the job Teresa wanted, about 2 months after joining</li><li>Around a 20% salary increase</li><li>The confidence to walk into interviews knowing, in Teresa’s words, “I will get an offer no matter what”</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><div class="video-embed"><iframe src="https://www.loom.com/embed/eb75b57e15414828a0a96254e886c628" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-michael">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_michael.png" alt="Michael">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Michael</div>
+          <h2>From a Layoff and a Missed Shopify Offer to 3 Offers: How Michael Moved From Product Data Science Into a Senior Machine Learning Role</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Michael's challenges</h3>
+          <ul><li>Laid off, and had just missed out at Shopify after messing up one of the interviews</li><li>Unsure whether something in his interview prep was the problem</li><li>Three years of machine learning work that his resume didn’t present as machine learning</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>One resume change: a line on an AI project and one piece of experience reframed as machine learning</li><li>Filling the top of the funnel by reaching out to his network for interviews</li><li>Heads-down interview prep using the programme’s knowledge base</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>3 offers: two product data science roles and one machine learning role</li><li>Took the senior role, a step up in seniority from the other two offers</li><li>Matched his previous base salary of about $174K</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><div class="video-embed"><iframe src="https://www.loom.com/embed/e4875a570eb847f4b834e5b0133d4337" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-islam">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_islam.png" alt="Islam">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Islam</div>
+          <h2>From Redundancy to 3x His Salary: How Islam Went From £45K to a £136K Pro-Rata Role Without Having to Negotiate</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Islam's challenges</h3>
+          <ul><li>A hit-and-miss job hunt: cold applying on job boards and hoping his experience would speak for itself</li><li>A CV that listed duties, a LinkedIn profile he had barely touched, and answers that came across as technical but not clear</li><li>A hard market, and then made redundant</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Rewriting the CV around business and financial impact, with metrics he could defend when questioned</li><li>Mock interviews with Mandy and the group: brevity, a bank of stories, and the answer frameworks</li><li>Posting on LinkedIn to get visible</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Went from £45K to about £136K pro-rata, three times his old salary</li><li>Seven final-stage interviews, then an offer his new employer raised from £130K to £136K without him negotiating, with office days cut to once a week</li><li>One LinkedIn post reached 10,000 impressions, and people now reach out to him</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><div class="video-embed"><iframe src="https://www.loom.com/embed/d16052506c9a4068be6c6700de34dc01" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-aman">
+      <div class="story-hero reveal">
+        <div class="hero-photo avatar-fallback">AM</div>
+        <div class="hero-text">
+          <div class="kicker">Client Story: Aman</div>
+          <h2>From Uncertainty to $295K at FAANG: How Aman Landed a Senior Data Scientist Role at Meta</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Aman's challenges</h3>
+          <ul><li>Unclear expectations for different interview rounds</li><li>Struggling with product analytics questions</li><li>No structured approach for statistical prep, and not enough time to figure it out</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Mock product analytics interviews using real FAANG-level questions and frameworks</li><li>Mastering core statistical concepts to answer with confidence</li><li>Step-by-step salary negotiation, down to the exact words to use</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>2 offers: Meta &amp; DoorDash</li><li>Negotiated an extra $30K in stock + $25K signing bonus</li><li>Final TC: $295K</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_aman.png" alt="Aman's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}"></div>
+    </section>
+
+    <section class="story" id="story-sehaj">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_sehaj.png" alt="Sehaj">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Sehaj</div>
+          <h2>From a Year of No Traction to a New Offer &amp; an $18K Raise: How Sehaj Landed a Machine Learning Engineer Job</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Sehaj's challenges</h3>
+          <ul><li>A full year of job searching in 2024 with zero traction</li><li>Confidence shattered from constant rejection</li><li>Stuck in a consulting job with no growth</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Reframing his consulting experience to match what data hiring managers actually look for</li><li>Targeted interview strategies to confidently tackle different types of interviews</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Landed an offer after months of frustration</li><li>$18K CAD salary increase, $120K TC</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_sehaj.png" alt="Sehaj's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}"></div>
+    </section>
+
+    <section class="story" id="story-mansi">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_mansi.png" alt="Mansi">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Mansi</div>
+          <h2>From a Year of Post-Graduation Burnout to FAANG: How Mansi Landed Her Dream Role at Meta</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Mansi's challenges</h3>
+          <ul><li>Burnt out, overwhelmed, and feeling alone in her job search</li><li>Spinning her wheels for over a year post-graduation, despite watching every video and reading everything online</li><li>Fired from her internship with just 3 months left on her visa</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Shifted from a scattered job search to a focused, FAANG-specific strategy</li><li>Used word-for-word networking scripts to land high-quality referrals - including Meta</li><li>Ran targeted mock interviews with detailed, personalized feedback to level up her problem-solving and communication</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>6-figure offer with Meta in under 3 months</li></ul>
+        </div>
+      </div>
+
+      
+    </section>
+
+    <section class="story" id="story-zack">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_zack.png" alt="Zack">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Zack</div>
+          <h2>From 8 Months of Rejection to a $150K Offer: How Zack Landed a Business Analyst Role</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Zack's challenges</h3>
+          <ul><li>Countless applications and some interviews, but always falling short</li><li>No clear idea of what to improve</li><li>Exhausted, frustrated, and doubting himself</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Reframing his experience in reporting efficiency to match what target companies actually need</li><li>Mock interviews to sharpen both behavioral and technical skills</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Final round with eBay</li><li>$150K TC offer</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_zack.png" alt="Zack's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}"></div>
+    </section>
+
+    <section class="story" id="story-souravi">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_souravi.png" alt="Souravi">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Souravi</div>
+          <h2>From Rejections to Fullstack Senior DS: How Souravi Reinvented Herself After a 1-Year Career Break</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Souravi's challenges</h3>
+          <ul><li>1 year of career gap</li><li>Despite landing occasional interviews, none was converting past the initial stages</li><li>Endless rejections drained her confidence and she didn’t know what else she could possibly do</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Confidence building and mindset shift</li><li>Reframing her stories so they were told from an interviewer’s point of view</li><li>Communicating with structure in every round to stand out as a must-hire</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Landed a Senior Data Scientist role at a major online entertainment company</li><li>Better-than-expected offer with strong salary + benefits</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_souravi.png" alt="Souravi's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}"></div>
+    </section>
+
+    <section class="story" id="story-atera">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_atera.png" alt="Atera">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Atera</div>
+          <h2>From Burnout and Hundreds of Rejections to $88K: How Atera Broke into Data from Biotech in 2 Months</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Atera's challenges</h3>
+          <ul><li>1000+ applications but only hearing crickets</li><li>Struggled to transition from biotech to data in a competitive market</li><li>Burnt out from 10 months of job search</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Developing a game-changing mindset that projected confidence in interviews</li><li>Framing their experience to cater to data positions</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Landed an offer in under 3 months</li><li>Negotiated 3% in an entry-level civil services job where salary bands are pretty immovable</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><div class="video-embed"><iframe src="https://www.loom.com/embed/3333d4aa1062404aa1a06faab3513cf5" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-abrar">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_abrar.png" alt="Abrar">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Abrar</div>
+          <h2>From a Year of Rejections to a Post-doc Offer: How Abrar Landed His First Job in 2 Months</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Abrar's challenges</h3>
+          <ul><li>300+ applications but unable to grab recruiters’ attention</li><li>Struggled with coding screens as they were nothing like LeetCode</li><li>No clue what else he could possibly do</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Recrafting his resume to get picked from the pile</li><li>Brushing up on ML core concepts so he knew exactly what to expect in interviews</li><li>Keeping him motivated and emotionally supported</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Interviews with 2 universities</li><li>Post-doc offer with SMU in AI and Machine Learning</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_abrar.png" alt="Abrar's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}"></div>
+    </section>
+
+    <section class="story" id="story-satyajit">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_satyajit.png" alt="Satyajit">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Satyajit</div>
+          <h2>From Feeling Lost with Academic Experience to an Industry Role in 3 Months</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Satyajit's challenges</h3>
+          <ul><li>Translating research into industry language</li><li>Walking blind into interviews</li><li>Imposter syndrome - he worried his academic background would be seen as out of touch, or worse, irrelevant</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Shutting down imposter syndrome</li><li>Making his resume industry-ready: quantified research experience &amp; reframed results and impact</li><li>Giving him a full interview playbook - what to say, how to say it</li><li>Weekly feedback loops</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>75 job applications → 18 interviews</li><li>Offer from a SaaS company with a 12K EUR bump</li></ul>
+        </div>
+      </div>
+
+      
+    </section>
+
+    <section class="story" id="story-ahmed">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_ahmed.png" alt="Ahmed">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Ahmed</div>
+          <h2>From 4 Months of Rejections to an Offer in 82 Days: How Ahmed Landed His First Job as a Data Scientist Consultant in Paris</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Ahmed's challenges</h3>
+          <ul><li>4 months of facing a competitive market in France for new grads</li><li>Feeling overwhelmed by rejections and conflicting advice on the internet</li><li>Financially tight, thinking about returning to home country</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Confidence building and mindset shift</li><li>Tailored his resume, LinkedIn and portfolio to land interviews within 2 weeks</li><li>Reframed his interview approach to combine technical skills with business acumen to stand out from the crowd</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Landed a Data Scientist Consultant role in Paris, France at a consulting firm</li><li>Salary above €40,000 annually</li><li>Secured the job in under 3 months (82 days)</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_ahmed.png" alt="Ahmed's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}"></div>
+    </section>
+
+    <section class="story" id="story-cristina">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_cristina.png" alt="Cristina">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Cristina</div>
+          <h2>From Under 30K and Stuck in Spain to 82K Remote: How Cristina Landed a Senior ML Engineer Role at a Gaming Company</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Cristina's challenges</h3>
+          <ul><li>Underpaid with no international exposure</li><li>No experience working in English or in a global environment</li><li>Job searching without a plan, daily structure, or clear direction</li><li>No feedback on mock sessions - unsure where to focus her efforts</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Revamped her resume to lead with business metrics and real impact</li><li>Mock interviews to build confidence - got live feedback</li><li>Shifted framing from technical tasks to business outcomes</li><li>Structured game plan for her to follow</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Landed a Senior ML Engineer role - full pipeline ownership, fully remote</li><li>More than doubled base salary: 38K → 82K + negotiated bonus structure</li><li>Left with a repeatable system and confidence</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_cristina.png" alt="Cristina's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}">
+<div class="video-embed"><iframe src="https://www.loom.com/embed/174cef74c51c42029d52ba20aaf9ce8a" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-phoebe">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_phoebe.png" alt="Phoebe">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Phoebe</div>
+          <h2>From Sending Applications Into the Void to a 100K Offer: How Phoebe Made the Jump from Software Engineering to Senior Data Analyst</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Phoebe's challenges</h3>
+          <ul><li>Stuck in a software engineering role with no clear path into data</li><li>Built a massive self-study roadmap and burned out before even starting</li><li>Sending applications into the void with no structured approach or game plan</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Revamped resume to quantify impact and frame leadership</li><li>Interview frameworks to replace scripted answers with confident, results-oriented responses</li><li>Targeted her job search to the right data roles based on her actual skill set</li><li>Mindset shift</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Landed a Senior Data Analyst role</li><li>Salary jumped from 76K to 100K - a 32% increase</li><li>Interview confidence and frameworks gained</li><li>Left with clarity on her career direction</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_phoebe.png" alt="Phoebe's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}">
+<div class="video-embed"><iframe src="https://www.loom.com/embed/44d5bc306fb3466bb443ddeebe9d3f34" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-anthony">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_anthony.png" alt="Anthony">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Anthony</div>
+          <h2>From Applying for Data Analyst Roles with No Results to Landing a Data Scientist Role at Visa: How Anthony Made the Jump in 4 Months</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Anthony's challenges</h3>
+          <ul><li>Only landing Data Analyst interviews despite targeting Data Scientist roles</li><li>No strategy or structure behind his job search</li><li>Losing motivation doing it alone after months of rejections</li><li>Lacked confidence to believe he could land a DS title without production experience</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Built two tailored resumes (Data Scientist + Data Analyst)</li><li>Repositioned his non-technical data experience toward DS roles</li><li>Interview frameworks and mock interviews</li><li>LinkedIn networking and outreach strategy</li><li>Accountability through weekly calls and community</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Landed Data Scientist role at Visa Inc.</li><li>$117K AUD base / $148K AUD total comp</li><li>~12 interviews, 8-9 for DS roles</li><li>Went from zero DS interviews to signing a DS offer in 4 months</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_anthony.png" alt="Anthony's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}">
+<div class="video-embed"><iframe src="https://www.loom.com/embed/dd0a3ea93d154aa8ba4ac828a7937522" frameborder="0" allowfullscreen loading="lazy"></iframe></div></div>
+    </section>
+
+    <section class="story" id="story-shilpa">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_shilpa.png" alt="Shilpa">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Shilpa</div>
+          <h2>From +100 Applications and No Results to 4 Job Offers: How Shilpa Landed a Program Manager Role at TikTok Shop</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Shilpa's challenges</h3>
+          <ul><li>Sent ~100 applications over 6 months, only 3–4 interviews and generic rejections</li><li>Visa status stalled several interviews once sponsorship came up</li><li>Stuck with no real feedback loop on what wasn’t working</li><li>Torn between data/analytics vs. research, on top of feeling undervalued at work</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Helped her learn to "pitch herself," sharpening her CV and interview narrative</li><li>Built a structured system and consistent feedback loop through the CTC community</li><li>Strengthened how she structured her thoughts and communicated in interviews</li><li>Kept her accountable and consistent over the 4-month search</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Landed 4 job offers</li><li>Accepted a Program Manager role at TikTok Shop (Customer Experience - loyalty &amp; trust)</li><li>Achieved this within 4 months of joining</li><li>Gained lasting confidence and consistency in her job search</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_shilpa.png" alt="Shilpa's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}"></div>
+    </section>
+
+    <section class="story" id="story-aaron">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_aaron.png" alt="Aaron">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Aaron</div>
+          <h2>From Multiple Rejections to Landing a Senior Financial Analyst Offer: How Aaron Got Upleveled Because of His Interview Performance</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Aaron's challenges</h3>
+          <ul><li>Diverse background that didn’t read as "data" on paper</li><li>Real entry-level DA/DS postings were scarce, so he broadened toward SQL-heavy ops and analyst roles</li><li>Unsure whether to chase DS titles or build up through analyst roles first</li><li>Lacked a clear script for cold networking outreach</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Rebuilt resume to surface the data/analytics angle across every past role, with quantified metrics</li><li>Targeted analyst-track roles (BA/DA/financial/ops) with JD-based tailoring</li><li>Optimized LinkedIn for data keywords</li><li>Networking templates + daily outreach cadence, plus mock interview practice</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Applied for a Financial Analyst role (posted range $74K–$94K)</li><li>After 5 interview rounds + a take-home assignment, was upleveled by the employer into a Senior Financial Analyst offer (posted range $87K–$117K)</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><img class="zoomable" src="assets/cropped/screenshot_aaron.png" alt="Aaron's testimonial screenshot" loading="lazy" tabindex="0" role="button" onclick="openLightbox(this.src, this.alt)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openLightbox(this.src,this.alt)}"></div>
+    </section>
+
+    </div>
+
+    <section class="story closing reveal" id="closing">
+      <div class="kicker">Hired in Data · Client Stories</div>
+      <h2>This isn't even all of them.</h2>
+      <p class="lede">Find more <a href="https://senja.io/p/linkedin-kKh/YgVV7-" target="_blank" rel="noopener">testimonials</a> and LinkedIn <a href="https://www.linkedin.com/in/mandy-liu-lead-data-scientist-ex-meta-2551724a/" target="_blank" rel="noopener">recommendations</a> here.</p>
+      <p class="lede">While not every client shares their journey publicly, my priority is making you the next success story.</p>
+      <p class="footnote" style="font-weight:700;">See you on the inside.</p>
+      <a class="cta-button" href="https://hiredindata.com/">Book a Free Strategy Call</a>
+    </section>
+</main>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  function jumpTo(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const toTopBtn = document.getElementById('to-top');
+  window.addEventListener('scroll', () => {
+    toTopBtn.classList.toggle('visible', window.scrollY > window.innerHeight * 0.6);
+  }, { passive: true });
+
+  function openLightbox(src, alt) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-img').alt = alt;
+    lb.classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  const floatingCta = document.getElementById('floating-cta');
+  const closingSection = document.getElementById('closing');
+  if (floatingCta && closingSection) {
+    const ctaObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        floatingCta.classList.toggle('hidden', entry.isIntersecting);
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+    ctaObserver.observe(closingSection);
+  }
+</script>
+
+<footer class="site-footer">
+  <div class="footer-row">
+    <p class="footer-brand">Hired in Data</p>
+    <div class="footer-follow">
+      <span>Connect with us:</span>
+      <div class="footer-inline"><a href="https://www.linkedin.com/in/mandy-liu-data-ex-meta/" target="_blank" rel="noopener noreferrer"><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg><span>Mandy</span></a><span class="footer-sep" aria-hidden="true">·</span><a href="https://www.linkedin.com/in/egorhowell/" target="_blank" rel="noopener noreferrer"><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg><span>Egor</span></a><span class="footer-sep" aria-hidden="true">·</span><a href="https://www.youtube.com/@egorhowell" target="_blank" rel="noopener noreferrer"><svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg><span>Egor</span></a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
