@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "workshop.egorhowell.com" }],
+      "destination": "https://webinar.hiredindata.com/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "workshop.egorhowell.com" }],
+      "destination": "https://webinar.hiredindata.com/:path*",
+      "statusCode": 301
+    }
+  ]
+}
