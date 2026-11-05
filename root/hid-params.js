@@ -26,8 +26,10 @@
   function params() {
     var p;
     try { p = new URLSearchParams(window.location.search); } catch (e) { return null; }
+    // Trakyo's own current id wins over whatever came in on the URL: if this
+    // browser already had an id, Trakyo keeps it and that's the one to pass on.
     var id = window.trakyo_id || cookie('trakyo_id') || p.get('trakyo_id');
-    if (id && !p.get('trakyo_id')) p.set('trakyo_id', id);
+    if (id) p.set('trakyo_id', id);
     return p;
   }
 
