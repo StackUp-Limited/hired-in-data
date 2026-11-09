@@ -379,9 +379,9 @@ a.coach-card:focus-visible { outline: 2px solid var(--coach, var(--accent)); out
 }
 .logos img:hover { opacity: 1; filter: none; }
 
-/* Laptop widths: the 14 logos no longer fit on one line, so let the row wrap
+/* Smaller laptops: the logos no longer fit on one line, so let the row wrap
    into two centred lines instead of clipping the logos at each end. */
-@media (max-width: 90rem) {
+@media (max-width: 70rem) {
   .logos-scroll { width: auto; margin-inline: 0; }
   .logos { flex-wrap: wrap; width: 100%; max-width: 62rem; row-gap: 1.4rem; column-gap: 2.5rem; padding-inline: 0; }
 }
