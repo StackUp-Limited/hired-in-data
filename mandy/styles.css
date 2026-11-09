@@ -849,13 +849,25 @@ a.coach-card:focus-visible { outline: 2px solid var(--coach, var(--accent)); out
    line is the one way off the section. Extra margin-bottom (was 0) gives the
    marquee row room to breathe instead of crowding straight in under it. */
 .swall-more {
-  margin: 1.25rem 0 2.5rem;
+  margin: 1.75rem 0 2.5rem;
   text-align: center;
-  font-size: 1.05rem;
-  font-weight: 500;
 }
-.swall-more a { color: var(--accent-text); text-decoration: none; }
-.swall-more a:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* An outlined button rather than a text link, so it reads as a clear next step
+   without competing with the solid "Book a call" buttons. */
+.swall-more a {
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.swall-more a:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .swall-more a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* ---------- other-client cards, sliding under the featured stories ---------- */
