@@ -361,12 +361,12 @@ a.coach-card:focus-visible { outline: 2px solid var(--coach, var(--accent)); out
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 2.75rem;
+  gap: clamp(1.25rem, 1.6vw, 2.75rem);
   width: max-content;
   padding-inline: 1.5rem;
 }
 .logos img {
-  height: 1.9rem;
+  height: 1.7rem;
   width: auto;
   max-width: 8.5rem;
   flex: 0 0 auto;
@@ -378,6 +378,13 @@ a.coach-card:focus-visible { outline: 2px solid var(--coach, var(--accent)); out
   transition: opacity 0.15s ease, filter 0.15s ease;
 }
 .logos img:hover { opacity: 1; filter: none; }
+
+/* Laptop widths: the 14 logos no longer fit on one line, so let the row wrap
+   into two centred lines instead of clipping the logos at each end. */
+@media (max-width: 90rem) {
+  .logos-scroll { width: auto; margin-inline: 0; }
+  .logos { flex-wrap: wrap; width: 100%; max-width: 62rem; row-gap: 1.4rem; column-gap: 2.5rem; padding-inline: 0; }
+}
 
 /* On mobile the row can't stay on one line legibly, so wrap it into exactly two:
    a flex-basis of one sixth forces 6 per row, and the remaining 5 centre
