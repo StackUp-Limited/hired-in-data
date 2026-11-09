@@ -346,6 +346,7 @@ a.coach-card:focus-visible { outline: 2px solid var(--coach, var(--accent)); out
    the two sections cannot double up again. */
 .logowall { padding: 4rem 0 0; text-align: center; overflow-x: hidden; }
 .logowall + .proof { padding-top: 3rem; }
+.booking-top + .logowall { padding-top: 2.5rem; }
 .logowall .eyebrow { margin-bottom: 2rem; }
 /* One unbroken row, free to run wider than the page's content column.
    It breaks out to the full viewport width rather than scrolling; the section
@@ -472,6 +473,10 @@ a.coach-card:focus-visible { outline: 2px solid var(--coach, var(--accent)); out
   margin: 0 auto;
   min-height: var(--booking-min-h, 560px);
 }
+/* The min-height only reserves room while the calendar loads. Once Aura has
+   sized its iframe, let the frame fit it, or the reserve leaves an empty band
+   under the calendar. */
+.booking-frame:has(iframe[style*="height"]) { min-height: 0; }
 
 /* ---------- proof ---------- */
 
