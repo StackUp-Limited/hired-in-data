@@ -52,7 +52,6 @@
       .thanks .step-card::before { left: 0.9rem; top: 1rem; width: 1.75rem; height: 1.75rem; font-size: 0.85rem; }
       .thanks .step-card .step-video { width: calc(100% + 2.25rem); margin-left: -2.25rem; }
     }
-    .thanks .step-card .step-img { margin-top: 1rem; }
   </style>
 </head>
 <body class="thanks hl-mark">
@@ -80,12 +79,22 @@
           <li class="step step-card">
             <h3>Accept the meeting invite to lock in your spot</h3>
             <p>Open the calendar invite we just sent and hit <strong>“Yes”</strong>. Spots are in high demand, so if it isn’t confirmed <strong>12 hours before the call</strong>, it goes to the next person on the waitlist.</p>
-            <img class="step-img zoomable" src="/thanks/assets/steps/confirm-call.webp" alt="Google Calendar invitation with the Yes button circled" loading="lazy" tabindex="0" role="button">
           </li>
           <li class="step step-card">
             <h3>Watch this video before your call</h3>
             <p>It’ll help us make the most of our time together on the call.</p>
-            <div class="vsl-frame step-video"><video class="vsl-video" src="/assets/video/mandy-precall-720p.mp4" poster="/assets/video/mandy-precall-poster.jpg" autoplay muted playsinline preload="metadata" controls></video></div>
+            <div class="vsl-frame step-video"><div id="vidalytics_embed_axUNO61gd5rXWydQ" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
+<script type="text/javascript">
+(function (v, i, d, a, l, y, t, c, s) {
+    y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
+    if (!vsl){vsl=function(u,cb){
+        if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
+        if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
+        i.getElementsByTagName("head")[0].appendChild(s);
+    };}
+    vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
+})(window, document, 'Vidalytics', 'vidalytics_embed_axUNO61gd5rXWydQ', 'https://fast.vidalytics.com/embeds/HQ2gIvqR/axUNO61gd5rXWydQ/');
+</script></div>
           </li></ol>
       </div>
     </section>
@@ -692,138 +701,6 @@
     })();
   </script>
 
-  <script>
-    (function () {
-      var v = document.querySelector('.vsl-video');
-      if (!v) return;
-
-      var sent = {};
-      function send(name, percent) {
-        if (sent[name] || typeof window.gtag !== 'function') return;
-        sent[name] = true;
-        window.gtag('event', name, {
-          video_provider: 'self',
-          video_id: (v.currentSrc || v.src || '').split('/').pop(),
-          video_title: document.title,
-          video_percent: percent
-        });
-      }
-
-      if (v.muted) {
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'vsl-unmute';
-        btn.innerHTML = '<span class="vsl-unmute-icon" aria-hidden="true">&#128266;</span> Unmute';
-        v.parentNode.appendChild(btn);
-
-        var going = false;
-        function done() {
-          if (going) return;
-          going = true;
-          btn.disabled = true;
-          setTimeout(function () {
-            btn.classList.add('is-leaving');
-            setTimeout(function () { btn.remove(); }, 400);
-          }, 600);
-        }
-        btn.addEventListener('click', function () {
-          v.muted = false;
-          v.currentTime = 0;
-          var p = v.play();
-          if (p && p.catch) p.catch(function () {});
-          btn.innerHTML = '<span class="vsl-unmute-icon" aria-hidden="true">&#128266;</span> Sound on';
-          done();
-        });
-        // Fires for either route to sound - this button, or the player's own
-        // volume control - because both mean the same thing about the viewer.
-        // send() dedupes, so the two cannot double count.
-        v.addEventListener('volumechange', function () {
-          if (v.muted) return;
-          send('video_unmute', 0);
-          done();
-        });
-      }
-
-      v.addEventListener('play', function () { send('video_play', 0); });
-      v.addEventListener('ended', function () { send('video_complete', 100); });
-      v.addEventListener('timeupdate', function () {
-        if (v.currentTime >= 10) send('video_10s', 0);
-        if (!v.duration) return;
-        var pct = (v.currentTime / v.duration) * 100;
-        if (pct >= 25) send('video_progress_25', 25);
-        if (pct >= 50) send('video_progress_50', 50);
-        if (pct >= 75) send('video_progress_75', 75);
-      });
-
-      // video_stall - playback ran out of buffer and stopped.
-      //
-      // This is the one thing self-hosting can do worse than Vimeo: one file at
-      // one bitrate cannot drop to a lower quality on a weak connection the way
-      // their adaptive stream does. Without this event that failure is invisible,
-      // because someone who gives up on a stuttering video just leaves.
-      //
-      // Counted rather than deduped, unlike every other event here: the question
-      // is how OFTEN, and GA4 divides by sessions itself. Capped at 10 per view
-      // so one broken connection cannot flood the property.
-      //
-      // The started guard matters - 'waiting' also fires during the initial
-      // buffer before playback begins, which is loading, not stalling.
-      var started = false, stalls = 0;
-      v.addEventListener('playing', function () { started = true; });
-      v.addEventListener('waiting', function () {
-        if (!started || stalls >= 10 || typeof window.gtag !== 'function') return;
-        stalls++;
-        window.gtag('event', 'video_stall', {
-          video_provider: 'self',
-          video_id: (v.currentSrc || v.src || '').split('/').pop(),
-          video_title: document.title,
-          video_percent: v.duration ? Math.round((v.currentTime / v.duration) * 100) : 0
-        });
-      });
-    })();
-  </script><script>
-    (function () {
-      document.querySelectorAll('.video-facade').forEach(function (facade) {
-        facade.addEventListener('click', function () {
-          var wrap = document.createElement('div');
-          wrap.className = 'video-embed video-loading';
-          if (facade.dataset.loomAspect) {
-            wrap.style.paddingBottom = facade.dataset.loomAspect + '%';
-          }
-
-          // Loom's embed is ~250 requests before it paints anything, so hold
-          // the poster up behind a spinner rather than handing over a black
-          // rectangle for several seconds - that reads as a broken video.
-          var shot = facade.querySelector('.facade-shot');
-          if (shot) wrap.appendChild(shot.cloneNode());
-          var spinner = document.createElement('span');
-          spinner.className = 'facade-spinner';
-          spinner.setAttribute('role', 'status');
-          spinner.setAttribute('aria-label', 'Loading video');
-          wrap.appendChild(spinner);
-
-          var frame = document.createElement('iframe');
-          frame.title = 'Client story';
-          frame.allow = 'autoplay; fullscreen';
-          frame.allowFullscreen = true;
-
-          var reveal = function () {
-            wrap.classList.remove('video-loading');
-            if (spinner.parentNode) spinner.remove();
-            var held = wrap.querySelector('.facade-shot');
-            if (held) held.remove();
-          };
-          frame.addEventListener('load', reveal);
-          setTimeout(reveal, 15000);
-
-          frame.src = 'https://www.loom.com/embed/' + facade.dataset.loom + '?autoplay=1';
-          wrap.appendChild(frame);
-
-          facade.replaceWith(wrap);
-        });
-      });
-    })();
-  </script>
 
 </body>
 </html>
