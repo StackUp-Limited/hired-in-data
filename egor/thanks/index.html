@@ -29,6 +29,30 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="/styles.css">
   <style>:root { --accent: #007fff; --accent-ink: #ffffff; --accent-text: #007fff; --mark: #7dd3fc; --bg: #ffffff; --bg-alt: #f4f4f4; }</style>
+  <style>
+    /* Steps as cards, with a wider section so the step-2 video is bigger. */
+    .thanks .steps-wide { max-width: 60rem; }
+    .thanks .step-card {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem 1.35rem 4.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    .thanks .step-card:last-child { margin-bottom: 0; }
+    .thanks .step-card::before { left: 1.25rem; top: 1.2rem; width: 2.1rem; height: 2.1rem; font-size: 1rem; }
+    .thanks .step-card h3 { margin-bottom: 0.35rem; }
+    .thanks .step-card p { margin: 0; color: var(--muted); }
+    .thanks .step-card p strong { color: var(--ink); font-weight: 600; }
+    /* The video spans the full card width, out past the number column. */
+    .thanks .step-card .step-video { max-width: none; width: calc(100% + 2.75rem); margin: 1rem 0 0 -2.75rem; }
+    @media (max-width: 34rem) {
+      .thanks .step-card { padding: 1rem 1rem 1.1rem 3.25rem; }
+      .thanks .step-card::before { left: 0.9rem; top: 1rem; width: 1.75rem; height: 1.75rem; font-size: 0.85rem; }
+      .thanks .step-card .step-video { width: calc(100% + 2.25rem); margin-left: -2.25rem; }
+    }
+  </style>
 </head>
 <body class="thanks hl-mark">
 
@@ -50,16 +74,15 @@
     </section>
 
     <section class="steps alt">
-      <div class="wrap narrow">
+      <div class="wrap steps-wide">
         <ol class="step-list">
-          <li class="step">
-            <h3>Hit “Yes” on the meeting invite to confirm your spot</h3>
-            <p>Due to high demand, if the invite isn't confirmed 12 hours before the call, we'll have to release the spot to someone else on the waitlist.</p>
-            
+          <li class="step step-card">
+            <h3>Accept the meeting invite to lock in your spot</h3>
+            <p>Open the calendar invite we just sent and hit <strong>“Yes”</strong>. Spots are in high demand, so if it isn’t confirmed <strong>12 hours before the call</strong>, it goes to the next person on the waitlist.</p>
           </li>
-          <li class="step">
-            <h3>Watch the video below to get the most out of your call</h3>
-            
+          <li class="step step-card">
+            <h3>Watch this video before your call</h3>
+            <p>It’ll help us make the most of our time together on the call.</p>
             <div class="vsl-frame step-video"><div id="vidalytics_embed_UlTL7SSmRcG02M_Z" style="width: 100%; position:relative; padding-top: 56.25%;"></div>
 <script type="text/javascript">
 (function (v, i, d, a, l, y, t, c, s) {
@@ -72,7 +95,6 @@
     vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
 })(window, document, 'Vidalytics', 'vidalytics_embed_UlTL7SSmRcG02M_Z', 'https://fast.vidalytics.com/embeds/HQ2gIvqR/UlTL7SSmRcG02M_Z/');
 </script></div>
-        <p class="video-link"><a href="https://www.youtube.com/watch?v=KuNFGDAVCFk" target="_blank" rel="noopener"><span class="video-link-play" aria-hidden="true"></span>How I landed a $198k job at 26</a></p>
           </li></ol>
       </div>
     </section>
