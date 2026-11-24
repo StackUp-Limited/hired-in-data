@@ -281,6 +281,12 @@
     overflow: hidden;
     box-shadow: 0 8px 24px var(--shadow);
   }
+  .video-embed video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #000;
+  }
   .video-embed iframe {
     position: absolute;
     top: 0; left: 0;
@@ -472,10 +478,26 @@
 <main>
   <section class="grid-section" id="grid">
     <h1>Stuck. Underpaid. Rejected. Then this happened.</h1>
-    <p class="lede">29 Hired in Data clients on the offers, raises, and pivots they landed. Click anyone below to jump straight to their story.</p>
+    <p class="lede">31 Hired in Data clients on the offers, raises, and pivots they landed. Click anyone below to jump straight to their story.</p>
     <div class="story-grid">
 
-      <button class="story-card" style="--i:0" data-target="story-peter" onclick="jumpTo('story-peter')">
+      <button class="story-card" style="--i:0" data-target="story-avidar" onclick="jumpTo('story-avidar')">
+        <img src="assets/cropped/headshot_avidar.png" alt="Avidar" loading="lazy">
+        <div class="card-stat">Spotify offer</div>
+        <div class="card-name">Avidar</div>
+        <div class="card-micro">Avidar Went From 200 Unanswered Applications to an Offer at Spotify</div>
+        <div class="card-badge badge-entryLevel">Entry Level</div>
+      </button>
+
+      <button class="story-card" style="--i:1" data-target="story-shruti" onclick="jumpTo('story-shruti')">
+        <img src="assets/cropped/headshot_shruti.png" alt="Shruti" loading="lazy">
+        <div class="card-stat">$101K &rarr; $245K</div>
+        <div class="card-name">Shruti</div>
+        <div class="card-micro">Shruti Landed Data Engineer II at Amazon and More Than Doubled Her Pay</div>
+        <div class="card-badge badge-experienced">Experienced</div>
+      </button>
+
+      <button class="story-card" style="--i:2" data-target="story-peter" onclick="jumpTo('story-peter')">
         <img src="assets/cropped/headshot_peter.png" alt="Peter" loading="lazy">
         <div class="card-stat">IBM offer in under 2 months</div>
         <div class="card-name">Peter</div>
@@ -483,7 +505,7 @@
         <div class="card-badge badge-transitions">Transition</div>
       </button>
 
-      <button class="story-card" style="--i:1" data-target="story-mark" onclick="jumpTo('story-mark')">
+      <button class="story-card" style="--i:3" data-target="story-mark" onclick="jumpTo('story-mark')">
         <img src="assets/cropped/headshot_mark.png" alt="Mark" loading="lazy">
         <div class="card-stat">+£21K</div>
         <div class="card-name">Mark</div>
@@ -491,7 +513,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:2" data-target="story-billy" onclick="jumpTo('story-billy')">
+      <button class="story-card" style="--i:4" data-target="story-billy" onclick="jumpTo('story-billy')">
         <img src="assets/cropped/headshot_billy.png" alt="Billy" loading="lazy">
         <div class="card-stat">Offer in 1.5 months</div>
         <div class="card-name">Billy</div>
@@ -499,7 +521,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:3" data-target="story-bach" onclick="jumpTo('story-bach')">
+      <button class="story-card" style="--i:5" data-target="story-bach" onclick="jumpTo('story-bach')">
         <img src="assets/cropped/headshot_bach.png" alt="Bach" loading="lazy">
         <div class="card-stat">+57% pay</div>
         <div class="card-name">Bach</div>
@@ -507,7 +529,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:4" data-target="story-adel" onclick="jumpTo('story-adel')">
+      <button class="story-card" style="--i:6" data-target="story-adel" onclick="jumpTo('story-adel')">
         <img src="assets/cropped/headshot_adel.png" alt="Adel" loading="lazy">
         <div class="card-stat">+$50K</div>
         <div class="card-name">Adel</div>
@@ -515,7 +537,7 @@
         <div class="card-badge badge-transitions">Transition</div>
       </button>
 
-      <button class="story-card" style="--i:5" data-target="story-masego" onclick="jumpTo('story-masego')">
+      <button class="story-card" style="--i:7" data-target="story-masego" onclick="jumpTo('story-masego')">
         <img src="assets/cropped/headshot_masego.png" alt="Masego" loading="lazy">
         <div class="card-stat">+22% salary</div>
         <div class="card-name">Masego</div>
@@ -523,7 +545,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:6" data-target="story-teresa" onclick="jumpTo('story-teresa')">
+      <button class="story-card" style="--i:8" data-target="story-teresa" onclick="jumpTo('story-teresa')">
         <img src="assets/cropped/headshot_teresa.png" alt="Teresa" loading="lazy">
         <div class="card-stat">+20% salary</div>
         <div class="card-name">Teresa</div>
@@ -531,7 +553,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:7" data-target="story-michael" onclick="jumpTo('story-michael')">
+      <button class="story-card" style="--i:9" data-target="story-michael" onclick="jumpTo('story-michael')">
         <img src="assets/cropped/headshot_michael.png" alt="Michael" loading="lazy">
         <div class="card-stat">3 offers</div>
         <div class="card-name">Michael</div>
@@ -539,7 +561,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:8" data-target="story-islam" onclick="jumpTo('story-islam')">
+      <button class="story-card" style="--i:10" data-target="story-islam" onclick="jumpTo('story-islam')">
         <img src="assets/cropped/headshot_islam.png" alt="Islam" loading="lazy">
         <div class="card-stat">£45K → £136K</div>
         <div class="card-name">Islam</div>
@@ -547,7 +569,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:9" data-target="story-aman" onclick="jumpTo('story-aman')">
+      <button class="story-card" style="--i:11" data-target="story-aman" onclick="jumpTo('story-aman')">
         <div class="avatar-fallback">AM</div>
         <div class="card-stat">$295K TC</div>
         <div class="card-name">Aman</div>
@@ -555,7 +577,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:10" data-target="story-sehaj" onclick="jumpTo('story-sehaj')">
+      <button class="story-card" style="--i:12" data-target="story-sehaj" onclick="jumpTo('story-sehaj')">
         <img src="assets/cropped/headshot_sehaj.png" alt="Sehaj" loading="lazy">
         <div class="card-stat">+$18K CAD</div>
         <div class="card-name">Sehaj</div>
@@ -563,7 +585,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:11" data-target="story-mansi" onclick="jumpTo('story-mansi')">
+      <button class="story-card" style="--i:13" data-target="story-mansi" onclick="jumpTo('story-mansi')">
         <img src="assets/cropped/headshot_mansi.png" alt="Mansi" loading="lazy">
         <div class="card-stat">6-figure @ Meta</div>
         <div class="card-name">Mansi</div>
@@ -571,7 +593,7 @@
         <div class="card-badge badge-entryLevel">Entry Level</div>
       </button>
 
-      <button class="story-card" style="--i:12" data-target="story-zack" onclick="jumpTo('story-zack')">
+      <button class="story-card" style="--i:14" data-target="story-zack" onclick="jumpTo('story-zack')">
         <img src="assets/cropped/headshot_zack.png" alt="Zack" loading="lazy">
         <div class="card-stat">$150K TC</div>
         <div class="card-name">Zack</div>
@@ -579,7 +601,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:13" data-target="story-souravi" onclick="jumpTo('story-souravi')">
+      <button class="story-card" style="--i:15" data-target="story-souravi" onclick="jumpTo('story-souravi')">
         <img src="assets/cropped/headshot_souravi.png" alt="Souravi" loading="lazy">
         <div class="card-stat">Senior DS role</div>
         <div class="card-name">Souravi</div>
@@ -587,7 +609,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:14" data-target="story-atera" onclick="jumpTo('story-atera')">
+      <button class="story-card" style="--i:16" data-target="story-atera" onclick="jumpTo('story-atera')">
         <img src="assets/cropped/headshot_atera.png" alt="Atera" loading="lazy">
         <div class="card-stat">$88K</div>
         <div class="card-name">Atera</div>
@@ -595,7 +617,7 @@
         <div class="card-badge badge-transitions">Transition</div>
       </button>
 
-      <button class="story-card" style="--i:15" data-target="story-abrar" onclick="jumpTo('story-abrar')">
+      <button class="story-card" style="--i:17" data-target="story-abrar" onclick="jumpTo('story-abrar')">
         <img src="assets/cropped/headshot_abrar.png" alt="Abrar" loading="lazy">
         <div class="card-stat">First job, 2 months</div>
         <div class="card-name">Abrar</div>
@@ -603,7 +625,7 @@
         <div class="card-badge badge-entryLevel">Entry Level</div>
       </button>
 
-      <button class="story-card" style="--i:16" data-target="story-satyajit" onclick="jumpTo('story-satyajit')">
+      <button class="story-card" style="--i:18" data-target="story-satyajit" onclick="jumpTo('story-satyajit')">
         <img src="assets/cropped/headshot_satyajit.png" alt="Satyajit" loading="lazy">
         <div class="card-stat">Industry role, 3 months</div>
         <div class="card-name">Satyajit</div>
@@ -611,7 +633,7 @@
         <div class="card-badge badge-transitions">Transition</div>
       </button>
 
-      <button class="story-card" style="--i:17" data-target="story-ahmed" onclick="jumpTo('story-ahmed')">
+      <button class="story-card" style="--i:19" data-target="story-ahmed" onclick="jumpTo('story-ahmed')">
         <img src="assets/cropped/headshot_ahmed.png" alt="Ahmed" loading="lazy">
         <div class="card-stat">82 days</div>
         <div class="card-name">Ahmed</div>
@@ -619,7 +641,7 @@
         <div class="card-badge badge-entryLevel">Entry Level</div>
       </button>
 
-      <button class="story-card" style="--i:18" data-target="story-cristina" onclick="jumpTo('story-cristina')">
+      <button class="story-card" style="--i:20" data-target="story-cristina" onclick="jumpTo('story-cristina')">
         <img src="assets/cropped/headshot_cristina.png" alt="Cristina" loading="lazy">
         <div class="card-stat">38K → 82K</div>
         <div class="card-name">Cristina</div>
@@ -627,7 +649,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:19" data-target="story-phoebe" onclick="jumpTo('story-phoebe')">
+      <button class="story-card" style="--i:21" data-target="story-phoebe" onclick="jumpTo('story-phoebe')">
         <img src="assets/cropped/headshot_phoebe.png" alt="Phoebe" loading="lazy">
         <div class="card-stat">76K → 100K</div>
         <div class="card-name">Phoebe</div>
@@ -635,7 +657,7 @@
         <div class="card-badge badge-transitions">Transition</div>
       </button>
 
-      <button class="story-card" style="--i:20" data-target="story-anthony" onclick="jumpTo('story-anthony')">
+      <button class="story-card" style="--i:22" data-target="story-anthony" onclick="jumpTo('story-anthony')">
         <img src="assets/cropped/headshot_anthony.png" alt="Anthony" loading="lazy">
         <div class="card-stat">$148K AUD TC</div>
         <div class="card-name">Anthony</div>
@@ -643,7 +665,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:21" data-target="story-shilpa" onclick="jumpTo('story-shilpa')">
+      <button class="story-card" style="--i:23" data-target="story-shilpa" onclick="jumpTo('story-shilpa')">
         <img src="assets/cropped/headshot_shilpa.png" alt="Shilpa" loading="lazy">
         <div class="card-stat">4 offers</div>
         <div class="card-name">Shilpa</div>
@@ -651,7 +673,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:22" data-target="story-aaron" onclick="jumpTo('story-aaron')">
+      <button class="story-card" style="--i:24" data-target="story-aaron" onclick="jumpTo('story-aaron')">
         <img src="assets/cropped/headshot_aaron.png" alt="Aaron" loading="lazy">
         <div class="card-stat">Upleveled offer</div>
         <div class="card-name">Aaron</div>
@@ -659,7 +681,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:23" data-target="story-shikha" onclick="jumpTo('story-shikha')">
+      <button class="story-card" style="--i:25" data-target="story-shikha" onclick="jumpTo('story-shikha')">
         <div class="avatar-fallback">SH</div>
         <div class="card-stat">3 offers in Barcelona</div>
         <div class="card-name">Shikha</div>
@@ -667,7 +689,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:24" data-target="story-preetika" onclick="jumpTo('story-preetika')">
+      <button class="story-card" style="--i:26" data-target="story-preetika" onclick="jumpTo('story-preetika')">
         <div class="avatar-fallback">PR</div>
         <div class="card-stat">Senior @ RBC</div>
         <div class="card-name">Preetika</div>
@@ -675,7 +697,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:25" data-target="story-beril" onclick="jumpTo('story-beril')">
+      <button class="story-card" style="--i:27" data-target="story-beril" onclick="jumpTo('story-beril')">
         <div class="avatar-fallback">BE</div>
         <div class="card-stat">+$9.3K negotiated</div>
         <div class="card-name">Beril</div>
@@ -683,7 +705,7 @@
         <div class="card-badge badge-transitions">Transition</div>
       </button>
 
-      <button class="story-card" style="--i:26" data-target="story-scott" onclick="jumpTo('story-scott')">
+      <button class="story-card" style="--i:28" data-target="story-scott" onclick="jumpTo('story-scott')">
         <div class="avatar-fallback">SC</div>
         <div class="card-stat">MLE in 54 days</div>
         <div class="card-name">Scott</div>
@@ -691,7 +713,7 @@
         <div class="card-badge badge-entryLevel">Entry Level</div>
       </button>
 
-      <button class="story-card" style="--i:27" data-target="story-zhe" onclick="jumpTo('story-zhe')">
+      <button class="story-card" style="--i:29" data-target="story-zhe" onclick="jumpTo('story-zhe')">
         <div class="avatar-fallback">ZH</div>
         <div class="card-stat">+17% salary</div>
         <div class="card-name">Zhe</div>
@@ -699,7 +721,7 @@
         <div class="card-badge badge-experienced">Experienced</div>
       </button>
 
-      <button class="story-card" style="--i:28" data-target="story-agrima" onclick="jumpTo('story-agrima')">
+      <button class="story-card" style="--i:30" data-target="story-agrima" onclick="jumpTo('story-agrima')">
         <div class="avatar-fallback">AG</div>
         <div class="card-stat">$150K @ Microsoft</div>
         <div class="card-name">Agrima</div>
@@ -711,6 +733,58 @@
 
 
 <div class="story-columns">
+    <section class="story" id="story-avidar">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_avidar.png" alt="Avidar">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Avidar</div>
+          <h2>From 200 Applications and Zero Replies to an Offer at Spotify: How Avidar Stopped Building Projects and Started Selling His Experience</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Avidar's challenges</h3>
+          <ul><li>Self-taught data scientist at a company that wasn&rsquo;t tech-first and had little brand name in the field</li><li>Sent 200 applications, 30 a day and tailored, without a single reply</li><li>Had never been through a standard data science interview loop: recruiter screen, technical screen, take-home and case study</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>Selling the experience he already had, instead of building more Kaggle projects and collecting certificates</li><li>Resume rebuilt: tech stack up front, the soft-skills list cut, every bullet reviewed by someone in his field</li><li>Interview frameworks for the recruiter, behavioural and technical rounds</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Offer accepted at Spotify, the product-first company type he had targeted from the start</li><li>Recruiters told him he stood out for business understanding as well as technical skill</li><li>Went, in his words, &ldquo;from zero to hero&rdquo; on interview loops he had never done before</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><div class="video-embed"><video controls playsinline preload="none" poster="/assets/video/avidar-testimonial-poster.jpg"><source src="/assets/video/avidar-testimonial-720p.mp4" type="video/mp4"></video></div></div>
+    </section>
+    <section class="story" id="story-shruti">
+      <div class="story-hero reveal">
+        <img class="hero-photo" src="assets/cropped/headshot_shruti.png" alt="Shruti">
+        <div class="hero-text">
+          <div class="kicker">Client Story: Shruti</div>
+          <h2>From Impact Without Dollar Signs to Data Engineer II at Amazon: How Shruti More Than Doubled Her Pay</h2>
+        </div>
+      </div>
+
+      <div class="three-col reveal">
+        <div class="card card-challenges">
+          <h3>Shruti's challenges</h3>
+          <ul><li>Quantified her work in users and hours saved, never in dollars</li><li>Amazon&rsquo;s interviews lean hard on measurable impact in leadership principle stories</li><li>A self-described overthinker who needed the right mindset to keep going</li></ul>
+        </div>
+        <div class="card card-focus">
+          <h3>What we focused on</h3>
+          <ul><li>A rule: a dollar value on as many resume bullets as possible, with estimates she could explain</li><li>Resume cut down and LinkedIn revamped, then a short three-bullet pitch to a senior engineer on the team, sent within 45 minutes of his post</li><li>Mindset coaching through the videos and calls</li></ul>
+        </div>
+        <div class="card card-results">
+          <h3>Results</h3>
+          <ul><li>Data Engineer II at Amazon: $101K &rarr; $245K</li><li>Recruiters started reaching out, and her cold applications began getting past ATS screens</li><li>Her financial-impact numbers held up when interviewers questioned them</li></ul>
+        </div>
+      </div>
+
+      <div class="proof-row reveal"><div class="video-embed"><video controls playsinline preload="none" poster="/assets/video/shruti-testimonial-poster.jpg"><source src="/assets/video/shruti-testimonial-720p.mp4" type="video/mp4"></video></div></div>
+    </section>
     <section class="story" id="story-peter">
       <div class="story-hero reveal">
         <img class="hero-photo" src="assets/cropped/headshot_peter.png" alt="Peter">
